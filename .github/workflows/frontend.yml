@@ -4,9 +4,6 @@ on:
   push:
     paths:
       - 'ArcadiaParties-SPA\**\*'
-  pull_request:
-    paths:
-      - 'ArcadiaParties-SPA\**\*'
 
 jobs:
   build:
