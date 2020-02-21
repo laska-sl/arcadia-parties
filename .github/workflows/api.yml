@@ -2,8 +2,7 @@ name: API
 
 on:
   push:
-    paths-ignore:
-      - 'ArcadiaParties-SPA\**\*'
+    paths-ignore: 'ArcadiaParties-SPA/**/*'
 
 jobs:
   build:
