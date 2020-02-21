@@ -1,6 +1,12 @@
 name: API
 
-on: [push]
+on:
+  push:
+    paths-ignore:
+      - 'ArcadiaParties-SPA\**\*'
+  pull_request:
+    paths-ignore:
+      - 'ArcadiaParties-SPA\**\*'
 
 jobs:
   build:
