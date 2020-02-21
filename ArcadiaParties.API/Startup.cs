@@ -31,8 +31,9 @@ namespace ArcadiaParties.API
         {
             services.AddControllers();
 
-            //temp SQLite connection
+            // Temporary use SQLite connection until set connection to Arcadia API
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ArcadiaParties.API", Version = "v1" });
@@ -48,8 +49,6 @@ namespace ArcadiaParties.API
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            //app.UseHttpsRedirection();
 
             app.UseSwagger();
 

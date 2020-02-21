@@ -1,0 +1,22 @@
+name: Frontend
+
+on:
+  push:
+    paths:
+      - 'ArcadiaParties-SPA\**\*'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    env:
+      working_directory: .\ArcadiaParties-SPA
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm install
+        working-directory: ${{env.working_directory}}
+      - run: npm run lint
+        working-directory: ${{env.working_directory}}
+      - run: npm run build
+        working-directory: ${{env.working_directory}}
