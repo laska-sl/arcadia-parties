@@ -1,9 +1,6 @@
 name: Frontend
 
-on:
-  push:
-    paths:
-      - 'ArcadiaParties-SPA\**\*'
+on: [push]
 
 jobs:
   build:
