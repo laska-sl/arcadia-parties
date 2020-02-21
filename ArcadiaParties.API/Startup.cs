@@ -1,3 +1,5 @@
+using ArcadiaParties.CQRS;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +13,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
 namespace ArcadiaParties.API
@@ -37,6 +38,7 @@ namespace ArcadiaParties.API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ArcadiaParties.API", Version = "v1" });
             });
 
+            services.AddMediatR(typeof(Temp));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
