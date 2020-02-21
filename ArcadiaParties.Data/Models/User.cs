@@ -22,5 +22,10 @@ namespace ArcadiaParties.Data.Models
         public DateTime HireDate { get; set; }
 
         public ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
+
+        [Required]
+        public int DepartmentId { get; set; }
+
+        public Department Department { get; set; }
     }
 }
