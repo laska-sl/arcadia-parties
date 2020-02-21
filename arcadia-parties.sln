@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArcadiaParties.API", "ArcadiaParties.API\ArcadiaParties.API.csproj", "{709A315A-17B4-4CEC-89F5-E3D202B63422}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArcadiaParties.API", "ArcadiaParties.API\ArcadiaParties.API.csproj", "{709A315A-17B4-4CEC-89F5-E3D202B63422}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArcadiaParties.CQRS", "ArcadiaParties.CQRS\ArcadiaParties.CQRS.csproj", "{FBD12628-1D9A-4701-BEC3-7DB02E60844D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArcadiaParties.CQRS", "ArcadiaParties.CQRS\ArcadiaParties.CQRS.csproj", "{FBD12628-1D9A-4701-BEC3-7DB02E60844D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArcadiaParties.Data", "ArcadiaParties.Data\ArcadiaParties.Data.csproj", "{2B9B86E4-0D73-4E88-8462-B60277F0546F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,18 @@ Global
 		{FBD12628-1D9A-4701-BEC3-7DB02E60844D}.Release|x64.Build.0 = Release|Any CPU
 		{FBD12628-1D9A-4701-BEC3-7DB02E60844D}.Release|x86.ActiveCfg = Release|Any CPU
 		{FBD12628-1D9A-4701-BEC3-7DB02E60844D}.Release|x86.Build.0 = Release|Any CPU
+		{2B9B86E4-0D73-4E88-8462-B60277F0546F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B9B86E4-0D73-4E88-8462-B60277F0546F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B9B86E4-0D73-4E88-8462-B60277F0546F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2B9B86E4-0D73-4E88-8462-B60277F0546F}.Debug|x64.Build.0 = Debug|Any CPU
+		{2B9B86E4-0D73-4E88-8462-B60277F0546F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2B9B86E4-0D73-4E88-8462-B60277F0546F}.Debug|x86.Build.0 = Debug|Any CPU
+		{2B9B86E4-0D73-4E88-8462-B60277F0546F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B9B86E4-0D73-4E88-8462-B60277F0546F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B9B86E4-0D73-4E88-8462-B60277F0546F}.Release|x64.ActiveCfg = Release|Any CPU
+		{2B9B86E4-0D73-4E88-8462-B60277F0546F}.Release|x64.Build.0 = Release|Any CPU
+		{2B9B86E4-0D73-4E88-8462-B60277F0546F}.Release|x86.ActiveCfg = Release|Any CPU
+		{2B9B86E4-0D73-4E88-8462-B60277F0546F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
