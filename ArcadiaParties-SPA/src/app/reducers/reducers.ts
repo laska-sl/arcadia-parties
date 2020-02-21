@@ -4,7 +4,7 @@ import { InjectionToken } from '@angular/core';
 import { headerFeatureStateKey, HeaderState, reducers } from './header-reducers';
 
 export interface State {
-  [headerFeatureStateKey]: HeaderState
+  [headerFeatureStateKey]: HeaderState;
 }
 
 export const ROOT_REDUCERS = new InjectionToken<ActionReducerMap<State, Action>>('Root reducers token', {

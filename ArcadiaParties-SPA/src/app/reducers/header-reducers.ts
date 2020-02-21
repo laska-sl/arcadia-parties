@@ -10,7 +10,7 @@ export interface HeaderState {
 
 const initialState: HeaderState = {
     title: ''
-}
+};
 
 export const reducers = createReducer(
     initialState,
