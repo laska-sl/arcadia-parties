@@ -1,6 +1,7 @@
-import { headerFeatureStateKey, HeaderState, reducers } from './header-reducers';
 import { ActionReducerMap, Action } from '@ngrx/store';
 import { InjectionToken } from '@angular/core';
+
+import { headerFeatureStateKey, HeaderState, reducers } from './header-reducers';
 
 export interface State {
   [headerFeatureStateKey]: HeaderState

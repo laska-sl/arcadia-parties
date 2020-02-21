@@ -1,4 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
+
 import { changeTitleAction } from '../actions/actions';
 
 export const headerFeatureStateKey = 'header';
