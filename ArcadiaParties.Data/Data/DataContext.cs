@@ -1,7 +1,7 @@
 using ArcadiaParties.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace ArcadiaParties.API.Data
+namespace ArcadiaParties.Data
 {
     public class DataContext : DbContext
     {

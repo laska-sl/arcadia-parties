@@ -1,4 +1,4 @@
-using ArcadiaParties.API.Data;
+using ArcadiaParties.Data;
 using ArcadiaParties.CQRS;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
