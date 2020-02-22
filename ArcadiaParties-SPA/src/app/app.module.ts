@@ -25,7 +25,8 @@ import { ContentComponent } from './content/content.component';
          }
       }),
       BrowserModule,
-      BrowserAnimationsModule, StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+      BrowserAnimationsModule,
+      StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
       MaterialModule
    ],
    providers: [],
