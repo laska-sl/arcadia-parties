@@ -1,17 +1,17 @@
 [
   {
-    "Name": "Manager"
+    "Name": "User"
   },
   {
-    "Name": "Stager"
+    "Name": "Administrator"
   },
   {
-    "Name": "Admin"
+    "Name": "Administrator"
   },
   {
-    "Name": "Chelovek"
+    "Name": "User"
   },
   {
-    "Name": "Senior Engineer"
+    "Name": "User"
   }
 ]
