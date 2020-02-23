@@ -1,13 +1,14 @@
-@import '@angular/material/prebuilt-themes/pink-bluegrey.css';
+@import "@angular/material/prebuilt-themes/pink-bluegrey.css";
 
-html, body { 
-    height: 100%; 
+html,
+body {
+  height: 100%;
 }
 
-body { margin: 0; 
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-    background-color: #edebe9;
-    display: flex;
-    overflow: scroll;
-    flex-direction: column;
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #edebe9;
+  display: flex;
+  flex-direction: column;
 }
