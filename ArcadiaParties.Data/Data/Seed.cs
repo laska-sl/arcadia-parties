@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,13 +8,13 @@ namespace ArcadiaParties.Data.Data
 {
     public class Seed
     {
-        public async static Task<Boolean> SeedData(DataContext context)
+        public async static Task SeedData(DataContext context)
         {
             if (!context.Department.Any())
             {
-                var depData = System.IO.File.ReadAllText("../ArcadiaParties.Data/Data/Depart.json");
-                var deps = JsonConvert.DeserializeObject<List<Department>>(depData);
-                await context.Department.AddRangeAsync(deps);
+                var departmentData = System.IO.File.ReadAllText("../ArcadiaParties.Data/Data/Depart.json");
+                var departments = JsonConvert.DeserializeObject<List<Department>>(departmentData);
+                await context.Department.AddRangeAsync(departments);
                 await context.SaveChangesAsync();
             }
 
@@ -37,13 +36,11 @@ namespace ArcadiaParties.Data.Data
 
             if (!context.UserRole.Any())
             {
-                var userroleData = System.IO.File.ReadAllText("../ArcadiaParties.Data/Data/UserRole.json");
-                var usersroles = JsonConvert.DeserializeObject<List<UserRole>>(userroleData);
-                await context.UserRole.AddRangeAsync(usersroles);
+                var userRoleData = System.IO.File.ReadAllText("../ArcadiaParties.Data/Data/UserRole.json");
+                var usersRoles = JsonConvert.DeserializeObject<List<UserRole>>(userRoleData);
+                await context.UserRole.AddRangeAsync(usersRoles);
                 await context.SaveChangesAsync();
             }
-            
-            return true;
         }
     }
 }
