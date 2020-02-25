@@ -12,9 +12,10 @@ import { environment } from '../environments/environment';
 import { HeaderComponent } from './header/header.component';
 import { ContentComponent } from './content/content.component';
 import { appRoutes } from './routes';
+import { UserIdentityComponent } from './user/user-identity/user-identity.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, ContentComponent],
+  declarations: [AppComponent, HeaderComponent, ContentComponent, UserIdentityComponent],
   imports: [
     StoreModule.forRoot(ROOT_REDUCERS, {
       runtimeChecks: {

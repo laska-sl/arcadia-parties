@@ -12,7 +12,7 @@ const initialState: HeaderState = {
     title: ''
 };
 
-export const reducers = createReducer(
+export const headerReducer = createReducer(
     initialState,
     on(changeTitleAction, (state, props) => ({ ...state, title: props.title }))
 );

@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 
 import { State } from './reducers/reducers';
 import { selectTitle } from './selector/selector';
-import { changeTitleAction } from './actions/actions';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +14,6 @@ export class AppComponent {
   title$: Observable<string> = this.store.pipe(select(selectTitle));
 
   constructor(private store: Store<State>) {
-    store.dispatch(changeTitleAction({ title: 'ArcadiaParties-SPA' }));
+   
   }
 }
