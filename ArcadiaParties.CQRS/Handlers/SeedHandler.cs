@@ -11,16 +11,19 @@ namespace ArcadiaParties.CQRS.Handlers
     public class SeedHandler : IRequestHandler<SeedCommand>
     {
         private readonly DataContext _context;
+        private readonly ISeed _seed;
 
-        public SeedHandler(DataContext context)
+        public SeedHandler(ISeed seed, DataContext context)
         {
             _context = context;
+            _seed = seed;
         }
         
         public async Task<Unit> Handle(SeedCommand request, CancellationToken cancellationToken)
         {
             await _context.Database.MigrateAsync();
-            await Seed.SeedData(_context);
+
+            await _seed.SeedData(_context);
             return Unit.Value;
         }
     }

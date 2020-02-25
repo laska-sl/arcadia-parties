@@ -6,9 +6,9 @@ using Newtonsoft.Json;
 
 namespace ArcadiaParties.Data.Data
 {
-    public class Seed
+    public class Seed : ISeed
     {
-        public async static Task SeedData(DataContext context)
+        public async Task SeedData(DataContext context)
         {
             if (!context.Department.Any())
             {
@@ -43,4 +43,4 @@ namespace ArcadiaParties.Data.Data
             }
         }
     }
-}
+ }
