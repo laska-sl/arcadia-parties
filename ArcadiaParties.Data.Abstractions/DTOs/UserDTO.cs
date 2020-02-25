@@ -16,7 +16,7 @@ namespace ArcadiaParties.Data.Abstractions.DTOs
 
         public DateTime HireDate { get; set; }
 
-        public ICollection<UserRoleDTO> UserRoles { get; set; } = new List<UserRole>();
+        public ICollection<UserRoleDTO> UserRoles { get; set; }
 
         public int DepartmentId { get; set; }
 
