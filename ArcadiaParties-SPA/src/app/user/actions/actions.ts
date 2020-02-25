@@ -1,3 +1,4 @@
 import { createAction, props } from '@ngrx/store';
+import { User } from 'src/app/models/User';
 
-export const changeIdentityAction = createAction('[Main] Change Identity', props<{ identity: string }>());
+export const loadUser = createAction('[Main] Change Identity', props<{ user: User }>());

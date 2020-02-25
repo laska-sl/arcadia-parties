@@ -1,18 +1,26 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { changeIdentityAction } from '../actions/actions';
+import { loadUser } from '../actions/actions';
+import { User } from 'src/app/models/User';
 
-export const identityFeatureStateKey = 'identity';
+export const userFeatureStateKey = 'user';
 
-export interface IdentityState {
-    identity: string;
+export interface UserState {
+    user: User;
 }
 
-const initialState: IdentityState = {
-    identity: ''
-};
+const initialState: UserState = {
+    user: {
+        identity: '',
+        firstName: '',
+        lastName: '',
+        department: '',
+        dates: [],
+        roles: []
+    }
+}
 
-export const identityReducer = createReducer(
+export const userReducer = createReducer(
     initialState,
-    on(changeIdentityAction, (state, props) => ({ ...state, identity: props.identity }))
+    on(loadUser, (state, props) => ({ ...state, user: props.user }))
 );

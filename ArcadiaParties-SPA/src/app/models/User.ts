@@ -3,6 +3,6 @@ export interface User {
     firstName: string;
     lastName: string;
     department: string;
-    dates?: Date[];
+    dates: Date[];
     roles: string[];
 }

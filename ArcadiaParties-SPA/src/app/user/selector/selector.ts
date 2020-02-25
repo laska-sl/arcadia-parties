@@ -1,12 +1,12 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { identityFeatureStateKey, IdentityState } from '../reducers/identity-reducer';
+import { userFeatureStateKey, UserState } from '../reducers/identity-reducer';
 import { State } from 'src/app/reducers/reducers';
 
 
-export const identityFeatureSelector = createFeatureSelector<State, IdentityState>(identityFeatureStateKey);
+export const userFeatureSelector = createFeatureSelector<State, UserState>(userFeatureStateKey);
 
-export const selectIdentity = createSelector(
-    identityFeatureSelector,
-    state => state.identity
+export const selectUser = createSelector(
+    userFeatureSelector,
+    state => state.user
 );
