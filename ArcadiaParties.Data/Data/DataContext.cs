@@ -1,7 +1,7 @@
 using ArcadiaParties.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace ArcadiaParties.API.Data
+namespace ArcadiaParties.Data
 {
     public class DataContext : DbContext
     {
@@ -12,5 +12,7 @@ namespace ArcadiaParties.API.Data
         public DbSet<User> Users { get; set; }
 
         public DbSet<UserRole> UserRole { get; set; }
+
+        public DbSet<Department> Department { get; set; }
     }
 }

@@ -1,0 +1,42 @@
+[
+    {
+      "Identity": "1",
+      "FirstName": "Anderson",
+      "LastName": "Fields",
+      "HireDate": "2003-08-29",
+      "BirthDate": "2007-10-17",
+      "DepartmentId": "1"
+    },
+    {
+      "Identity": "2",
+      "FirstName": "Vova",
+      "LastName": "Pupkin",
+      "HireDate": "2005-04-24",
+      "BirthDate": "2007-10-17",
+      "DepartmentId": "2"
+    },
+    {
+      "Identity": "3",
+      "FirstName": "Jackson",
+      "LastName": "Rovnit",
+      "HireDate": "2003-08-29",
+      "BirthDate": "2007-10-17",
+      "DepartmentId": "3"
+    },
+    {
+      "Identity": "4",
+      "FirstName": "Robert",
+      "LastName": "Pattison",
+      "HireDate": "1990-05-23",
+      "BirthDate": "1960-10-17",
+      "DepartmentId": "4"
+    },
+    {
+      "Identity": "5",
+      "FirstName": "Ella",
+      "LastName": "Porter",
+      "HireDate": "2003-08-29",
+      "BirthDate": "2007-10-17",
+      "DepartmentId": "5"
+    }
+  ]

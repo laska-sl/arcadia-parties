@@ -1,4 +1,4 @@
-using ArcadiaParties.API.Data;
+using ArcadiaParties.Data;
 using ArcadiaParties.CQRS;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using ArcadiaParties.Data.Data;
 
 namespace ArcadiaParties.API
 {
@@ -24,6 +25,8 @@ namespace ArcadiaParties.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddTransient<ISeed, Seed>();
 
             // Temporary use SQLite connection until set connection to Arcadia API
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
