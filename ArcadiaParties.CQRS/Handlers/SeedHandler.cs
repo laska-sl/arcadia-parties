@@ -23,7 +23,7 @@ namespace ArcadiaParties.CQRS.Handlers
         {
             await _context.Database.MigrateAsync();
 
-            await _seed.SeedData(_context);
+            await _seed.SeedData();
             return Unit.Value;
         }
     }

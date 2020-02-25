@@ -25,7 +25,6 @@ namespace ArcadiaParties.API
                     var command = new SeedCommand();
                     await mediator.Send(command);
                 }
-
                 catch (Exception ex)
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();

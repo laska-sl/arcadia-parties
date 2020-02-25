@@ -8,38 +8,45 @@ namespace ArcadiaParties.Data.Data
 {
     public class Seed : ISeed
     {
-        public async Task SeedData(DataContext context)
+        private readonly DataContext _context;
+
+        public Seed(DataContext dataContext)
         {
-            if (!context.Department.Any())
+            _context = dataContext;
+        }
+
+        public async Task SeedData()
+        {
+            if (!_context.Department.Any())
             {
                 var departmentData = System.IO.File.ReadAllText("../ArcadiaParties.Data/Data/Depart.json");
                 var departments = JsonConvert.DeserializeObject<List<Department>>(departmentData);
-                await context.Department.AddRangeAsync(departments);
-                await context.SaveChangesAsync();
+                await _context.Department.AddRangeAsync(departments);
+                await _context.SaveChangesAsync();
             }
 
-            if (!context.Roles.Any())
+            if (!_context.Roles.Any())
             {
                 var roleData = System.IO.File.ReadAllText("../ArcadiaParties.Data/Data/RoleSeed.json");
                 var roles = JsonConvert.DeserializeObject<List<Role>>(roleData);
-                await context.Roles.AddRangeAsync(roles);
-                await context.SaveChangesAsync();
+                await _context.Roles.AddRangeAsync(roles);
+                await _context.SaveChangesAsync();
             }
 
-            if (!context.Users.Any())
+            if (!_context.Users.Any())
             {
                 var userData = System.IO.File.ReadAllText("../ArcadiaParties.Data/Data/UserSeed.json");
                 var users = JsonConvert.DeserializeObject<List<User>>(userData);
-                await context.Users.AddRangeAsync(users);
-                await context.SaveChangesAsync();
+                await _context.Users.AddRangeAsync(users);
+                await _context.SaveChangesAsync();
             }
 
-            if (!context.UserRole.Any())
+            if (!_context.UserRole.Any())
             {
                 var userRoleData = System.IO.File.ReadAllText("../ArcadiaParties.Data/Data/UserRole.json");
                 var usersRoles = JsonConvert.DeserializeObject<List<UserRole>>(userRoleData);
-                await context.UserRole.AddRangeAsync(usersRoles);
-                await context.SaveChangesAsync();
+                await _context.UserRole.AddRangeAsync(usersRoles);
+                await _context.SaveChangesAsync();
             }
         }
     }
