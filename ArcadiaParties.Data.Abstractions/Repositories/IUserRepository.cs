@@ -10,6 +10,5 @@ namespace ArcadiaParties.Data.Abstractions.Repositories
     {
         Task<UserDTO> GetUser(string identity);
         Task<List<UserDTO>> GetUsers();
-
     }
 }

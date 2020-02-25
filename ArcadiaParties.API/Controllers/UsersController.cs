@@ -29,7 +29,7 @@ namespace ArcadiaParties.API.Controllers
             return Ok(users);
         }
 
-        [HttpGet("{identity}", Name = "GetUser")]
+        [HttpGet("{identity}")]
         public async Task<IActionResult> GetUser(string identity)
         {
             var user = await _repo.GetUser(identity);

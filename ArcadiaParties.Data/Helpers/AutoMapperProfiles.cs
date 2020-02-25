@@ -13,7 +13,6 @@ namespace ArcadiaParties.Data.Helpers
             CreateMap<Role, RoleDTO>();
             CreateMap<Department, DepartmentDTO>();
             CreateMap<UserRole, UserRoleDTO>();
-
         }
     }
 }
