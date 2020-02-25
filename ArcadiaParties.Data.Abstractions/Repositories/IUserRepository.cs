@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ArcadiaParties.Data.Abstractions.Repositories
 {
-    interface IUserRepository
+    public interface IUserRepository
     {
         Task<UserDTO> GetUser(string identity);
         Task<List<UserRoleDTO>> GetUsers();

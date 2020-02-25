@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ArcadiaParties.Data.Abstractions.DTOs
 {
-    class UserRoleDTO
+    public class UserRoleDTO
     {
         public int Id { get; set; }
 
