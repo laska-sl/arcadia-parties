@@ -14,6 +14,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ArcadiaParties.CQRS\ArcadiaParties.CQRS.csproj" />
+    <ProjectReference Include="..\ArcadiaParties.Data.Abstractions\ArcadiaParties.Data.Abstractions.csproj" />
     <ProjectReference Include="..\ArcadiaParties.Data\ArcadiaParties.Data.csproj" />
   </ItemGroup>
 </Project>
