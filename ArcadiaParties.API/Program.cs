@@ -18,12 +18,14 @@ namespace ArcadiaParties.API
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
+
                 try
                 {
                     var mediator = services.GetRequiredService<IMediator>();
                     var command = new SeedCommand();
                     await mediator.Send(command);
                 }
+
                 catch (Exception ex)
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
