@@ -22,7 +22,6 @@ namespace ArcadiaParties.CQRS.Handlers
         public async Task<Unit> Handle(SeedCommand request, CancellationToken cancellationToken)
         {
             await _context.Database.MigrateAsync();
-
             await _seed.SeedData();
             return Unit.Value;
         }
