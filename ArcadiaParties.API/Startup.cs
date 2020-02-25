@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using ArcadiaParties.Data.Data;
+using ArcadiaParties.Data.Repositories;
+using AutoMapper;
 
 namespace ArcadiaParties.API
 {
@@ -37,6 +39,8 @@ namespace ArcadiaParties.API
             });
 
             services.AddMediatR(typeof(Temp));
+
+            services.AddAutoMapper(typeof(UserRepository).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
