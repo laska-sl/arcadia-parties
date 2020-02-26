@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using ArcadiaParties.Data.Data;
+using Microsoft.AspNetCore.Server.IISIntegration;
 
 namespace ArcadiaParties.API
 {
@@ -37,6 +38,8 @@ namespace ArcadiaParties.API
             });
 
             services.AddMediatR(typeof(Temp));
+
+            services.AddAuthentication(IISDefaults.AuthenticationScheme);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +58,8 @@ namespace ArcadiaParties.API
             });
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
