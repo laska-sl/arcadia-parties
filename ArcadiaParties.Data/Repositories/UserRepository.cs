@@ -26,7 +26,7 @@ namespace ArcadiaParties.Data.Repositories
             return userToReturn;
         }
 
-        public async Task<List<UserDTO>> GetUsers()
+        public async Task<IEnumerable<UserDTO>> GetUsers()
         {
             var users = await _context.Users.ToListAsync();
 
