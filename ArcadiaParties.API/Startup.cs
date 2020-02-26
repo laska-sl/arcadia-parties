@@ -10,6 +10,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using ArcadiaParties.Data.Data;
 using Microsoft.AspNetCore.Authentication.Negotiate;
+using System.Security.Claims;
+using ArcadiaParties.API.CustomMiddlewares;
 
 namespace ArcadiaParties.API
 {
@@ -37,7 +39,7 @@ namespace ArcadiaParties.API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ArcadiaParties.API", Version = "v1" });
             });
 
-            services.AddMediatR(typeof(Temp));
+            services.AddMediatR(typeof(Temp).Assembly);
 
             services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNegotiate();
         }
@@ -60,6 +62,8 @@ namespace ArcadiaParties.API
             app.UseRouting();
 
             app.UseAuthentication();
+
+            app.UseCreateClaims(); //Custom middleware
 
             app.UseAuthorization();
 
