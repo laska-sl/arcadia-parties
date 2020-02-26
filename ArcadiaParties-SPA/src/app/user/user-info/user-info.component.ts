@@ -1,4 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+
+import { selectUser } from '../selector/selector';
+import { Observable } from 'rxjs';
+import { State } from '../../reducers/reducers';
 import { User } from 'src/app/models/User';
 
 @Component({
@@ -7,11 +12,9 @@ import { User } from 'src/app/models/User';
   styleUrls: ['./user-info.component.scss']
 })
 export class UserInfoComponent implements OnInit {
-  @Input() user: User;
+  user$: Observable<User> = this.store.pipe(select(selectUser));
 
-  constructor() { }
+  constructor(private store: Store<State>) {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
