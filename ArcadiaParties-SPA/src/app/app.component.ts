@@ -14,6 +14,5 @@ export class AppComponent {
   title$: Observable<string> = this.store.pipe(select(selectTitle));
 
   constructor(private store: Store<State>) {
-   
   }
 }
