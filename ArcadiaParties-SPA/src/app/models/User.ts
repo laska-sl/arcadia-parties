@@ -1,8 +1,10 @@
+import { Dates } from './Dates';
+
 export interface User {
-    identity: string;
-    firstName: string;
-    lastName: string;
-    department: string;
-    dates: Date[];
-    roles: string[];
+  identity: string;
+  firstName: string;
+  lastName: string;
+  department: string;
+  dates?: Dates[];
+  roles?: string[];
 }
