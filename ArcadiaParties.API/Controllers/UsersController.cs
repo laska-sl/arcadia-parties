@@ -14,10 +14,8 @@ namespace ArcadiaParties.API.Controllers
     public class UsersController : ControllerBase
     {        
         private readonly IUserRepository _repo;
-        private readonly IMapper _mapper;
         public UsersController(IUserRepository repo, IMapper mapper)
         {
-            _mapper = mapper;
             _repo = repo;
         }
 
