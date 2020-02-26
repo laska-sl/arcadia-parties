@@ -5,14 +5,14 @@ import { changeTitleAction } from '../actions/actions';
 export const headerFeatureStateKey = 'header';
 
 export interface HeaderState {
-    title: string;
+  title: string;
 }
 
 const initialState: HeaderState = {
-    title: ''
+  title: ''
 };
 
 export const headerReducer = createReducer(
-    initialState,
-    on(changeTitleAction, (state, props) => ({ ...state, title: props.title }))
+  initialState,
+  on(changeTitleAction, (state, props) => ({ ...state, title: props.title }))
 );

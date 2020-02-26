@@ -15,10 +15,8 @@ export class HeaderComponent implements OnInit {
   title$: Observable<string> = this.store.pipe(select(selectTitle));
 
   constructor(private store: Store<State>) {
-    store.dispatch(changeTitleAction({ title: 'Acradia Parties'}));
+    store.dispatch(changeTitleAction({ title: 'Acradia Parties' }));
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

@@ -2,7 +2,7 @@ import { ActionReducerMap, Action } from '@ngrx/store';
 import { InjectionToken } from '@angular/core';
 
 import { headerFeatureStateKey, HeaderState, headerReducer } from './header-reducers';
-import { userFeatureStateKey, UserState, userReducer } from '../user/reducers/identity-reducer';
+import { userFeatureStateKey, UserState, userReducer } from '../user/reducers/user-reducer';
 
 export interface State {
   [headerFeatureStateKey]: HeaderState;
