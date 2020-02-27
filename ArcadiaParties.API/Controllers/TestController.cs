@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -9,24 +10,10 @@ namespace ArcadiaParties.API.Controllers
     [ApiController]
     public class TestController : ControllerBase
     {
-        private readonly IMediator _mediator;
-        public TestController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
         [HttpGet]
         public async Task<IActionResult> TestMethod()
         {
-            return Ok(
-            //userRoles
-            new
-            {
-                User.Identity.AuthenticationType,
-                User.Identity.IsAuthenticated,
-                User.Identity.Name
-            }
-            );
+            return Ok(new { User.Identity.Name });
         }
     }
 }
