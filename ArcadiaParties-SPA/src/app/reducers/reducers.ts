@@ -1,14 +1,14 @@
 import { ActionReducerMap, Action } from '@ngrx/store';
 import { InjectionToken } from '@angular/core';
 
-import { headerFeatureStateKey, HeaderState, reducers } from './header-reducers';
+import { titleFeatureStateKey, TitleState, titleReducer } from './title-reducers';
 
 export interface State {
-  [headerFeatureStateKey]: HeaderState;
+  [titleFeatureStateKey]: TitleState;
 }
 
 export const ROOT_REDUCERS = new InjectionToken<ActionReducerMap<State, Action>>('Root reducers token', {
   factory: () => ({
-    [headerFeatureStateKey]: reducers,
+    [titleFeatureStateKey]: titleReducer
   })
 });

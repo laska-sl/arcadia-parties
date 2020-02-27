@@ -1,0 +1,18 @@
+:host {
+  display: flex;
+  flex: 1 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.center {
+  text-align: center;
+}
+
+.font {
+  font-size: 15pt;
+}
+
+mat-card {
+  border-radius: 30px;
+}
