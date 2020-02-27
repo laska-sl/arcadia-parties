@@ -1,23 +1,29 @@
 <div class="flex-container">
   <mat-card>
     <mat-card-title class="center">User Profile</mat-card-title>
-    <mat-tab-group mat-stretch-tabs>
-      <mat-card-content>
+    <mat-card-content *ngIf="user$ | async as user; else emptyUser">
+      <mat-tab-group mat-stretch-tabs>
         <mat-tab label="General">
           <div class="center">
-            <p>Identity: {{ (user$ | async).identity }} </p>
-            <p>FirstName: {{ (user$ | async).firstName }} </p>
-            <p>LastName: {{ (user$ | async).lastName }} </p>
-            <p>Department: {{ (user$ | async).department }} </p>
-            <p>Roles: <span *ngFor="let role of (user$ | async).roles"> {{ role }} </span></p>
+            <p>Identity: {{ user.identity }} </p>
+            <p>FirstName: {{ user.firstName }} </p>
+            <p>LastName: {{ user.lastName }} </p>
+            <p>Department: {{ user.department }} </p>
+            <p>Roles: <span *ngFor="let role of user.roles"> {{ role }} </span></p>
           </div>
         </mat-tab>
         <mat-tab label="Dates">
-          <p class="center" *ngFor="let date of (user$ | async).dates">{{ date.name }}:
+          <p class="center" *ngFor="let date of user.dates">{{ date.name }}:
             {{ date.date | date:'longDate' }} </p>
         </mat-tab>
-      </mat-card-content>
-    </mat-tab-group>
-    <!-- <button mat-raised-button color="primary" class="edit-button">Edit</button> -->
+      </mat-tab-group>
+      <!-- <button mat-raised-button color="primary" class="edit-button">Edit</button> -->
+    </mat-card-content>
   </mat-card>
 </div>
+
+<ng-template #emptyUser>
+  <mat-card-content class="center">
+    User is not defined
+  </mat-card-content>
+</ng-template>

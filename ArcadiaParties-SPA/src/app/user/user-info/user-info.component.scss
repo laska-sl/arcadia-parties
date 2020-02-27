@@ -14,8 +14,11 @@ mat-card {
   border-radius: 8px;
 }
 
+p {
+  font-size: 15pt;
+}
+
 mat-card-content {
-  width: 60%;
   display: block;
   margin: auto;
   margin-top: 20px;
@@ -26,4 +29,4 @@ mat-card-content {
   display: block;
   width: 80%;
   margin: 20px auto;
-}
+} 
