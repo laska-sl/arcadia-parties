@@ -7,19 +7,17 @@ using System.Threading.Tasks;
 
 namespace ArcadiaParties.API.CustomMiddlewares
 {
-    public class CreateClaimsMiddleware
+    public class DatabaseRolesMiddleware
     {
         private readonly RequestDelegate _next;
-        private IMediator _mediator;
-        public CreateClaimsMiddleware(RequestDelegate next)
+
+        public DatabaseRolesMiddleware(RequestDelegate next)
         {
             _next = next;
         }
 
         public async Task InvokeAsync(HttpContext context, IMediator mediator)
         {
-            _mediator = mediator;
-
             var user = context.User;
 
             var newIdentity = new ClaimsIdentity(
@@ -30,7 +28,7 @@ namespace ArcadiaParties.API.CustomMiddlewares
             newIdentity.AddClaim(new Claim(ClaimTypes.Name, user.Identity.Name));
 
             var query = new GetUserRolesQuery(user.Identity.Name);
-            var userRoles = await _mediator.Send(query);
+            var userRoles = await mediator.Send(query);
 
             foreach (var item in userRoles)
             {
