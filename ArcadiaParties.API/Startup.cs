@@ -11,6 +11,7 @@ using Microsoft.OpenApi.Models;
 using ArcadiaParties.Data.Data;
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using ArcadiaParties.API.CustomMiddlewares;
+using ArcadiaParties.CQRS.Commands;
 
 namespace ArcadiaParties.API
 {
@@ -38,7 +39,7 @@ namespace ArcadiaParties.API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ArcadiaParties.API", Version = "v1" });
             });
 
-            services.AddMediatR(typeof(Temp).Assembly);
+            services.AddMediatR(typeof(SeedCommand).Assembly);
 
             services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNegotiate();
         }
