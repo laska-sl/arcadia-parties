@@ -9,10 +9,8 @@ import { State } from '../reducers/reducers';
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.scss']
 })
-export class ContentComponent implements OnInit {
+export class ContentComponent {
   constructor(private store: Store<State>) {
     store.dispatch(changeTitleAction({ title: 'Arcadia Parties' }));
   }
-
-  ngOnInit() {}
 }
