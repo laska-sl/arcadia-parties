@@ -28,6 +28,5 @@ namespace ArcadiaParties.CQRS.Handlers
 
             return userRoles;
         }
-
     }
 }
