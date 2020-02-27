@@ -1,5 +1,4 @@
 using ArcadiaParties.Data;
-using ArcadiaParties.CQRS;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
