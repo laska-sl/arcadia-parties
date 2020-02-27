@@ -63,7 +63,7 @@ namespace ArcadiaParties.API
 
             app.UseAuthentication();
 
-            app.UseCreateClaims(); //Custom middleware
+            app.UseCreateClaims();
 
             app.UseAuthorization();
 
