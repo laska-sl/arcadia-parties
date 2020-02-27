@@ -11,7 +11,7 @@ export class TitleEffect {
     this.actions$.pipe(
       ofType(changeTitleAction),
       tap(payload => this.titleService.setTitle(payload.title)),
-      map(() => changeTitleSuccessAction())
+      map(payload => changeTitleSuccessAction(payload))
     )
   );
 

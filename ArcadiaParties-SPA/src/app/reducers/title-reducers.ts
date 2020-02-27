@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { changeTitleAction } from '../actions/actions';
+import { changeTitleSuccessAction } from '../actions/actions';
 
 export const titleFeatureStateKey = 'title';
 
@@ -14,5 +14,5 @@ const initialState: TitleState = {
 
 export const titleReducer = createReducer(
   initialState,
-  on(changeTitleAction, (state, props) => ({ ...state, title: props.title }))
+  on(changeTitleSuccessAction, (state, props) => ({ ...state, title: props.title }))
 );
