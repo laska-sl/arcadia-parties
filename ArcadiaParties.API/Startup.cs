@@ -62,7 +62,7 @@ namespace ArcadiaParties.API
 
             app.UseAuthentication();
 
-            app.UseCreateClaims();
+            app.UseDatabaseRoles();
 
             app.UseAuthorization();
 
