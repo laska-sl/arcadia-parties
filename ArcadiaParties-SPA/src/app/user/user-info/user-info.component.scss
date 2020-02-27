@@ -1,11 +1,12 @@
 :host {
-  flex: 1 0 auto;
-}
-
-.flex-container {
   display: flex;
+  flex: 1 0 auto;
   justify-content: center;
   align-items: center;
+}
+
+.center {
+  text-align:center;
 }
 
 mat-card {

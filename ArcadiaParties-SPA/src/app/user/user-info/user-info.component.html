@@ -1,18 +1,22 @@
 <div class="flex-container">
   <mat-card>
-    <mat-card-title style="text-align:center">Your information</mat-card-title>
+    <mat-card-title class="center">User Profile</mat-card-title>
     <mat-tab-group mat-stretch-tabs>
-      <mat-tab label="General">
-        <mat-card-content>Identity: {{ (user$ | async).identity }} </mat-card-content>
-        <mat-card-content>FirstName: {{ (user$ | async).firstName }} </mat-card-content>
-        <mat-card-content>LastName: {{ (user$ | async).lastName }} </mat-card-content>
-        <mat-card-content>Department: {{ (user$ | async).department }} </mat-card-content>
-        <mat-card-content>Roles: <span *ngFor="let role of (user$ | async).roles"> {{ role }} </span></mat-card-content>
-      </mat-tab>
-      <mat-tab label="Dates">
-        <mat-card-content><span *ngFor="let date of (user$ | async).dates">{{ date.name }}:
-            {{ date.date | date:'longDate' }} </span></mat-card-content>
-      </mat-tab>
+      <mat-card-content>
+        <mat-tab label="General">
+          <div class="center">
+            <p>Identity: {{ (user$ | async).identity }} </p>
+            <p>FirstName: {{ (user$ | async).firstName }} </p>
+            <p>LastName: {{ (user$ | async).lastName }} </p>
+            <p>Department: {{ (user$ | async).department }} </p>
+            <p>Roles: <span *ngFor="let role of (user$ | async).roles"> {{ role }} </span></p>
+          </div>
+        </mat-tab>
+        <mat-tab label="Dates">
+          <p class="center" *ngFor="let date of (user$ | async).dates">{{ date.name }}:
+            {{ date.date | date:'longDate' }} </p>
+        </mat-tab>
+      </mat-card-content>
     </mat-tab-group>
     <!-- <button mat-raised-button color="primary" class="edit-button">Edit</button> -->
   </mat-card>

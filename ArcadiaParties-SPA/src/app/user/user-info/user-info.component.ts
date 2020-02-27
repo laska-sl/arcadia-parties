@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-
 import { selectUser } from '../selector/selector';
 import { Observable } from 'rxjs';
 import { State } from '../../reducers/reducers';
