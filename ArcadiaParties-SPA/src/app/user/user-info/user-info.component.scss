@@ -6,27 +6,10 @@
 }
 
 .center {
-  text-align:center;
-}
-
-mat-card {
-  margin: 10% auto;
-  border-radius: 8px;
-}
-
-p {
+  text-align: center;
   font-size: 15pt;
 }
 
-mat-card-content {
-  display: block;
-  margin: auto;
-  margin-top: 20px;
+mat-card {
+  border-radius: 30px;
 }
-
-.edit-button {
-  margin-top: 20px;
-  display: block;
-  width: 80%;
-  margin: 20px auto;
-} 
