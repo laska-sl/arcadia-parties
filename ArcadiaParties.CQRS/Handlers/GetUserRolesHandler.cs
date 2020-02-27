@@ -19,7 +19,10 @@ namespace ArcadiaParties.CQRS.Handlers
         }
         public async Task<IEnumerable<string>> Handle(GetUserRolesQuery request, CancellationToken cancellationToken)
         {
-            var user = await _context.Users.Include(u => u.UserRoles).ThenInclude(r => r.Role).FirstOrDefaultAsync(u => u.Identity == request.UserIdentity);
+            var user = await _context.Users
+                .Include(u => u.UserRoles)
+                .ThenInclude(r => r.Role)
+                .FirstOrDefaultAsync(u => u.Identity == request.UserIdentity);
 
             var userRoles = user.UserRoles.Select(userRole => userRole.Role.Name);
 
