@@ -1,11 +1,10 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace ArcadiaParties.API.Controllers
 {
-    //[Authorize(Roles = "User")]
+    [Authorize(Roles = "User")]
     [Route("api/[controller]")]
     [ApiController]
     public class TestController : ControllerBase

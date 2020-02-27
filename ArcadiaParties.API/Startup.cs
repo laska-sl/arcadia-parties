@@ -10,7 +10,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using ArcadiaParties.Data.Data;
 using Microsoft.AspNetCore.Authentication.Negotiate;
-using System.Security.Claims;
 using ArcadiaParties.API.CustomMiddlewares;
 
 namespace ArcadiaParties.API

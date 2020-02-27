@@ -1,11 +1,7 @@
 ﻿using ArcadiaParties.CQRS.Queries;
-using ArcadiaParties.Data;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -40,11 +36,6 @@ namespace ArcadiaParties.API.CustomMiddlewares
             {
                 newIdentity.AddClaim(new Claim(ClaimTypes.Role, item));
             }
-
-            // Temp user roles
-            //newIdentity.AddClaim(new Claim(ClaimTypes.Role, "User"));
-            //newIdentity.AddClaim(new Claim(ClaimTypes.Role, "Reviewer"));
-            //newIdentity.AddClaim(new Claim(ClaimTypes.Role, "Admin"));
 
             context.User = new ClaimsPrincipal(newIdentity);
             context.User.AddIdentities(user.Identities);

@@ -6,7 +6,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MediatR;
 using System.Threading.Tasks;
-using ArcadiaParties.CQRS.Queries;
 
 namespace ArcadiaParties.API
 {
