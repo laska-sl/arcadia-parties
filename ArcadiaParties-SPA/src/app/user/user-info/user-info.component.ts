@@ -3,9 +3,10 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { selectUser } from '../selector/selector';
-import { State } from '../../reducers/reducers';
+
 import { User } from '../models/User';
 import { changeTitleAction } from 'src/app/actions/actions';
+import { UserState } from '../reducers/reducer';
 
 @Component({
   selector: 'app-user-info',
@@ -15,9 +16,9 @@ import { changeTitleAction } from 'src/app/actions/actions';
 export class UserInfoComponent implements OnInit {
   user$: Observable<User> = this.store.pipe(select(selectUser));
 
-  constructor(private store: Store<State>) {
+  constructor(private store: Store<UserState>) {
     store.dispatch(changeTitleAction({ title: 'Acradia Parties - User Profile' }));
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 }

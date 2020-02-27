@@ -13,8 +13,7 @@ import { selectTitle } from '../selector/selector';
 export class HeaderComponent implements OnInit {
   title$: Observable<string> = this.store.pipe(select(selectTitle));
 
-  constructor(private store: Store<State>) {
-  }
+  constructor(private store: Store<State>) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 }

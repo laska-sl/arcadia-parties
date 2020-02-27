@@ -10,12 +10,9 @@ import { State } from '../reducers/reducers';
   styleUrls: ['./content.component.scss']
 })
 export class ContentComponent implements OnInit {
-
   constructor(private store: Store<State>) {
     store.dispatch(changeTitleAction({ title: 'Acradia Parties' }));
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

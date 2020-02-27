@@ -1,28 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { StoreModule } from '@ngrx/store';
 import { RouterModule } from '@angular/router';
-import {StoreModule} from '@ngrx/store';
 
 import { UserIdentityComponent } from './user-identity/user-identity.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { MaterialModule } from '../material/material.module';
-import { appRoutes } from '../routes';
-import { userFeatureStateKey, userReducer } from './reducers/user-reducer';
+import { userFeatureStateKey, userReducer } from './reducers/reducer';
+import { userRoutes } from './routes';
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forRoot(appRoutes),
     MaterialModule,
-    StoreModule.forFeature(userFeatureStateKey, userReducer)
+    StoreModule.forFeature(userFeatureStateKey, userReducer),
+    RouterModule.forChild(userRoutes)
   ],
-  declarations: [
-    UserIdentityComponent,
-    UserInfoComponent
-  ],
-  exports: [
-    UserIdentityComponent,
-    UserInfoComponent
-  ]
+  declarations: [UserIdentityComponent, UserInfoComponent],
+  exports: [UserIdentityComponent, UserInfoComponent]
 })
-export class UserModule { }
+export class UserModule {}

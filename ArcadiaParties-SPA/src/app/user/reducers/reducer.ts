@@ -1,4 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
+
 import { loadUser } from '../actions/actions';
 import { User } from '../models/User';
 

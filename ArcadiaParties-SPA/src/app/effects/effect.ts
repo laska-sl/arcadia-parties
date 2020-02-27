@@ -7,15 +7,13 @@ import { TitleService } from '../services/title.service';
 
 @Injectable()
 export class TitleEffect {
+  loadTitle$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(changeTitleAction),
+      tap(payload => this.titleService.setTitle(payload.title)),
+      map(() => changeTitleSuccessAction())
+    )
+  );
 
-    loadTitle$ = createEffect(() => this.actions$.pipe(
-        ofType(changeTitleAction),
-        tap(payload => this.titleService.setTitle(payload.title)),
-        map(() => changeTitleSuccessAction())
-    ));
-
-    constructor(
-        private actions$: Actions,
-        private titleService: TitleService
-    ) { }
+  constructor(private actions$: Actions, private titleService: TitleService) {}
 }
