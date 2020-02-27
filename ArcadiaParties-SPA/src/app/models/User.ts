@@ -1,10 +1,13 @@
-import { Dates } from './Dates';
-
 export interface User {
   identity: string;
   firstName: string;
   lastName: string;
   department: string;
-  dates?: Dates[];
+  dates?: CelebrationDate[];
   roles?: string[];
+}
+
+export interface CelebrationDate {
+  name: string;
+  date: Date;
 }
