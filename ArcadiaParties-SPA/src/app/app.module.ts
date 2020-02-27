@@ -12,11 +12,10 @@ import { environment } from '../environments/environment';
 import { HeaderComponent } from './header/header.component';
 import { ContentComponent } from './content/content.component';
 import { appRoutes } from './routes';
-import { UserIdentityComponent } from './user/user-identity/user-identity.component';
-import { UserInfoComponent } from './user/user-info/user-info.component';
+import { UserModule } from './user/user.module';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, ContentComponent, UserIdentityComponent, UserInfoComponent],
+  declarations: [AppComponent, HeaderComponent, ContentComponent],
   imports: [
     StoreModule.forRoot(ROOT_REDUCERS, {
       runtimeChecks: {
@@ -25,6 +24,7 @@ import { UserInfoComponent } from './user/user-info/user-info.component';
       }
     }),
     BrowserModule,
+    UserModule,
     BrowserAnimationsModule,
     StoreDevtoolsModule.instrument({
       maxAge: 25,
