@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
@@ -10,10 +10,8 @@ import { selectTitle } from '../selector/selector';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   title$: Observable<string> = this.store.pipe(select(selectTitle));
 
   constructor(private store: Store<State>) {}
-
-  ngOnInit() {}
 }

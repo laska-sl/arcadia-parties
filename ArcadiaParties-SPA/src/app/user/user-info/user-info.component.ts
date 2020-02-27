@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { selectUser } from '../selector/selector';
-
 import { User } from '../models/User';
 import { changeTitleAction } from 'src/app/actions/actions';
 import { UserState } from '../reducers/reducer';
@@ -13,12 +12,10 @@ import { UserState } from '../reducers/reducer';
   templateUrl: './user-info.component.html',
   styleUrls: ['./user-info.component.scss']
 })
-export class UserInfoComponent implements OnInit {
+export class UserInfoComponent {
   user$: Observable<User> = this.store.pipe(select(selectUser));
 
   constructor(private store: Store<UserState>) {
-    store.dispatch(changeTitleAction({ title: 'Acradia Parties - User Profile' }));
+    store.dispatch(changeTitleAction({ title: 'Arcadia Parties - User Profile' }));
   }
-
-  ngOnInit() {}
 }
