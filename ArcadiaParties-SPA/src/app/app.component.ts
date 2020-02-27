@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 import { State } from './reducers/reducers';
-import { selectTitle } from './selector/selector';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +9,6 @@ import { selectTitle } from './selector/selector';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title$: Observable<string> = this.store.pipe(select(selectTitle));
 
   constructor(private store: Store<State>) {
   }
