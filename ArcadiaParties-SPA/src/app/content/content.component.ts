@@ -11,7 +11,7 @@ import { State } from '../reducers/reducers';
 })
 export class ContentComponent implements OnInit {
   constructor(private store: Store<State>) {
-    store.dispatch(changeTitleAction({ title: 'Acradia Parties' }));
+    store.dispatch(changeTitleAction({ title: 'Arcadia Parties' }));
   }
 
   ngOnInit() {}

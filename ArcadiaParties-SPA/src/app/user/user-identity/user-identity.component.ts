@@ -3,7 +3,6 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { loadUser } from '../actions/actions';
-
 import { selectUserIdentity } from '../selector/selector';
 import { UserState } from '../reducers/reducer';
 
