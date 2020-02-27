@@ -1,5 +1,4 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-
 import { headerFeatureStateKey, HeaderState } from '../reducers/header-reducers';
 import { State } from '../reducers/reducers';
 
