@@ -1,26 +1,24 @@
-<div>
-  <mat-card>
-    <mat-card-title class="center">User Profile</mat-card-title>
-    <mat-card-content *ngIf="user$ | async as user; else emptyUser">
-      <mat-tab-group mat-stretch-tabs>
-        <mat-tab label="General">
-          <div class="center font">
-            <p>Identity: {{ user.identity }}</p>
-            <p>FirstName: {{ user.firstName }}</p>
-            <p>LastName: {{ user.lastName }}</p>
-            <p>Department: {{ user.department }}</p>
-            <p>
-              Roles: <span *ngFor="let role of user.roles"> {{ role }} </span>
-            </p>
-          </div>
-        </mat-tab>
-        <mat-tab label="Dates">
-          <p class="center font" *ngFor="let date of user.dates">{{ date.name }}: {{ date.date | date: 'longDate' }}</p>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card-content>
-  </mat-card>
-</div>
+<mat-card>
+  <mat-card-title class="center">User Profile</mat-card-title>
+  <mat-card-content *ngIf="user$ | async as user; else emptyUser">
+    <mat-tab-group mat-stretch-tabs>
+      <mat-tab label="General">
+        <div class="center font">
+          <p>Identity: {{ user.identity }}</p>
+          <p>FirstName: {{ user.firstName }}</p>
+          <p>LastName: {{ user.lastName }}</p>
+          <p>Department: {{ user.department }}</p>
+          <p>
+            Roles: <span *ngFor="let role of user.roles"> {{ role }} </span>
+          </p>
+        </div>
+      </mat-tab>
+      <mat-tab label="Dates">
+        <p class="center font" *ngFor="let date of user.dates">{{ date.name }}: {{ date.date | date: 'longDate' }}</p>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card-content>
+</mat-card>
 
 <ng-template #emptyUser>
   <mat-card-content class="center">
