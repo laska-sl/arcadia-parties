@@ -5,7 +5,10 @@
 
 a {
   color: #fff;
-  margin-bottom: 20px;
   text-decoration: none;
-  margin-top: -20px;
+}
+
+:host { 
+  display:flex;
+  align-items: center;
 }
