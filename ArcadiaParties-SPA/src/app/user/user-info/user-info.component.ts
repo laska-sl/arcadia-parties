@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { selectUser } from '../selector/selector';
 import { Observable } from 'rxjs';
 import { State } from '../../reducers/reducers';
-import { User } from 'src/app/models/User';
+import { User } from '../models/User';
 
 @Component({
   selector: 'app-user-info',
