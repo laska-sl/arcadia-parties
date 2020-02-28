@@ -11,6 +11,9 @@ using ArcadiaParties.Data.Data;
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using ArcadiaParties.API.CustomMiddlewares;
 using ArcadiaParties.CQRS.Commands;
+using ArcadiaParties.Data.Repositories;
+using AutoMapper;
+using ArcadiaParties.Data.Abstractions.Repositories;
 
 namespace ArcadiaParties.API
 {
@@ -41,6 +44,11 @@ namespace ArcadiaParties.API
             services.AddMediatR(typeof(SeedCommand).Assembly);
 
             services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNegotiate();
+            services.AddMediatR(typeof(Temp));
+
+            services.AddAutoMapper(typeof(UserRepository).Assembly);
+
+            services.AddScoped<IUserRepository, UserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
