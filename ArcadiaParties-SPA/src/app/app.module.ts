@@ -15,6 +15,7 @@ import { ContentComponent } from './content/content.component';
 import { appRoutes } from './routes';
 import { UserModule } from './user/user.module';
 import { TitleEffect } from './effects/effect';
+import { UserEffect } from './user/effects/effect';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, ContentComponent],

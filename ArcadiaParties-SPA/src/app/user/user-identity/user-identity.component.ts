@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { loadUser } from '../actions/actions';
+import { loadUserAction, loadUserSuccessAction } from '../actions/actions';
 import { selectUserIdentity } from '../selector/selector';
 import { UserState } from '../reducers/reducer';
 
@@ -15,6 +15,6 @@ export class UserIdentityComponent {
   userIdentity$: Observable<string> = this.store.pipe(select(selectUserIdentity));
 
   constructor(private store: Store<UserState>) {
-    store.dispatch(loadUser());
+    store.dispatch(loadUserAction());
   }
 }
