@@ -4,6 +4,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { EffectsModule } from '@ngrx/effects';
 
 import { MaterialModule } from './material/material.module';
 import { AppComponent } from './app.component';
@@ -12,6 +13,8 @@ import { environment } from '../environments/environment';
 import { HeaderComponent } from './header/header.component';
 import { ContentComponent } from './content/content.component';
 import { appRoutes } from './routes';
+import { UserModule } from './user/user.module';
+import { TitleEffect } from './effects/effect';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, ContentComponent],
@@ -23,6 +26,7 @@ import { appRoutes } from './routes';
       }
     }),
     BrowserModule,
+    UserModule,
     BrowserAnimationsModule,
     StoreDevtoolsModule.instrument({
       maxAge: 25,
@@ -30,8 +34,9 @@ import { appRoutes } from './routes';
     }),
     MaterialModule,
     RouterModule.forRoot(appRoutes),
+    EffectsModule.forRoot([TitleEffect])
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

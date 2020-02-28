@@ -1,11 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { headerFeatureStateKey, HeaderState } from '../reducers/header-reducers';
-import { State } from '../reducers/reducers';
+import { titleFeatureStateKey, TitleState } from '../reducers/title-reducers';
 
-export const headerFeatureSelector = createFeatureSelector<State, HeaderState>(headerFeatureStateKey);
+export const titleFeatureSelector = createFeatureSelector<TitleState>(titleFeatureStateKey);
 
-export const selectTitle = createSelector(
-    headerFeatureSelector,
-    state => state.title
-);
+export const selectTitle = createSelector(titleFeatureSelector, state => state.title);

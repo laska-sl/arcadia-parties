@@ -1,12 +1,12 @@
 [
-    {
-      "Identity": "1",
-      "FirstName": "Anderson",
-      "LastName": "Fields",
-      "HireDate": "2003-08-29",
-      "BirthDate": "2007-10-17",
-      "DepartmentId": "1"
-    },
+  {
+    "Identity": "LASKA-PC\\Vyacheslav",
+    "FirstName": "Anderson",
+    "LastName": "Fields",
+    "HireDate": "2003-08-29",
+    "BirthDate": "2007-10-17",
+    "DepartmentId": "1"
+  },
     {
       "Identity": "2",
       "FirstName": "Vova",
