@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { loadUserAction, loadUserSuccessAction } from '../actions/actions';
+import { loadUserSuccessAction } from '../actions/actions';
 import { User } from '../models/User';
 
 export const userFeatureStateKey = 'user';

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { loadUserAction, loadUserSuccessAction } from '../actions/actions';
+import { loadUserAction } from '../actions/actions';
 import { selectUserIdentity } from '../selector/selector';
 import { UserState } from '../reducers/reducer';
 
