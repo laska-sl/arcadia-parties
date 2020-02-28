@@ -1,6 +1,8 @@
 ﻿using ArcadiaParties.Data.Abstractions.DTOs;
 using ArcadiaParties.Data.Models;
 using AutoMapper;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ArcadiaParties.Data.Helpers
 {
@@ -8,11 +10,9 @@ namespace ArcadiaParties.Data.Helpers
     {
         public AutoMapperProfiles()
         {
-            CreateMap<User, UserDTO>();
-            CreateMap<Role, RoleDTO>();
-            CreateMap<Role, RoleDTO>();
-            CreateMap<Department, DepartmentDTO>();
-            CreateMap<UserRole, UserRoleDTO>();
+            CreateMap<User, UserDTO>()
+                .ForMember(uDTO => uDTO.UserRoles, opt => opt.MapFrom(x => x.UserRoles.Select(y => y.Role.Name).ToList()))
+                .ForMember(uDTO => uDTO.Department, opt => opt.MapFrom(x => x.Department.Name));
         }
     }
 }
