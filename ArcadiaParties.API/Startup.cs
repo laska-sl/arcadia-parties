@@ -44,7 +44,6 @@ namespace ArcadiaParties.API
             services.AddMediatR(typeof(SeedCommand).Assembly);
 
             services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNegotiate();
-            services.AddMediatR(typeof(Temp));
 
             services.AddAutoMapper(typeof(UserRepository).Assembly);
 
