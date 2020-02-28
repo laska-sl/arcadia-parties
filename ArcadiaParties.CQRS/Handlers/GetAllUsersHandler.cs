@@ -3,7 +3,6 @@ using ArcadiaParties.Data.Abstractions.DTOs;
 using ArcadiaParties.Data.Abstractions.Repositories;
 using MediatR;
 using System.Collections.Generic;
-using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 

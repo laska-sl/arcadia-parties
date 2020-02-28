@@ -1,7 +1,6 @@
 ﻿using ArcadiaParties.Data.Abstractions.DTOs;
 using ArcadiaParties.Data.Models;
 using AutoMapper;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace ArcadiaParties.Data.Helpers
