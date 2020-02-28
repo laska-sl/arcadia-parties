@@ -11,7 +11,7 @@ export class UserEffect {
   loadUser = createEffect(() =>
     this.actions.pipe(
       ofType(loadUserAction),
-      map(() => loadUserSuccessAction(this.userService.getUser()))
+      map(() => loadUserSuccessAction({user : this.userService.getUser()}))
     )
   );
 
