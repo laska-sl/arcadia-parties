@@ -3,6 +3,7 @@ using ArcadiaParties.Data.Abstractions.Repositories;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ArcadiaParties.Data.Repositories
@@ -19,7 +20,9 @@ namespace ArcadiaParties.Data.Repositories
         }
         public async Task<UserDTO> GetUser(string identity)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Identity == identity);
+            var user = await _context.Users
+                .Include(u => u.Department)
+                .FirstOrDefaultAsync(u => u.Identity == identity);
 
             var userToReturn = _mapper.Map<UserDTO>(user);
 
@@ -28,7 +31,11 @@ namespace ArcadiaParties.Data.Repositories
 
         public async Task<IEnumerable<UserDTO>> GetUsers()
         {
-            var users = await _context.Users.ToListAsync();
+            var users = await _context.Users
+                .Include(u => u.Department)
+                .Include(u => u.UserRoles)
+                .ThenInclude(r => r.Role)
+                .ToListAsync();
 
             var usersToReturn = _mapper.Map<List<UserDTO>>(users);
 
