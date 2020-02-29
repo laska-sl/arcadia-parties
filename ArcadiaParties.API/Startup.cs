@@ -14,6 +14,7 @@ using ArcadiaParties.CQRS.Commands;
 using ArcadiaParties.Data.Repositories;
 using AutoMapper;
 using ArcadiaParties.Data.Abstractions.Repositories;
+using ArcadiaParties.Data.Helpers;
 
 namespace ArcadiaParties.API
 {
@@ -46,7 +47,7 @@ namespace ArcadiaParties.API
 
             services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNegotiate();
 
-            services.AddAutoMapper(typeof(UserRepository).Assembly);
+            services.AddAutoMapper(typeof(AutoMapperProfile));
 
             services.AddScoped<IUserRepository, UserRepository>();
         }

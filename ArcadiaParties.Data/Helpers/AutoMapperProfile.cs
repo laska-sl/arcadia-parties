@@ -5,9 +5,9 @@ using System.Linq;
 
 namespace ArcadiaParties.Data.Helpers
 {
-    class AutoMapperProfiles : Profile
+    public class AutoMapperProfile : Profile
     {
-        public AutoMapperProfiles()
+        public AutoMapperProfile()
         {
             CreateMap<User, UserDTO>()
                 .ForMember(uDTO => uDTO.UserRoles, opt => opt.MapFrom(x => x.UserRoles.Select(y => y.Role.Name).ToList()))
