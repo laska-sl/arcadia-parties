@@ -31,7 +31,7 @@ namespace ArcadiaParties.API.Controllers
         public async Task<IActionResult> GetUsers()
         {
             var query = new GetAllUsersQuery();
-            var users = _mediator.Send(query);
+            var users = await _mediator.Send(query);
 
             return Ok(users);
         }
@@ -47,7 +47,7 @@ namespace ArcadiaParties.API.Controllers
         {
             IPrincipal principal = HttpContext.User;
             var query = new GetCurrentUserQuery(principal);
-            var user = _mediator.Send(query);
+            var user = await _mediator.Send(query);
 
             return Ok(user);
         }
