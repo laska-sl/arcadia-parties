@@ -3,6 +3,8 @@ using ArcadiaParties.Data.Abstractions.Repositories;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Principal;
 using System.Threading.Tasks;
 
 namespace ArcadiaParties.Data.Repositories
@@ -17,6 +19,7 @@ namespace ArcadiaParties.Data.Repositories
             _context = context;
             _mapper = mapper;
         }
+
         public async Task<UserDTO> GetUser(string identity)
         {
             var user = await _context.Users
@@ -39,6 +42,19 @@ namespace ArcadiaParties.Data.Repositories
             var usersToReturn = _mapper.Map<List<UserDTO>>(users);
 
             return usersToReturn;
+        }
+
+
+        public async Task<IEnumerable<string>> GetUserRoles(string identity)
+        {
+            var user = await _context.Users
+                .Include(u => u.UserRoles)
+                .ThenInclude(r => r.Role)
+                .FirstOrDefaultAsync(u => u.Identity == identity);
+
+            var userRoles = user.UserRoles.Select(userRole => userRole.Role.Name);
+
+            return userRoles;
         }
     }
 }

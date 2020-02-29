@@ -1,15 +1,16 @@
 ﻿using MediatR;
 using System.Collections.Generic;
+using System.Security.Principal;
 
 namespace ArcadiaParties.CQRS.Queries
 {
     public class GetUserRolesQuery : IRequest<IEnumerable<string>>
     {
-        public GetUserRolesQuery(string userIdentity)
+        public GetUserRolesQuery(IPrincipal principal)
         {
-            UserIdentity = userIdentity;
+            Principal = principal;
         }
 
-        public string UserIdentity { get; }
+        public IPrincipal Principal { get; }
     }
 }

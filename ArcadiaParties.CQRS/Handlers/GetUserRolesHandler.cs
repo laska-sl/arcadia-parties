@@ -1,9 +1,7 @@
 ﻿using ArcadiaParties.CQRS.Queries;
-using ArcadiaParties.Data;
+using ArcadiaParties.Data.Abstractions.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,22 +9,15 @@ namespace ArcadiaParties.CQRS.Handlers
 {
     public class GetUserRolesHandler : IRequestHandler<GetUserRolesQuery, IEnumerable<string>>
     {
-        private readonly DataContext _context;
+        private readonly IUserRepository _repo;
 
-        public GetUserRolesHandler(DataContext context)
+        public GetUserRolesHandler(IUserRepository repo)
         {
-            _context = context;
+            _repo = repo;
         }
         public async Task<IEnumerable<string>> Handle(GetUserRolesQuery request, CancellationToken cancellationToken)
         {
-            var user = await _context.Users
-                .Include(u => u.UserRoles)
-                .ThenInclude(r => r.Role)
-                .FirstOrDefaultAsync(u => u.Identity == request.UserIdentity);
-
-            var userRoles = user.UserRoles.Select(userRole => userRole.Role.Name);
-
-            return userRoles;
+            return await _repo.GetUserRoles(request.Principal.Identity.Name);
         }
     }
 }
