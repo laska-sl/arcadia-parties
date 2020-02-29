@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace ArcadiaParties.API.CustomMiddlewares
 {
-    public class DatabaseRolesMiddleware
+    public class DatabaseAuthorizationMiddleware
     {
         private readonly RequestDelegate _next;
 
-        public DatabaseRolesMiddleware(RequestDelegate next)
+        public DatabaseAuthorizationMiddleware(RequestDelegate next)
         {
             _next = next;
         }
@@ -20,17 +20,23 @@ namespace ArcadiaParties.API.CustomMiddlewares
         {
             var user = context.User;
 
+            var getCurrentUserQuery = new GetCurrentUserQuery(user);
+            var currentUserFromDB = await mediator.Send(getCurrentUserQuery);
+
+            if (currentUserFromDB == null)
+            {
+                context.Response.StatusCode = 403;
+                return;
+            }
+
             var newIdentity = new ClaimsIdentity(
                 NegotiateDefaults.AuthenticationScheme,
                 ClaimTypes.Name,
                 ClaimTypes.Role);
 
             newIdentity.AddClaim(new Claim(ClaimTypes.Name, user.Identity.Name));
-
-            var query = new GetUserRolesQuery(user.Identity.Name);
-            var userRoles = await mediator.Send(query);
-
-            foreach (var item in userRoles)
+            
+            foreach (var item in currentUserFromDB.UserRoles)
             {
                 newIdentity.AddClaim(new Claim(ClaimTypes.Role, item));
             }

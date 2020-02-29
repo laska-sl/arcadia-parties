@@ -11,6 +11,10 @@ using ArcadiaParties.Data.Data;
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using ArcadiaParties.API.CustomMiddlewares;
 using ArcadiaParties.CQRS.Commands;
+using ArcadiaParties.Data.Repositories;
+using AutoMapper;
+using ArcadiaParties.Data.Abstractions.Repositories;
+using ArcadiaParties.Data.Helpers;
 
 namespace ArcadiaParties.API
 {
@@ -36,11 +40,16 @@ namespace ArcadiaParties.API
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ArcadiaParties.API", Version = "v1" });
+                c.EnableAnnotations();
             });
 
             services.AddMediatR(typeof(SeedCommand).Assembly);
 
             services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNegotiate();
+
+            services.AddAutoMapper(typeof(AutoMapperProfile));
+
+            services.AddScoped<IUserRepository, UserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,7 +71,7 @@ namespace ArcadiaParties.API
 
             app.UseAuthentication();
 
-            app.UseDatabaseRoles();
+            app.UseDatabaseAuthorization();
 
             app.UseAuthorization();
 
