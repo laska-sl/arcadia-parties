@@ -14,7 +14,7 @@ namespace ArcadiaParties.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
-    {        
+    {
         private readonly IMediator _mediator;
 
         public UsersController(IMediator mediator)
@@ -22,7 +22,7 @@ namespace ArcadiaParties.API.Controllers
             _mediator = mediator;
         }
 
-        [ProducesResponseType(typeof(IEnumerable<UserDTO>),StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<UserDTO>), StatusCodes.Status200OK)]
         [SwaggerOperation(
              Summary = "Returns all users"
         )]
