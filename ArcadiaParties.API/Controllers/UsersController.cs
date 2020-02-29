@@ -1,9 +1,11 @@
 ﻿using ArcadiaParties.CQRS.Queries;
+using ArcadiaParties.Data.Abstractions.DTOs;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -20,7 +22,7 @@ namespace ArcadiaParties.API.Controllers
             _mediator = mediator;
         }
 
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<UserDTO>),StatusCodes.Status200OK)]
         [SwaggerOperation(
              Summary = "Returns all users"
         )]
@@ -35,7 +37,7 @@ namespace ArcadiaParties.API.Controllers
             return Ok(users);
         }
 
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(UserDTO), StatusCodes.Status200OK)]
         [SwaggerOperation(
              Summary = "Returns current authenticated user"
         )]
