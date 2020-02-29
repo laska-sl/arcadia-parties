@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace ArcadiaParties.API.CustomMiddlewares
 {
-    public class DatabaseRolesMiddleware
+    public class DatabaseAuthorizationMiddleware
     {
         private readonly RequestDelegate _next;
 
-        public DatabaseRolesMiddleware(RequestDelegate next)
+        public DatabaseAuthorizationMiddleware(RequestDelegate next)
         {
             _next = next;
         }

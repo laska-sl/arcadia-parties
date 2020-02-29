@@ -2,11 +2,11 @@
 
 namespace ArcadiaParties.API.CustomMiddlewares
 {
-    public static class DatabaseRolesMiddlewareExtensions
+    public static class DatabaseAuthorizationMiddlewareExtensions
     {
         public static IApplicationBuilder UseDatabaseRoles(this IApplicationBuilder builder)
         {
-            return builder.UseMiddleware<DatabaseRolesMiddleware>();
+            return builder.UseMiddleware<DatabaseAuthorizationMiddleware>();
         }
     }
 }
