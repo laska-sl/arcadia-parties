@@ -5,7 +5,7 @@ import { User } from '../models/User';
   providedIn: 'root'
 })
 export class UserService {
-  private mockUser = {
+  private mockUser: User = {
     identity: 'ekaterina.kuznetsova',
     firstName: 'ekaterina',
     lastName: 'kuznetsova',
@@ -17,7 +17,7 @@ export class UserService {
     roles: ['User', 'Admin']
   };
 
-  getUser(): User {
+  getUser() {
     return this.mockUser;
   }
 }
