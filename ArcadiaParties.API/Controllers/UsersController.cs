@@ -45,7 +45,7 @@ namespace ArcadiaParties.API.Controllers
         [Route("GetCurrentUser")]
         public async Task<IActionResult> GetCurrentUser(CancellationToken ct)
         {
-            IPrincipal principal = HttpContext.User;
+            IPrincipal principal = User;
             var query = new GetCurrentUserQuery(principal);
             var user = await _mediator.Send(query, ct);
 
