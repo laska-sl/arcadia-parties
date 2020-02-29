@@ -23,6 +23,7 @@ namespace ArcadiaParties.API.Controllers
         }
 
         [ProducesResponseType(typeof(IEnumerable<UserDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [SwaggerOperation(
              Summary = "Returns all users"
         )]
@@ -38,6 +39,7 @@ namespace ArcadiaParties.API.Controllers
         }
 
         [ProducesResponseType(typeof(UserDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [SwaggerOperation(
              Summary = "Returns current authenticated user"
         )]
