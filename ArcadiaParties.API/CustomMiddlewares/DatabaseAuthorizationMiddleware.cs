@@ -35,11 +35,8 @@ namespace ArcadiaParties.API.CustomMiddlewares
                 ClaimTypes.Role);
 
             newIdentity.AddClaim(new Claim(ClaimTypes.Name, user.Identity.Name));
-
-            var query = new GetUserRolesQuery(user);
-            var userRoles = await mediator.Send(query);
-
-            foreach (var item in userRoles)
+            
+            foreach (var item in currentUserFromDB.UserRoles)
             {
                 newIdentity.AddClaim(new Claim(ClaimTypes.Role, item));
             }
