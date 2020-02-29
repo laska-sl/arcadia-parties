@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using System.Threading.Tasks;
 
 namespace ArcadiaParties.API.Controllers
@@ -17,6 +18,9 @@ namespace ArcadiaParties.API.Controllers
             _mediator = mediator;
         }
 
+        [SwaggerOperation(
+             Summary = "Returns all users"
+        )]
         [Authorize(Roles = "Administrator")]
         [HttpGet]
         [Route("GetUsers")]
@@ -29,6 +33,9 @@ namespace ArcadiaParties.API.Controllers
             return Ok(users);
         }
 
+        [SwaggerOperation(
+             Summary = "Returns current authenticated Windows user"
+        )]
         [HttpGet]
         [Route("GetCurrentUser")]
         public async Task<IActionResult> GetCurrentUser()

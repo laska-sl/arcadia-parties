@@ -39,6 +39,7 @@ namespace ArcadiaParties.API
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ArcadiaParties.API", Version = "v1" });
+                c.EnableAnnotations();
             });
 
             services.AddMediatR(typeof(SeedCommand).Assembly);
