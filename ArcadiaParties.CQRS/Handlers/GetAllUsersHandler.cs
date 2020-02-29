@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ArcadiaParties.CQRS.Handlers
 {
-    public class GetAllUsersHandler : IRequestHandler<GetAllUsersQuery, IEnumerable<UserDTO>>
+    internal class GetAllUsersHandler : IRequestHandler<GetAllUsersQuery, IEnumerable<UserDTO>>
     {
         private readonly IUserRepository _repo;
 

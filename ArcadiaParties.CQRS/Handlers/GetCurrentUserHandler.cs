@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ArcadiaParties.CQRS.Handlers
 {
-    public class GetCurrentUserHandler : IRequestHandler<GetCurrentUserQuery, UserDTO>
+    internal class GetCurrentUserHandler : IRequestHandler<GetCurrentUserQuery, UserDTO>
     {
         private readonly IUserRepository _repo;
 
