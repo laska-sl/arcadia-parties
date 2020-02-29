@@ -17,7 +17,7 @@ export class UserService {
     roles: ['User', 'Admin']
   };
 
-  getUser() {
+  getUser(): User {
     return this.mockUser;
   }
 }
