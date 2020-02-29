@@ -22,7 +22,6 @@ namespace ArcadiaParties.API.Controllers
         }
 
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [SwaggerOperation(
              Summary = "Returns all users"
         )]
