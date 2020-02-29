@@ -44,7 +44,6 @@ namespace ArcadiaParties.Data.Repositories
             return usersToReturn;
         }
 
-
         public async Task<IEnumerable<string>> GetUserRoles(string identity)
         {
             var user = await _context.Users
