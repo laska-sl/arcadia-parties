@@ -8,6 +8,5 @@ namespace ArcadiaParties.Data.Abstractions.Repositories
     {
         Task<UserDTO> GetUser(string identity);
         Task<IEnumerable<UserDTO>> GetUsers();
-        Task<IEnumerable<string>> GetUserRoles(string identity);
     }
 }

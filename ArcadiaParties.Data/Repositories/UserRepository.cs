@@ -45,15 +45,5 @@ namespace ArcadiaParties.Data.Repositories
 
             return usersToReturn;
         }
-
-        public async Task<IEnumerable<string>> GetUserRoles(string identity)
-        {
-            var userRoles = await _context.Roles
-                .Where(role => role.UserRoles.Any(userRole => userRole.User.Identity == identity))
-                .Select(role => role.Name)
-                .ToListAsync();
-
-            return userRoles;
-        }
     }
 }
