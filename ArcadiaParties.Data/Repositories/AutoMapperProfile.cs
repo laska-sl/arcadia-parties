@@ -10,8 +10,8 @@ namespace ArcadiaParties.Data.Helpers
         public AutoMapperProfile()
         {
             CreateMap<User, UserDTO>()
-                .ForMember(uDTO => uDTO.UserRoles, opt => opt.MapFrom(x => x.UserRoles.Select(y => y.Role.Name).ToList()))
-                .ForMember(uDTO => uDTO.Department, opt => opt.MapFrom(x => x.Department.Name));
+                .ForMember(uDTO => uDTO.UserRoles, userDtoOpt => userDtoOpt.MapFrom(user => user.UserRoles.Select(y => y.Role.Name).ToList()))
+                .ForMember(uDTO => uDTO.Department, userDtoOpt => userDtoOpt.MapFrom(user => user.Department.Name));
         }
     }
 }
