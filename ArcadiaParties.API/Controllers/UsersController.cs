@@ -27,7 +27,6 @@ namespace ArcadiaParties.API.Controllers
         public async Task<IActionResult> GetUsers()
         {
             var query = new GetAllUsersQuery();
-
             var users = _mediator.Send(query);
 
             return Ok(users);
@@ -42,7 +41,6 @@ namespace ArcadiaParties.API.Controllers
         {
             var userIdentity = User.Identity.Name;
             var query = new GetCurrentUserQuery(userIdentity);
-
             var user = _mediator.Send(query);
 
             return Ok(user);
