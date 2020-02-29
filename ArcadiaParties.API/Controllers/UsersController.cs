@@ -1,6 +1,7 @@
 ﻿using ArcadiaParties.CQRS.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Threading.Tasks;
@@ -18,6 +19,8 @@ namespace ArcadiaParties.API.Controllers
             _mediator = mediator;
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [SwaggerOperation(
              Summary = "Returns all users"
         )]
@@ -32,6 +35,8 @@ namespace ArcadiaParties.API.Controllers
             return Ok(users);
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [SwaggerOperation(
              Summary = "Returns current authenticated Windows user"
         )]
