@@ -46,7 +46,6 @@ namespace ArcadiaParties.API.Controllers
             var query = new GetCurrentUserQuery(User);
             var user = await _mediator.Send(query, cancellationToken);
 
-
             return Ok(user);
         }
     }
