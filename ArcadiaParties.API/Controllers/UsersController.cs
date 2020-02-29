@@ -39,7 +39,7 @@ namespace ArcadiaParties.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [SwaggerOperation(
-             Summary = "Returns current authenticated Windows user"
+             Summary = "Returns current authenticated user"
         )]
         [HttpGet]
         [Route("GetCurrentUser")]
