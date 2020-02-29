@@ -39,6 +39,7 @@ namespace ArcadiaParties.API.Controllers
         [SwaggerOperation(
              Summary = "Returns current authenticated user"
         )]
+        [Authorize]
         [HttpGet]
         [Route("GetCurrentUser")]
         public async Task<IActionResult> GetCurrentUser(CancellationToken cancellationToken)
