@@ -18,7 +18,7 @@ namespace ArcadiaParties.CQRS.Handlers
 
         public async Task<UserDTO> Handle(GetCurrentUserQuery request, CancellationToken cancellationToken)
         {
-            return await _repo.GetUser(request.Identity);
+            return await _repo.GetUser(request.Principal.Identity.Name);
         }
     }
 }

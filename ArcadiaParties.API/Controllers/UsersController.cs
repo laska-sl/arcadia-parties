@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using System.Security.Principal;
 using System.Threading.Tasks;
 
 namespace ArcadiaParties.API.Controllers
@@ -44,12 +45,11 @@ namespace ArcadiaParties.API.Controllers
         [Route("GetCurrentUser")]
         public async Task<IActionResult> GetCurrentUser()
         {
-            var userIdentity = User.Identity.Name;
-            var query = new GetCurrentUserQuery(userIdentity);
+            IPrincipal principal = HttpContext.User;
+            var query = new GetCurrentUserQuery(principal);
             var user = _mediator.Send(query);
 
             return Ok(user);
         }
-
     }
 }
