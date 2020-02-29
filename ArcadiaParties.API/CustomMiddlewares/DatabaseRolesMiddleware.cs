@@ -20,10 +20,19 @@ namespace ArcadiaParties.API.CustomMiddlewares
         {
             var user = context.User;
 
+            var getCurrentUserQuery = new GetCurrentUserQuery(user);
+            var currentUserFromDB = await mediator.Send(getCurrentUserQuery);
+
+            if (currentUserFromDB == null)
+            {
+                context.Response.StatusCode = 403;
+                return;
+            }
+
             var newIdentity = new ClaimsIdentity(
-                NegotiateDefaults.AuthenticationScheme,
-                ClaimTypes.Name,
-                ClaimTypes.Role);
+                    NegotiateDefaults.AuthenticationScheme,
+                    ClaimTypes.Name,
+                    ClaimTypes.Role);
 
             newIdentity.AddClaim(new Claim(ClaimTypes.Name, user.Identity.Name));
 
