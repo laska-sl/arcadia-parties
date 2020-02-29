@@ -24,6 +24,8 @@ namespace ArcadiaParties.Data.Repositories
         {
             var user = await _context.Users
                 .Include(u => u.Department)
+                .Include(u => u.UserRoles)
+                .ThenInclude(userRole => userRole.Role)
                 .FirstOrDefaultAsync(u => u.Identity == identity);
 
             var userToReturn = _mapper.Map<UserDTO>(user);
@@ -46,12 +48,10 @@ namespace ArcadiaParties.Data.Repositories
 
         public async Task<IEnumerable<string>> GetUserRoles(string identity)
         {
-            var user = await _context.Users
-                .Include(u => u.UserRoles)
-                .ThenInclude(r => r.Role)
-                .FirstOrDefaultAsync(u => u.Identity == identity);
-
-            var userRoles = user.UserRoles.Select(userRole => userRole.Role.Name);
+            var userRoles = await _context.Roles
+                .Where(role => role.UserRoles.Any(userRole => userRole.User.Identity == identity))
+                .Select(role => role.Name)
+                .ToListAsync();
 
             return userRoles;
         }
