@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -28,26 +27,25 @@ namespace ArcadiaParties.API.Controllers
         [Authorize(Roles = "Administrator")]
         [HttpGet]
         [Route("GetUsers")]
-        public async Task<IActionResult> GetUsers(CancellationToken ct)
+        public async Task<IActionResult> GetUsers(CancellationToken cancellationToken)
         {
             var query = new GetAllUsersQuery();
-            var users = await _mediator.Send(query,ct);
+            var users = await _mediator.Send(query, cancellationToken);
 
             return Ok(users);
         }
 
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [SwaggerOperation(
              Summary = "Returns current authenticated user"
         )]
         [HttpGet]
         [Route("GetCurrentUser")]
-        public async Task<IActionResult> GetCurrentUser(CancellationToken ct)
+        public async Task<IActionResult> GetCurrentUser(CancellationToken cancellationToken)
         {
-            IPrincipal principal = User;
-            var query = new GetCurrentUserQuery(principal);
-            var user = await _mediator.Send(query, ct);
+            var query = new GetCurrentUserQuery(User);
+            var user = await _mediator.Send(query, cancellationToken);
+
 
             return Ok(user);
         }
