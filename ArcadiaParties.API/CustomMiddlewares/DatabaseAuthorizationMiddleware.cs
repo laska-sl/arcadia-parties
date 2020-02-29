@@ -30,9 +30,9 @@ namespace ArcadiaParties.API.CustomMiddlewares
             }
 
             var newIdentity = new ClaimsIdentity(
-                    NegotiateDefaults.AuthenticationScheme,
-                    ClaimTypes.Name,
-                    ClaimTypes.Role);
+                NegotiateDefaults.AuthenticationScheme,
+                ClaimTypes.Name,
+                ClaimTypes.Role);
 
             newIdentity.AddClaim(new Claim(ClaimTypes.Name, user.Identity.Name));
 
