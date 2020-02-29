@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Security.Principal;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ArcadiaParties.API.Controllers
@@ -28,10 +29,10 @@ namespace ArcadiaParties.API.Controllers
         [Authorize(Roles = "Administrator")]
         [HttpGet]
         [Route("GetUsers")]
-        public async Task<IActionResult> GetUsers()
+        public async Task<IActionResult> GetUsers(CancellationToken ct)
         {
             var query = new GetAllUsersQuery();
-            var users = await _mediator.Send(query);
+            var users = await _mediator.Send(query,ct);
 
             return Ok(users);
         }
@@ -43,11 +44,11 @@ namespace ArcadiaParties.API.Controllers
         )]
         [HttpGet]
         [Route("GetCurrentUser")]
-        public async Task<IActionResult> GetCurrentUser()
+        public async Task<IActionResult> GetCurrentUser(CancellationToken ct)
         {
             IPrincipal principal = HttpContext.User;
             var query = new GetCurrentUserQuery(principal);
-            var user = await _mediator.Send(query);
+            var user = await _mediator.Send(query, ct);
 
             return Ok(user);
         }
