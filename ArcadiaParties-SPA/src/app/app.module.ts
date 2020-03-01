@@ -15,6 +15,7 @@ import { ContentComponent } from './content/content.component';
 import { appRoutes } from './routes';
 import { UserModule } from './user/user.module';
 import { TitleEffect } from './effects/effect';
+import { DepartmentModule } from './department/department.module';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, ContentComponent],
@@ -27,6 +28,7 @@ import { TitleEffect } from './effects/effect';
     }),
     BrowserModule,
     UserModule,
+    DepartmentModule,
     BrowserAnimationsModule,
     StoreDevtoolsModule.instrument({
       maxAge: 25,
@@ -39,4 +41,4 @@ import { TitleEffect } from './effects/effect';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
