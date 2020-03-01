@@ -1,20 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { DepartmentState } from '../reducers/reducer';
-import { loadDepartmentAction } from '../actions/actions';
-import { selectDepartment } from '../selector/selector';
+import { DepartmentsState } from '../reducers/reducer';
+import { loadDepartmentsAction } from '../actions/actions';
+import { selectDepartments } from '../selector/selector';
+import { User } from 'src/app/user/models/User';
+import { selectUser } from 'src/app/user/selector/selector';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-department-identity',
   templateUrl: './department-identity.component.html',
   styleUrls: ['./department-identity.component.scss']
 })
-export class DepartmentIdentityComponent {
-  department$: Observable<string> = this.store.pipe(select(selectDepartment));
+export class DepartmentIdentityComponent implements OnInit {
+  currentUser$: Observable<User> = this.store.pipe(select(selectUser));
 
-  constructor(private store: Store<DepartmentState>) {
-    store.dispatch(loadDepartmentAction());
+  departments$: Observable<string[]> = this.store.pipe(select(selectDepartments));
+
+  selectedDepartment: string;
+
+  constructor(private store: Store<DepartmentsState>, private router: Router) {
+    store.dispatch(loadDepartmentsAction());
+  }
+
+  ngOnInit() {
+    this.currentUser$.subscribe(currentUser => this.selectedDepartment = currentUser.department);
+  }
+
+  onChange() {
+    this.router.navigate(['/home', this.selectedDepartment]);
   }
 }

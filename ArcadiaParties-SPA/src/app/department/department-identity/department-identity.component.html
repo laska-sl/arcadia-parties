@@ -1,1 +1,10 @@
-<a href="#">{{ department$ | async }}</a>
+<form class="department-form">
+    <mat-form-field>
+        <mat-label>Department</mat-label>
+        <mat-select [(value)]="selectedDepartment" (selectionChange)="onChange()">
+            <mat-option *ngFor="let departament of ( departments$ | async)" value="{{departament}}">
+                {{departament}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</form>

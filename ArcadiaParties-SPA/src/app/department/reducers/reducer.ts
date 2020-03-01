@@ -1,20 +1,20 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { loadDepartmentAction } from '../actions/actions';
+import { loadDepartmentsAction } from '../actions/actions';
 
-export const departmentFeatureStateKey = 'department';
+export const departmentFeatureStateKey = 'departments';
 
-export interface DepartmentState {
-  department: string;
+export interface DepartmentsState {
+  departments: string[];
 }
 
-const initialState: DepartmentState = {
-  department: ''
+const initialState: DepartmentsState = {
+  departments: []
 };
 
-const mockDepartment = 'Temp department';
+const mockDepartment = ['Department1', 'Department2', 'Department3', 'horoshiy'];
 
 export const departmentReducer = createReducer(
   initialState,
-  on(loadDepartmentAction, (state) => ({ ...state, department: mockDepartment }))
+  on(loadDepartmentsAction, (state) => ({ ...state, departments: mockDepartment }))
 );
