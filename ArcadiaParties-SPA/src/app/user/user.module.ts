@@ -22,4 +22,4 @@ import { UserEffect } from './effects/effect';
   declarations: [UserIdentityComponent, UserInfoComponent],
   exports: [UserIdentityComponent, UserInfoComponent]
 })
-export class UserModule {}
+export class UserModule { }

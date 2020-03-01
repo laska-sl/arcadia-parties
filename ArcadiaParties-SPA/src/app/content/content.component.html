@@ -1,4 +1,33 @@
-<h1>{{tempString}}</h1>
+<h1>Selected department: {{tempString$ | async}}</h1>
+
+<mat-card>
+    <mat-card-title class="center">User Profile</mat-card-title>
+    <mat-card-content *ngIf="currentUser$ | async as user; else emptyUser">
+        <mat-tab-group mat-stretch-tabs>
+            <mat-tab label="General">
+                <div class="center font">
+                    <p>Identity: {{ user.identity }}</p>
+                    <p>FirstName: {{ user.firstName }}</p>
+                    <p>LastName: {{ user.lastName }}</p>
+                    <p>Department: {{ user.department.name }}</p>
+                    <p>
+                        Roles: <span *ngFor="let role of user.roles"> {{ role }} </span>
+                    </p>
+                </div>
+            </mat-tab>
+            <mat-tab label="Dates">
+                <p class="center font" *ngFor="let date of user.dates">{{ date.name }}:
+                    {{ date.date | date: 'longDate' }}</p>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-card-content>
+</mat-card>
+
+<ng-template #emptyUser>
+    <mat-card-content class="center">
+        User is not defined
+    </mat-card-content>
+</ng-template>
 
 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni veritatis provident animi impedit cumque itaque ut
     commodi, repellendus aut deserunt id accusantium, minima magnam ipsam. Nesciunt culpa amet sequi fugiat?

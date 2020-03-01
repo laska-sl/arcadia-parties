@@ -8,6 +8,7 @@ import { selectDepartments } from '../selector/selector';
 import { User } from 'src/app/user/models/User';
 import { selectUser } from 'src/app/user/selector/selector';
 import { Router } from '@angular/router';
+import { Department } from '../models/Department';
 
 @Component({
   selector: 'app-department-identity',
@@ -17,19 +18,19 @@ import { Router } from '@angular/router';
 export class DepartmentIdentityComponent implements OnInit {
   currentUser$: Observable<User> = this.store.pipe(select(selectUser));
 
-  departments$: Observable<string[]> = this.store.pipe(select(selectDepartments));
+  departments$: Observable<Department[]> = this.store.pipe(select(selectDepartments));
 
-  selectedDepartment: string;
+  selectedDepartmentId: number;
 
   constructor(private store: Store<DepartmentsState>, private router: Router) {
     store.dispatch(loadDepartmentsAction());
   }
 
   ngOnInit() {
-    this.currentUser$.subscribe(currentUser => this.selectedDepartment = currentUser.department);
+    this.currentUser$.subscribe(currentUser => this.selectedDepartmentId = currentUser.department.id);
   }
 
   onChange() {
-    this.router.navigate(['/home', this.selectedDepartment]);
+    this.router.navigate(['/home', this.selectedDepartmentId]);
   }
 }
