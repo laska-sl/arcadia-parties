@@ -25,7 +25,7 @@ export class ContentComponent implements OnInit {
     this.currentUser$.subscribe(user => this.tempString = user.department);
 
     this.route.params.subscribe(params => {
-      this.tempString = params['department'];
+      this.tempString = params.department;
     });
   }
 }
