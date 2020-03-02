@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ArcadiaParties.CQRS.Queries
 {
-    public class GetAllUsersQuery : IRequest<IEnumerable<UserDTO>>
+    public class GetAllDepartmentsQuery : IRequest<IEnumerable<DepartmentDTO>>
     {
     }
 }

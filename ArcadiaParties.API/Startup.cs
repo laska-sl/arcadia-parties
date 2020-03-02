@@ -50,6 +50,8 @@ namespace ArcadiaParties.API
             services.AddAutoMapper(typeof(AutoMapperProfile));
 
             services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
