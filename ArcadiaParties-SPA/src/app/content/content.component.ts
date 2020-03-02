@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, merge } from 'rxjs';
+import { Observable, merge, Subscription } from 'rxjs';
 import { takeUntil, map, filter, debounceTime } from 'rxjs/operators';
 
 import { changeTitleAction } from '../actions/actions';
@@ -15,7 +15,9 @@ import { SelectedDepartmentIdState } from '../department/reducers/selected-depar
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.scss']
 })
-export class ContentComponent {
+export class ContentComponent implements OnDestroy {
+  private mergedObservableSubscription: Subscription;
+
   currentDepartmentId$ = this.store.pipe(select(selectCurrentDepartment));
 
   constructor(private store: Store<SelectedDepartmentIdState>, route: ActivatedRoute) {
@@ -35,6 +37,11 @@ export class ContentComponent {
       routeParams$.pipe(map(params => params.departmentId))
     ).pipe(debounceTime(500));
 
-    mergedObservable$.subscribe(id => this.store.dispatch(changeDepartmentIdAction({ departmentId: id })));
+    this.mergedObservableSubscription = mergedObservable$
+      .subscribe(id => this.store.dispatch(changeDepartmentIdAction({ departmentId: id })));
+  }
+
+  ngOnDestroy() {
+    this.mergedObservableSubscription.unsubscribe();
   }
 }

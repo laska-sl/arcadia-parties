@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Router } from '@angular/router';
-import { Observable, combineLatest } from 'rxjs';
+import { Observable, combineLatest, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { DepartmentsState } from '../reducers/reducer';
@@ -14,7 +14,9 @@ import { Department } from '../models/Department';
   templateUrl: './department-selector.component.html',
   styleUrls: ['./department-selector.component.scss']
 })
-export class DepartmentSelectorComponent {
+export class DepartmentSelectorComponent implements OnDestroy {
+  private mergedObservableSubscription: Subscription;
+
   departments$: Observable<Department[]> = this.store.pipe(select(selectDepartments));
 
   selectedDepartment: Department;
@@ -22,7 +24,7 @@ export class DepartmentSelectorComponent {
   constructor(private store: Store<DepartmentsState>, private router: Router) {
     store.dispatch(loadDepartmentsAction());
 
-    combineLatest([
+    this.mergedObservableSubscription = combineLatest([
       this.departments$,
       this.store.pipe(select(selectCurrentDepartment))
     ])
@@ -32,5 +34,8 @@ export class DepartmentSelectorComponent {
 
   onChange() {
     this.router.navigate(['/home', this.selectedDepartment.id]);
+  }
+  ngOnDestroy(): void {
+    this.mergedObservableSubscription.unsubscribe();
   }
 }
