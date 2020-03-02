@@ -13,8 +13,8 @@ import { Department } from '../models/Department';
 
 @Component({
   selector: 'app-department-identity',
-  templateUrl: './department-identity.component.html',
-  styleUrls: ['./department-identity.component.scss']
+  templateUrl: './department-selector.component.html',
+  styleUrls: ['./department-selector.component.scss']
 })
 export class DepartmentIdentityComponent {
   currentUser$: Observable<User> = this.store.pipe(select(selectUser));

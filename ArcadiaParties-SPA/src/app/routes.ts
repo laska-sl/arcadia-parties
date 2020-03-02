@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { ContentComponent } from './content/content.component';
-import { DepartmentIdentityComponent } from './department/department-identity/department-identity.component';
+import { DepartmentIdentityComponent } from './department/department-selector/department-selector.component';
 
 export const appRoutes: Routes = [
   {
