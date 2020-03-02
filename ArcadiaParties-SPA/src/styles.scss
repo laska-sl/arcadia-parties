@@ -17,14 +17,6 @@ a {
   text-decoration: none;
 }
 
-.mat-form-field-wrapper{
-  padding: 0 !important;
-} 
-
-.ng-tns-c52-0{
-padding: 0 !important;
-}
-
-.mat-form-field-underline{
-  position: static !important;
+.mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label{
+  transform: translateY(-0.7em) scale(0.75) perspective(100px) translateZ(0.001px) !important;
 }
