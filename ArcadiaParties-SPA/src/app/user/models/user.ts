@@ -1,4 +1,4 @@
-import { Department } from 'src/app/department/models/Department';
+import { Department } from 'src/app/department/models/department';
 
 export interface User {
   identity: string;
