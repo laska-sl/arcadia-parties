@@ -22,6 +22,5 @@ export const appRoutes: Routes = [
       }
     ]
   },
-  // { path: 'user', component: DepartmentIdentityComponent, outlet: 'departmentSelector' },
   { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];
