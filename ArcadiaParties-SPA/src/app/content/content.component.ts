@@ -6,7 +6,6 @@ import { takeUntil, map, filter, debounceTime } from 'rxjs/operators';
 
 import { changeTitleAction } from '../actions/actions';
 import { selectUser } from '../user/selector/selector';
-import { User } from '../user/models/User';
 import { changeDepartmentIdAction } from '../department/actions/actions';
 import { selectCurrentDepartment } from '../department/selector/selector';
 import { SelectedDepartmentIdState } from '../department/reducers/selected-department-reducer';
@@ -17,7 +16,6 @@ import { SelectedDepartmentIdState } from '../department/reducers/selected-depar
   styleUrls: ['./content.component.scss']
 })
 export class ContentComponent {
-  currentUser$: Observable<User> = this.store.pipe(select(selectUser));
   currentDepartmentId$ = this.store.pipe(select(selectCurrentDepartment));
 
   constructor(private store: Store<SelectedDepartmentIdState>, route: ActivatedRoute) {
@@ -25,9 +23,12 @@ export class ContentComponent {
 
     const routeParams$ = route.params.pipe(filter(params => params.departmentId));
 
-    const currentUserDepartment$ = this.currentUser$.pipe(
-      takeUntil(routeParams$),
-      map(user => user.department.id));
+    const currentUserDepartment$ = this.store
+      .pipe(select(selectUser))
+      .pipe(
+        takeUntil(routeParams$),
+        map(user => user.department.id)
+      );
 
     const mergedObservable$ = merge(
       currentUserDepartment$,

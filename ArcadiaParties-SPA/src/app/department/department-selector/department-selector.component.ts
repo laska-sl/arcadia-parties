@@ -7,8 +7,6 @@ import { map } from 'rxjs/operators';
 import { DepartmentsState } from '../reducers/reducer';
 import { loadDepartmentsAction } from '../actions/actions';
 import { selectDepartments, selectCurrentDepartment } from '../selector/selector';
-import { User } from 'src/app/user/models/User';
-import { selectUser } from 'src/app/user/selector/selector';
 import { Department } from '../models/Department';
 
 @Component({
@@ -17,21 +15,18 @@ import { Department } from '../models/Department';
   styleUrls: ['./department-selector.component.scss']
 })
 export class DepartmentIdentityComponent {
-  currentUser$: Observable<User> = this.store.pipe(select(selectUser));
-
   departments$: Observable<Department[]> = this.store.pipe(select(selectDepartments));
-
-  currentDepartmentId$: Observable<number> = this.store.pipe(select(selectCurrentDepartment));
 
   selectedDepartment: Department;
 
   constructor(private store: Store<DepartmentsState>, private router: Router) {
     store.dispatch(loadDepartmentsAction());
 
-    const combined = combineLatest([
+    combineLatest([
       this.departments$,
-      this.currentDepartmentId$]
-    ).pipe(map(([departments, departmentId]) => departments.find(d => d.id === departmentId)))
+      this.store.pipe(select(selectCurrentDepartment))
+    ])
+      .pipe(map(([departments, departmentId]) => departments.find(d => d.id === departmentId)))
       .subscribe(d => this.selectedDepartment = d);
   }
 
