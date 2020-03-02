@@ -17,6 +17,7 @@ namespace ArcadiaParties.Data.Repositories
             _context = context;
             _mapper = mapper;
         }
+
         public async Task<IEnumerable<DepartmentDTO>> GetDepartments()
         {
             var departments = await _context.Department.ToListAsync();
