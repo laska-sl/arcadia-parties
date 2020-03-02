@@ -16,21 +16,26 @@ import { Department } from '../models/Department';
 })
 export class DepartmentSelectorComponent implements OnDestroy {
   private mergedObservableSubscription: Subscription;
+  private currentDepartmentSubscription: Subscription;
 
   departments$: Observable<Department[]> = this.store.pipe(select(selectDepartments));
 
   selectedDepartmentId: number;
+  selectedDepartmentName: string;
 
   constructor(private store: Store<DepartmentsState>, private router: Router) {
     store.dispatch(loadDepartmentsAction());
 
-    this.mergedObservableSubscription = combineLatest([
-      this.departments$,
-      this.store.pipe(select(selectCurrentDepartment))
-    ])
-      .pipe(map(([departments, departmentId]) => departments.find(d => d.id === departmentId)))
-      .pipe(filter(department => department !== undefined))
-      .subscribe(d => this.selectedDepartmentId = d.id);
+    // this.mergedObservableSubscription = combineLatest([
+    //   this.departments$,
+    //   this.store.pipe(select(selectCurrentDepartment))
+    // ])
+    //   .pipe(map(([departments, departmentId]) => departments.find(d => d.id === departmentId)))
+    //   .pipe(filter(department => department !== undefined))
+    //   .subscribe(d => this.selectedDepartmentName = d.name);
+
+
+    this.currentDepartmentSubscription = this.store.pipe(select(selectCurrentDepartment)).subscribe(id => this.selectedDepartmentId = id);
   }
 
   onChange() {
@@ -38,5 +43,6 @@ export class DepartmentSelectorComponent implements OnDestroy {
   }
   ngOnDestroy(): void {
     this.mergedObservableSubscription.unsubscribe();
+    this.currentDepartmentSubscription.unsubscribe()
   }
 }
