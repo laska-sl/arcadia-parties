@@ -22,7 +22,7 @@ export class DepartmentIdentityComponent {
   constructor(private store: Store<DepartmentsState>, private router: Router) {
     store.dispatch(loadDepartmentsAction());
 
-    combineLatest([
+    const combined = combineLatest([
       this.departments$,
       this.store.pipe(select(selectCurrentDepartment))
     ])
