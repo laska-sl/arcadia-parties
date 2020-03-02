@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { ContentComponent } from './content/content.component';
-import { DepartmentIdentityComponent } from './department/department-selector/department-selector.component';
+import { DepartmentSelectorComponent } from './department/department-selector/department-selector.component';
 
 export const appRoutes: Routes = [
   {
@@ -14,7 +14,7 @@ export const appRoutes: Routes = [
       {
         path: '',
         outlet: 'departmentSelector',
-        component: DepartmentIdentityComponent
+        component: DepartmentSelectorComponent
       },
       {
         path: ':departmentId',

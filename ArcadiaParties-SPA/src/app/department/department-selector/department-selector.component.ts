@@ -10,11 +10,11 @@ import { selectDepartments, selectCurrentDepartment } from '../selector/selector
 import { Department } from '../models/Department';
 
 @Component({
-  selector: 'app-department-identity',
+  selector: 'app-department-selector',
   templateUrl: './department-selector.component.html',
   styleUrls: ['./department-selector.component.scss']
 })
-export class DepartmentIdentityComponent {
+export class DepartmentSelectorComponent {
   departments$: Observable<Department[]> = this.store.pipe(select(selectDepartments));
 
   selectedDepartment: Department;
@@ -22,7 +22,7 @@ export class DepartmentIdentityComponent {
   constructor(private store: Store<DepartmentsState>, private router: Router) {
     store.dispatch(loadDepartmentsAction());
 
-    const combined = combineLatest([
+    combineLatest([
       this.departments$,
       this.store.pipe(select(selectCurrentDepartment))
     ])
