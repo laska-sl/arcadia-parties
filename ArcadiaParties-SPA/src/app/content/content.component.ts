@@ -8,7 +8,7 @@ import { changeTitleAction } from '../actions/actions';
 import { selectUser } from '../user/selector/selector';
 import { changeDepartmentIdAction } from '../department/actions/actions';
 import { selectCurrentDepartment } from '../department/selector/selector';
-import { SelectedDepartmentIdState } from '../department/reducers/selected-department-reducer';
+import { DepartmentState } from '../department/reducers/reducer';
 
 @Component({
   selector: 'app-content',
@@ -20,7 +20,7 @@ export class ContentComponent implements OnDestroy {
 
   currentDepartmentId$ = this.store.pipe(select(selectCurrentDepartment));
 
-  constructor(private store: Store<SelectedDepartmentIdState>, route: ActivatedRoute) {
+  constructor(private store: Store<DepartmentState>, route: ActivatedRoute) {
     store.dispatch(changeTitleAction({ title: 'Arcadia Parties' }));
 
     const routeParams$ = route.params.pipe(filter(params => params.departmentId));

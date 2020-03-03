@@ -1,10 +1,9 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { DepartmentState, departmentFeatureStateKey } from '../reducers/reducer';
 
-import { DepartmentsState, departmentsFeatureStateKey } from '../reducers/reducer';
-import { SelectedDepartmentIdState, selectedDepartmentFeatureStateKey } from '../reducers/selected-department-reducer';
 
-export const departmentsFeatureSelector = createFeatureSelector<DepartmentsState>(departmentsFeatureStateKey);
-export const selectDepartments = createSelector(departmentsFeatureSelector, state => state.departments);
+export const departmentFeatureSelector = createFeatureSelector<DepartmentState>(departmentFeatureStateKey);
 
-export const currentDepartmentFeatureSelector = createFeatureSelector<SelectedDepartmentIdState>(selectedDepartmentFeatureStateKey);
-export const selectCurrentDepartment = createSelector(currentDepartmentFeatureSelector, state => state.departmentId);
+export const selectDepartments = createSelector(departmentFeatureSelector, state => state.departments);
+
+export const selectCurrentDepartment = createSelector(departmentFeatureSelector, state => state.departmentId);

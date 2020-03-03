@@ -1,26 +1,29 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { loadDepartmentsAction } from '../actions/actions';
-import { Department } from '../models/Department';
+import { changeDepartmentIdAction, loadDepartmentsAction } from '../actions/actions';
+import { Department } from '../models/department';
 
-export const departmentsFeatureStateKey = 'departments';
+export const departmentFeatureStateKey = 'department';
 
-export interface DepartmentsState {
-  departments: Department[];
+export interface DepartmentState {
+    departmentId: number;
+    departments: Department[];
 }
 
-const initialState: DepartmentsState = {
-  departments: []
+const initialState: DepartmentState = {
+    departmentId: 0,
+    departments: []
 };
 
 const mockDepartments: Department[] = [
-  { id: 1, name: 'Department1' },
-  { id: 2, name: 'Department2' },
-  { id: 3, name: 'Department3' },
-  { id: 4, name: 'horoshiy' }
+    { id: 1, name: 'Department1' },
+    { id: 2, name: 'Department2' },
+    { id: 3, name: 'Department3' },
+    { id: 4, name: 'horoshiy' }
 ];
 
 export const departmentReducer = createReducer(
-  initialState,
-  on(loadDepartmentsAction, (state) => ({ ...state, departments: mockDepartments }))
+    initialState,
+    on(changeDepartmentIdAction, (state, props) => ({ ...state, departmentId: props.departmentId })),
+    on(loadDepartmentsAction, (state) => ({ ...state, departments: mockDepartments }))
 );
