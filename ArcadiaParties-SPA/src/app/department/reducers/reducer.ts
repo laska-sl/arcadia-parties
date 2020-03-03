@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { changeDepartmentIdAction, loadDepartmentsAction } from '../actions/actions';
+import { changeDepartmentIdAction, loadDepartmentsSuccessAction } from '../actions/actions';
 import { Department } from '../models/department';
 
 export const departmentFeatureStateKey = 'department';
@@ -15,15 +15,8 @@ const initialState: DepartmentState = {
     departments: []
 };
 
-const mockDepartments: Department[] = [
-    { id: 1, name: 'Department1' },
-    { id: 2, name: 'Department2' },
-    { id: 3, name: 'Department3' },
-    { id: 4, name: 'horoshiy' }
-];
-
 export const departmentReducer = createReducer(
     initialState,
     on(changeDepartmentIdAction, (state, props) => ({ ...state, departmentId: props.departmentId })),
-    on(loadDepartmentsAction, (state) => ({ ...state, departments: mockDepartments }))
+    on(loadDepartmentsSuccessAction, (state, props) => ({ ...state, departments: props.departments }))
 );
