@@ -27,7 +27,6 @@ export class DepartmentSelectorComponent implements OnDestroy {
     this.currentDepartmentSubscription = this.store.pipe(select(selectCurrentDepartment), debounceTime(0))
       .subscribe(id => {
         this.selectedDepartmentId = id;
-        console.log(id);
       });
   }
 
