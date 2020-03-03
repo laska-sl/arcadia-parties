@@ -31,7 +31,7 @@ export class DepartmentSelectorComponent implements OnDestroy {
   }
 
   onChange() {
-    this.router.navigate(['/home', this.selectedDepartmentId]);
+    this.router.navigate(['/calendar', this.selectedDepartmentId]);
   }
 
   ngOnDestroy() {

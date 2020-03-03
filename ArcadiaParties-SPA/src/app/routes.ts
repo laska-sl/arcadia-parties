@@ -5,7 +5,7 @@ import { DepartmentSelectorComponent } from './department/department-selector/de
 
 export const appRoutes: Routes = [
   {
-    path: 'home',
+    path: 'calendar',
     children: [
       {
         path: '',
@@ -22,5 +22,5 @@ export const appRoutes: Routes = [
       }
     ]
   },
-  { path: '**', redirectTo: 'home', pathMatch: 'full' }
+  { path: '**', redirectTo: 'calendar', pathMatch: 'full' }
 ];
