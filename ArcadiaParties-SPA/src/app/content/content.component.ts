@@ -23,7 +23,9 @@ export class ContentComponent implements OnDestroy {
   constructor(private store: Store<DepartmentState>, route: ActivatedRoute) {
     store.dispatch(changeTitleAction({ title: 'Arcadia Parties' }));
 
-    const routeParams$ = route.params.pipe(filter(params => params.departmentId));
+    const routeParams$ = route.params
+      .pipe(filter(params => params.departmentId))
+      .pipe(map(params => +params.departmentId));
 
     const currentUserDepartment$ = this.store
       .pipe(select(selectUser))
@@ -34,7 +36,7 @@ export class ContentComponent implements OnDestroy {
 
     const mergedObservable$ = merge(
       currentUserDepartment$,
-      routeParams$.pipe(map(params => +params.departmentId))
+      routeParams$
     ).pipe(debounceTime(500));
 
     this.mergedObservableSubscription = mergedObservable$
