@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, merge, Subscription } from 'rxjs';
+import { merge, Subscription } from 'rxjs';
 import { takeUntil, map, filter, debounceTime } from 'rxjs/operators';
 
 import { changeTitleAction } from '../actions/actions';
@@ -34,7 +34,7 @@ export class ContentComponent implements OnDestroy {
 
     const mergedObservable$ = merge(
       currentUserDepartment$,
-      routeParams$.pipe(map(params => params.departmentId))
+      routeParams$.pipe(map(params => +params.departmentId))
     ).pipe(debounceTime(500));
 
     this.mergedObservableSubscription = mergedObservable$
