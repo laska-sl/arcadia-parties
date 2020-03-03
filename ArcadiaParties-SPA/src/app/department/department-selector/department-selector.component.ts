@@ -2,10 +2,9 @@ import { Component, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
 
 import { loadDepartmentsAction } from '../actions/actions';
-import { selectDepartments, selectCurrentDepartment } from '../selector/selector';
+import { selectDepartments, selectCurrentDepartmentId } from '../selector/selector';
 import { Department } from '../models/Department';
 import { DepartmentState } from '../reducers/reducer';
 
@@ -24,7 +23,7 @@ export class DepartmentSelectorComponent implements OnDestroy {
   constructor(private store: Store<DepartmentState>, private router: Router) {
     store.dispatch(loadDepartmentsAction());
 
-    this.currentDepartmentSubscription = this.store.pipe(select(selectCurrentDepartment))
+    this.currentDepartmentSubscription = this.store.pipe(select(selectCurrentDepartmentId))
       .subscribe(id => {
         this.selectedDepartmentId = id;
       });

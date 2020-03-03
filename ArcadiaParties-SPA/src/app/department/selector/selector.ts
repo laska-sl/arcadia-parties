@@ -6,4 +6,4 @@ export const departmentFeatureSelector = createFeatureSelector<DepartmentState>(
 
 export const selectDepartments = createSelector(departmentFeatureSelector, state => state.departments);
 
-export const selectCurrentDepartment = createSelector(departmentFeatureSelector, state => state.departmentId);
+export const selectCurrentDepartmentId = createSelector(departmentFeatureSelector, state => state.departmentId);

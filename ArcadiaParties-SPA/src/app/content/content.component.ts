@@ -7,7 +7,7 @@ import { takeUntil, map, filter, debounceTime } from 'rxjs/operators';
 import { changeTitleAction } from '../actions/actions';
 import { selectUser } from '../user/selector/selector';
 import { changeDepartmentIdAction } from '../department/actions/actions';
-import { selectCurrentDepartment } from '../department/selector/selector';
+import { selectCurrentDepartmentId } from '../department/selector/selector';
 import { DepartmentState } from '../department/reducers/reducer';
 
 @Component({
@@ -18,7 +18,7 @@ import { DepartmentState } from '../department/reducers/reducer';
 export class ContentComponent implements OnDestroy {
   private mergedObservableSubscription: Subscription;
 
-  currentDepartmentId$ = this.store.pipe(select(selectCurrentDepartment));
+  currentDepartmentId$ = this.store.pipe(select(selectCurrentDepartmentId));
 
   constructor(private store: Store<DepartmentState>, route: ActivatedRoute) {
     store.dispatch(changeTitleAction({ title: 'Arcadia Parties' }));
