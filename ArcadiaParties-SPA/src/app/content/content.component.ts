@@ -24,13 +24,14 @@ export class ContentComponent implements OnDestroy {
     store.dispatch(changeTitleAction({ title: 'Arcadia Parties' }));
 
     const routeParams$ = route.params
-      .pipe(filter(params => params.departmentId))
-      .pipe(map(params => +params.departmentId))
-      .pipe(debounceTime(500));
+      .pipe(
+        filter(params => params.departmentId),
+        map(params => +params.departmentId)
+      );
 
     const currentUserDepartment$ = this.store
-      .pipe(select(selectUser))
       .pipe(
+        select(selectUser),
         takeUntil(routeParams$),
         map(user => user.department.id)
       );
@@ -38,7 +39,7 @@ export class ContentComponent implements OnDestroy {
     const mergedObservable$ = merge(
       currentUserDepartment$,
       routeParams$
-    );
+    ).pipe(debounceTime(500));
 
     this.mergedObservableSubscription = mergedObservable$
       .subscribe(id => this.store.dispatch(changeDepartmentIdAction({ departmentId: id })));
