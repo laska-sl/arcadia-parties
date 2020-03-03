@@ -7,7 +7,7 @@ import { loadDepartmentsSuccessAction, loadDepartmentsAction } from '../actions/
 
 @Injectable()
 export class DepartmentEffect {
-    loadUser = createEffect(() =>
+    loadDepartment = createEffect(() =>
         this.actions.pipe(
             ofType(loadDepartmentsAction),
             map(() => loadDepartmentsSuccessAction({ departments: this.departmentService.getDepartments() }))
