@@ -1,0 +1,10 @@
+<form class="department-form">
+    <mat-form-field>
+        <mat-label>Department</mat-label>
+        <mat-select [(value)]="selectedDepartmentId" (selectionChange)="onChange()">
+            <mat-option *ngFor="let departament of ( departments$ | async)" [value]="departament.id">
+                {{departament.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</form>

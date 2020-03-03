@@ -9,7 +9,7 @@ export class UserService {
     identity: 'ekaterina.kuznetsova',
     firstName: 'ekaterina',
     lastName: 'kuznetsova',
-    department: 'horoshiy',
+    department: { id: 4, name: 'horoshiy' },
     dates: [
       { name: 'BirthDay', date: new Date('11.02.1944') },
       { name: 'HireDay', date: new Date('03.12.1955') }

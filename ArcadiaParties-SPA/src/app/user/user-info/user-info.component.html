@@ -7,7 +7,7 @@
           <p>Identity: {{ user.identity }}</p>
           <p>FirstName: {{ user.firstName }}</p>
           <p>LastName: {{ user.lastName }}</p>
-          <p>Department: {{ user.department }}</p>
+          <p>Department: {{ user.department.name }}</p>
           <p>
             Roles: <span *ngFor="let role of user.roles"> {{ role }} </span>
           </p>

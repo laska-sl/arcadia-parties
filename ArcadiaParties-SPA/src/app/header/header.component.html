@@ -1,3 +1,6 @@
-<a [routerLink]="['/home']">Arcadia Parties</a>
+<a [routerLink]="['/calendar']">Arcadia Parties</a>
 <div class="header-spacer"></div>
+<div class="departmentSelectorContainer">
+    <router-outlet name="departmentSelector"></router-outlet>
+</div>
 <app-user-identity></app-user-identity>
