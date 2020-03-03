@@ -21,13 +21,7 @@ namespace ArcadiaParties.Data.Repositories
         public async Task<bool> DepartmentExists(int id)
         {
             var department = await _context.Department.FindAsync(id);
-
-            if (department == null)
-            {
-                return false;
-            }
-
-            return true;
+            return department != null;
         }
 
         public async Task<IEnumerable<DepartmentDTO>> GetDepartments()
