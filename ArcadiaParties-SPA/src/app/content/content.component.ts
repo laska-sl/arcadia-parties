@@ -25,7 +25,8 @@ export class ContentComponent implements OnDestroy {
 
     const routeParams$ = route.params
       .pipe(filter(params => params.departmentId))
-      .pipe(map(params => +params.departmentId));
+      .pipe(map(params => +params.departmentId))
+      .pipe(debounceTime(500));
 
     const currentUserDepartment$ = this.store
       .pipe(select(selectUser))
@@ -37,7 +38,7 @@ export class ContentComponent implements OnDestroy {
     const mergedObservable$ = merge(
       currentUserDepartment$,
       routeParams$
-    ).pipe(debounceTime(500));
+    );
 
     this.mergedObservableSubscription = mergedObservable$
       .subscribe(id => this.store.dispatch(changeDepartmentIdAction({ departmentId: id })));
