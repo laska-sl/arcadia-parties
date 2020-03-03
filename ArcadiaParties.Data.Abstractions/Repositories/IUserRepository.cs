@@ -7,6 +7,9 @@ namespace ArcadiaParties.Data.Abstractions.Repositories
     public interface IUserRepository
     {
         Task<UserDTO> GetUser(string identity);
+
         Task<IEnumerable<UserDTO>> GetUsers();
+
+        Task<IEnumerable<UserDTO>> GetUsersOfDepartment(int departmentId);
     }
 }

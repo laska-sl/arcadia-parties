@@ -7,5 +7,7 @@ namespace ArcadiaParties.Data.Abstractions.Repositories
     public interface IDepartmentRepository
     {
         Task<IEnumerable<DepartmentDTO>> GetDepartments();
+
+        Task<bool> DepartmentExists(int id);
     }
 }

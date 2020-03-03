@@ -13,16 +13,16 @@
       "LastName": "Lasukov",
       "HireDate": "2020-02-05",
       "BirthDate": "1999-06-08",
-      "DepartmentId": "2"
+      "DepartmentId": "1"
     },
-  {
-    "Identity": "ARCADIA\\ekaterina.kuznetsova",
-    "FirstName": "Ekaterina",
-    "LastName": "Kuznetsova",
-    "HireDate": "2003-08-29",
-    "BirthDate": "2007-10-17",
-    "DepartmentId": "3"
-  },
+    {
+      "Identity": "ARCADIA\\ekaterina.kuznetsova",
+      "FirstName": "Ekaterina",
+      "LastName": "Kuznetsova",
+      "HireDate": "2003-08-29",
+      "BirthDate": "2007-10-17",
+      "DepartmentId": "1"
+    },
     {
       "Identity": "4",
       "FirstName": "Robert",
