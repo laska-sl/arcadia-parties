@@ -30,7 +30,15 @@ namespace ArcadiaParties.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUsersOfDepartment(int id, CancellationToken cancellationToken)
         {
-            var query = new GetUsersOfDepartmentQuery(id);
+            var query1 = new DepartmentExistsQuery(id);
+            var departmentExists = await _mediator.Send(query1, cancellationToken);
+
+            if (!departmentExists)
+            {
+                return NotFound();
+            }
+
+            var query = new GetDatesOfDepartmentQuery(id);
             var users = await _mediator.Send(query, cancellationToken);
 
             return Ok(users);

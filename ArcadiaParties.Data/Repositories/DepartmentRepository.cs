@@ -18,6 +18,18 @@ namespace ArcadiaParties.Data.Repositories
             _mapper = mapper;
         }
 
+        public async Task<bool> DepartmentExists(int id)
+        {
+            var department = await _context.Department.FindAsync(id);
+
+            if (department == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public async Task<IEnumerable<DepartmentDTO>> GetDepartments()
         {
             var departments = await _context.Department.ToListAsync();
