@@ -15,6 +15,7 @@ using ArcadiaParties.Data.Repositories;
 using AutoMapper;
 using ArcadiaParties.Data.Abstractions.Repositories;
 using ArcadiaParties.Data.Helpers;
+using System;
 
 namespace ArcadiaParties.API
 {
@@ -41,6 +42,19 @@ namespace ArcadiaParties.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ArcadiaParties.API", Version = "v1" });
                 c.EnableAnnotations();
+                c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.OAuth2,
+                    Flows = new OpenApiOAuthFlows
+                    {
+                        Implicit = new OpenApiOAuthFlow
+                        {
+                            AuthorizationUrl = new Uri("https://login.microsoftonline.com/958661cb-2cde-47d5-814e-5be2619d3fde/oauth2/authorize"),
+                            TokenUrl = new Uri("https://login.microsoftonline.com/fa4e9c1f-6222-443d-a083-28f80c1ffefc/oauth2/token"),
+                        }
+                        
+                    }
+                });
             });
 
             services.AddMediatR(typeof(SeedCommand).Assembly);
@@ -66,8 +80,25 @@ namespace ArcadiaParties.API
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ArcadiaParties API V1");
+                c.OAuthClientId("3041149d-3071-4f8e-8df7-4ff59545cfeb");
+                c.OAuth2RedirectUrl("http://localhost:63601/swagger/o2c.html");
             });
+
+            //app.UseSwaggerUI(
+            //    c =>
+            //    {
+            //        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Arcadian-Assistant API");
+            //        c.ShowJsonEditor();
+            //        c.ShowRequestHeaders();
+            //        c.ConfigureOAuth2(
+            //            securitySettings.ClientId,
+            //            null,
+            //            securitySettings.SwaggerRedirectUri,
+            //            "ArcadiaAssistant",
+            //            additionalQueryStringParameters: new Dictionary<string, string>() { { "resource", securitySettings.ClientId } }
+            //            );
+            //    });
 
             app.UseRouting();
 
