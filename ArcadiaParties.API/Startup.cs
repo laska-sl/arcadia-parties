@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ArcadiaParties.Data.Data;
-using ArcadiaParties.API.CustomMiddlewares;
+//using ArcadiaParties.API.CustomMiddlewares;
 using ArcadiaParties.CQRS.Commands;
 using ArcadiaParties.Data.Repositories;
 using AutoMapper;
@@ -44,12 +44,9 @@ namespace ArcadiaParties.API
 
                 c.EnableAnnotations();
 
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
                 {
                     Type = SecuritySchemeType.OAuth2,
-                    Scheme = "Bearer",
-                    In = ParameterLocation.Header,
-                    Name = "Authorization",
                     Flows = new OpenApiOAuthFlows
                     {
                         Implicit = new OpenApiOAuthFlow
@@ -65,14 +62,11 @@ namespace ArcadiaParties.API
                     {
                         new OpenApiSecurityScheme
                         {
-                        Reference = new OpenApiReference
+                            Reference = new OpenApiReference
                             {
                                 Type = ReferenceType.SecurityScheme,
-                                Id = "Bearer"
-                            },
-                            Scheme = "oauth2",
-                            Name = "Bearer",
-                            In = ParameterLocation.Header,
+                                Id = "oauth2"
+                            }
                         },
                         new List<string>()
                     }
@@ -110,7 +104,7 @@ namespace ArcadiaParties.API
 
             app.UseAuthentication();
 
-            app.UseDatabaseAuthorization();
+            //app.UseDatabaseAuthorization();
 
             app.UseAuthorization();
 
