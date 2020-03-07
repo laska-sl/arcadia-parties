@@ -6,16 +6,16 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 using ArcadiaParties.Data.Data;
-using Microsoft.AspNetCore.Authentication.Negotiate;
 using ArcadiaParties.API.CustomMiddlewares;
 using ArcadiaParties.CQRS.Commands;
 using ArcadiaParties.Data.Repositories;
 using AutoMapper;
 using ArcadiaParties.Data.Abstractions.Repositories;
 using ArcadiaParties.Data.Helpers;
+using System.Collections.Generic;
 using System;
+using Microsoft.OpenApi.Models;
 
 namespace ArcadiaParties.API
 {
@@ -40,26 +40,48 @@ namespace ArcadiaParties.API
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ArcadiaParties.API", Version = "v1" });
-                c.EnableAnnotations();
-                c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                c.SwaggerDoc("v1", new OpenApiInfo() { Title = "Arcadia Parties API", Version = "v1" });
+
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Type = SecuritySchemeType.OAuth2,
+                    Scheme = "Bearer",
+                    In = ParameterLocation.Header,
+                    Name = "Authorization",
                     Flows = new OpenApiOAuthFlows
                     {
                         Implicit = new OpenApiOAuthFlow
                         {
-                            AuthorizationUrl = new Uri("https://login.microsoftonline.com/958661cb-2cde-47d5-814e-5be2619d3fde/oauth2/authorize"),
+                            AuthorizationUrl = new Uri("https://login.microsoftonline.com/fa4e9c1f-6222-443d-a083-28f80c1ffefc/oauth2/authorize"),
                             TokenUrl = new Uri("https://login.microsoftonline.com/fa4e9c1f-6222-443d-a083-28f80c1ffefc/oauth2/token"),
+                            Scopes = new Dictionary<string, string>
+                            {
+                                {"openid", "oidc standard"}
+                            }
                         }
-                        
+                    }
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                        Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                            Scheme = "oauth2",
+                            Name = "Bearer",
+                            In = ParameterLocation.Header,
+                        },
+                        new List<string>()
                     }
                 });
             });
 
             services.AddMediatR(typeof(SeedCommand).Assembly);
-
-            services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNegotiate();
 
             services.AddAutoMapper(typeof(AutoMapperProfile));
 
@@ -80,25 +102,11 @@ namespace ArcadiaParties.API
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ArcadiaParties API V1");
-                c.OAuthClientId("3041149d-3071-4f8e-8df7-4ff59545cfeb");
-                c.OAuth2RedirectUrl("http://localhost:63601/swagger/o2c.html");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Arcadian Parties API");
+                c.OAuthClientId("a2ccb221-60e2-47b8-b28c-bf88a59f7f4a");
+                c.OAuthAppName("Arcadia Parties - Swagger");
+                c.OAuthAdditionalQueryStringParams(new Dictionary<string, string>() { { "resource", "a2ccb221-60e2-47b8-b28c-bf88a59f7f4a" } });
             });
-
-            //app.UseSwaggerUI(
-            //    c =>
-            //    {
-            //        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Arcadian-Assistant API");
-            //        c.ShowJsonEditor();
-            //        c.ShowRequestHeaders();
-            //        c.ConfigureOAuth2(
-            //            securitySettings.ClientId,
-            //            null,
-            //            securitySettings.SwaggerRedirectUri,
-            //            "ArcadiaAssistant",
-            //            additionalQueryStringParameters: new Dictionary<string, string>() { { "resource", securitySettings.ClientId } }
-            //            );
-            //    });
 
             app.UseRouting();
 
