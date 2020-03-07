@@ -54,10 +54,6 @@ namespace ArcadiaParties.API
                         {
                             AuthorizationUrl = new Uri("https://login.microsoftonline.com/fa4e9c1f-6222-443d-a083-28f80c1ffefc/oauth2/authorize"),
                             TokenUrl = new Uri("https://login.microsoftonline.com/fa4e9c1f-6222-443d-a083-28f80c1ffefc/oauth2/token"),
-                            Scopes = new Dictionary<string, string>
-                            {
-                                {"openid", "oidc standard"}
-                            }
                         }
                     }
                 });
