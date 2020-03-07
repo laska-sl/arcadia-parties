@@ -1,6 +1,5 @@
 ﻿using ArcadiaParties.CQRS.Queries;
 using MediatR;
-using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -30,7 +29,7 @@ namespace ArcadiaParties.API.CustomMiddlewares
             }
 
             var newIdentity = new ClaimsIdentity(
-                NegotiateDefaults.AuthenticationScheme,
+                user.Identity.AuthenticationType,
                 ClaimTypes.Name,
                 ClaimTypes.Role);
 
