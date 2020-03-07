@@ -42,6 +42,8 @@ namespace ArcadiaParties.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo() { Title = "Arcadia Parties API", Version = "v1" });
 
+                c.EnableAnnotations();
+
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Type = SecuritySchemeType.OAuth2,
