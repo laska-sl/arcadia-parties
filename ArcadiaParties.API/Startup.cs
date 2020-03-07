@@ -44,7 +44,9 @@ namespace ArcadiaParties.API
 
                 c.EnableAnnotations();
 
-                c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                const string securityName = "oauth2";
+
+                c.AddSecurityDefinition(securityName, new OpenApiSecurityScheme
                 {
                     Type = SecuritySchemeType.OAuth2,
                     Flows = new OpenApiOAuthFlows
@@ -65,7 +67,7 @@ namespace ArcadiaParties.API
                             Reference = new OpenApiReference
                             {
                                 Type = ReferenceType.SecurityScheme,
-                                Id = "oauth2"
+                                Id = securityName
                             }
                         },
                         new List<string>()
