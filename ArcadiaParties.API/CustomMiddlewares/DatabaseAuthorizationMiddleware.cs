@@ -19,6 +19,12 @@ namespace ArcadiaParties.API.CustomMiddlewares
         {
             var user = context.User;
 
+            if (!user.Identity.IsAuthenticated)
+            {
+                context.Response.StatusCode = 401;
+                return;
+            }
+
             var getCurrentUserQuery = new GetCurrentUserQuery(user);
             var currentUserFromDB = await mediator.Send(getCurrentUserQuery);
 

@@ -23,6 +23,7 @@ namespace ArcadiaParties.API.Controllers
         }
 
         [ProducesResponseType(typeof(IEnumerable<DepartmentDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [SwaggerOperation(
              Summary = "Returns all departments"

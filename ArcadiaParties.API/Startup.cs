@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ArcadiaParties.Data.Data;
-//using ArcadiaParties.API.CustomMiddlewares;
+using ArcadiaParties.API.CustomMiddlewares;
 using ArcadiaParties.CQRS.Commands;
 using ArcadiaParties.Data.Repositories;
 using AutoMapper;
@@ -106,7 +106,7 @@ namespace ArcadiaParties.API
 
             app.UseAuthentication();
 
-            //app.UseDatabaseAuthorization();
+            app.UseDatabaseAuthorization();
 
             app.UseAuthorization();
 
