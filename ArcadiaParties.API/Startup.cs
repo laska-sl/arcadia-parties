@@ -6,15 +6,16 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 using ArcadiaParties.Data.Data;
-using Microsoft.AspNetCore.Authentication.Negotiate;
 using ArcadiaParties.API.CustomMiddlewares;
 using ArcadiaParties.CQRS.Commands;
 using ArcadiaParties.Data.Repositories;
 using AutoMapper;
 using ArcadiaParties.Data.Abstractions.Repositories;
 using ArcadiaParties.Data.Helpers;
+using System.Collections.Generic;
+using System;
+using Microsoft.OpenApi.Models;
 
 namespace ArcadiaParties.API
 {
@@ -39,13 +40,42 @@ namespace ArcadiaParties.API
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ArcadiaParties.API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Arcadia Parties API", Version = "v1" });
+
                 c.EnableAnnotations();
+
+                const string securityName = "oauth2";
+
+                c.AddSecurityDefinition(securityName, new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.OAuth2,
+                    Flows = new OpenApiOAuthFlows
+                    {
+                        Implicit = new OpenApiOAuthFlow
+                        {
+                            AuthorizationUrl = new Uri("https://login.microsoftonline.com/fa4e9c1f-6222-443d-a083-28f80c1ffefc/oauth2/authorize"),
+                            TokenUrl = new Uri("https://login.microsoftonline.com/fa4e9c1f-6222-443d-a083-28f80c1ffefc/oauth2/token"),
+                        }
+                    }
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = securityName
+                            }
+                        },
+                        new string[0]
+                    }
+                });
             });
 
             services.AddMediatR(typeof(SeedCommand).Assembly);
-
-            services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNegotiate();
 
             services.AddAutoMapper(typeof(AutoMapperProfile));
 
@@ -66,7 +96,10 @@ namespace ArcadiaParties.API
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Arcadian Parties API");
+                c.OAuthClientId("a2ccb221-60e2-47b8-b28c-bf88a59f7f4a");
+                c.OAuthAppName("Arcadia Parties - Swagger");
+                c.OAuthAdditionalQueryStringParams(new Dictionary<string, string>() { { "resource", "a2ccb221-60e2-47b8-b28c-bf88a59f7f4a" } });
             });
 
             app.UseRouting();
