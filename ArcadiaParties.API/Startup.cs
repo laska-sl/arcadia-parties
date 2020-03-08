@@ -70,7 +70,7 @@ namespace ArcadiaParties.API
                                 Id = securityName
                             }
                         },
-                        new List<string>()
+                        new string[0]
                     }
                 });
             });
