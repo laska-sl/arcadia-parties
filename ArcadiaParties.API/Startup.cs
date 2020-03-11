@@ -47,7 +47,7 @@ namespace ArcadiaParties.API
                 .AddJwtBearer(options =>
                 {
                     options.Audience = OAuthSettings.ClientId;
-                    options.MetadataAddress = "https://login.microsoftonline.com/" + OAuthSettings.Tenant + "/.well-known/openid-configuration";
+                    options.MetadataAddress = OAuthSettings.OpenIdConfigurationUrl;
                 });
 
             services.AddSwaggerGen(c =>
@@ -65,8 +65,8 @@ namespace ArcadiaParties.API
                     {
                         Implicit = new OpenApiOAuthFlow
                         {
-                            AuthorizationUrl = new Uri("https://login.microsoftonline.com/" + OAuthSettings.Tenant + "/oauth2/authorize"),
-                            TokenUrl = new Uri("https://login.microsoftonline.com/" + OAuthSettings.Tenant + "/oauth2/token"),
+                            AuthorizationUrl = new Uri(OAuthSettings.AuthorizationUrl),
+                            TokenUrl = new Uri(OAuthSettings.TokenUrl),
                         }
                     }
                 });
