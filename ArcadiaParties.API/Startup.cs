@@ -16,6 +16,7 @@ using ArcadiaParties.Data.Helpers;
 using System.Collections.Generic;
 using System;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace ArcadiaParties.API
 {
@@ -37,6 +38,21 @@ namespace ArcadiaParties.API
 
             // Temporary use SQLite connection until set connection to Arcadia API
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+
+            services
+                .AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(options =>
+                {
+                    options.SaveToken = true;
+                    options.RequireHttpsMetadata = false;
+                    options.Audience = "a2ccb221-60e2-47b8-b28c-bf88a59f7f4a";
+                    options.MetadataAddress = "https://login.microsoftonline.com/fa4e9c1f-6222-443d-a083-28f80c1ffefc/.well-known/openid-configuration";
+                });
 
             services.AddSwaggerGen(c =>
             {
