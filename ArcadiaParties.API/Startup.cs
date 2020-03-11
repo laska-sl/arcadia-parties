@@ -43,8 +43,6 @@ namespace ArcadiaParties.API
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
-                    options.SaveToken = true;
-                    options.RequireHttpsMetadata = false;
                     options.Audience = "a2ccb221-60e2-47b8-b28c-bf88a59f7f4a";
                     options.MetadataAddress = "https://login.microsoftonline.com/fa4e9c1f-6222-443d-a083-28f80c1ffefc/.well-known/openid-configuration";
                 });
