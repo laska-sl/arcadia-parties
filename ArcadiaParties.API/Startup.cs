@@ -28,7 +28,7 @@ namespace ArcadiaParties.API
             OAuthSettings = Configuration.GetSection("OAuth").Get<OAuthSettings>();
         }
 
-        public OAuthSettings OAuthSettings { get; set; }
+        public OAuthSettings OAuthSettings { get; }
 
         public IConfiguration Configuration { get; }
 
@@ -65,7 +65,7 @@ namespace ArcadiaParties.API
                     {
                         Implicit = new OpenApiOAuthFlow
                         {
-                            AuthorizationUrl = new Uri("https://login.microsoftonline.com/"+ OAuthSettings.Tenant + "/oauth2/authorize"),
+                            AuthorizationUrl = new Uri("https://login.microsoftonline.com/" + OAuthSettings.Tenant + "/oauth2/authorize"),
                             TokenUrl = new Uri("https://login.microsoftonline.com/" + OAuthSettings.Tenant + "/oauth2/token"),
                         }
                     }
