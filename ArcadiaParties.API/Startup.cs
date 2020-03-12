@@ -16,6 +16,7 @@ using ArcadiaParties.Data.Helpers;
 using System.Collections.Generic;
 using System;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace ArcadiaParties.API
 {
@@ -24,7 +25,10 @@ namespace ArcadiaParties.API
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            OAuthSettings = Configuration.GetSection("OAuth").Get<OAuthSettings>();
         }
+
+        public OAuthSettings OAuthSettings { get; }
 
         public IConfiguration Configuration { get; }
 
@@ -37,6 +41,14 @@ namespace ArcadiaParties.API
 
             // Temporary use SQLite connection until set connection to Arcadia API
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+
+            services
+                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.Audience = OAuthSettings.ClientId;
+                    options.MetadataAddress = OAuthSettings.OpenIdConfigurationUrl;
+                });
 
             services.AddSwaggerGen(c =>
             {
@@ -53,8 +65,8 @@ namespace ArcadiaParties.API
                     {
                         Implicit = new OpenApiOAuthFlow
                         {
-                            AuthorizationUrl = new Uri("https://login.microsoftonline.com/fa4e9c1f-6222-443d-a083-28f80c1ffefc/oauth2/authorize"),
-                            TokenUrl = new Uri("https://login.microsoftonline.com/fa4e9c1f-6222-443d-a083-28f80c1ffefc/oauth2/token"),
+                            AuthorizationUrl = new Uri(OAuthSettings.AuthorizationUrl),
+                            TokenUrl = new Uri(OAuthSettings.TokenUrl),
                         }
                     }
                 });
@@ -97,9 +109,9 @@ namespace ArcadiaParties.API
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Arcadian Parties API");
-                c.OAuthClientId("a2ccb221-60e2-47b8-b28c-bf88a59f7f4a");
+                c.OAuthClientId(OAuthSettings.ClientId);
                 c.OAuthAppName("Arcadia Parties - Swagger");
-                c.OAuthAdditionalQueryStringParams(new Dictionary<string, string>() { { "resource", "a2ccb221-60e2-47b8-b28c-bf88a59f7f4a" } });
+                c.OAuthAdditionalQueryStringParams(new Dictionary<string, string>() { { "resource", OAuthSettings.ClientId } });
             });
 
             app.UseRouting();
