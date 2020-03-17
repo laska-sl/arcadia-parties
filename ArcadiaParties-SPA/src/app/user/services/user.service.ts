@@ -1,23 +1,18 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/User';
+import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private mockUser: User = {
-    identity: 'ekaterina.kuznetsova',
-    firstName: 'ekaterina',
-    lastName: 'kuznetsova',
-    department: { id: 4, name: 'horoshiy' },
-    dates: [
-      { name: 'BirthDay', date: new Date('11.02.1944') },
-      { name: 'HireDay', date: new Date('03.12.1955') }
-    ],
-    roles: ['User', 'Admin']
-  };
+  baseUrl = environment.apiUrl;
 
-  getUser(): User {
-    return this.mockUser;
+  constructor(private http: HttpClient) {}
+
+  getUser(): Observable<User> {
+    return this.http.get<User>(this.baseUrl + 'Users/GetCurrentUser');
   }
 }

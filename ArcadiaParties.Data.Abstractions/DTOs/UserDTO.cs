@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace ArcadiaParties.Data.Abstractions.DTOs
 {
@@ -11,12 +10,10 @@ namespace ArcadiaParties.Data.Abstractions.DTOs
 
         public string LastName { get; set; }
 
-        public DateTime BirthDate { get; set; }
-
-        public DateTime HireDate { get; set; }
+        public ICollection<CelebratingDateDTO> Dates { get; set; }
 
         public IEnumerable<string> UserRoles { get; set; }
 
-        public string Department { get; set; }
+        public DepartmentDTO Department { get; set; }
     }
 }

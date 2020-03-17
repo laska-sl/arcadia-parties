@@ -10,6 +10,6 @@ namespace ArcadiaParties.Data.Abstractions.Repositories
 
         Task<IEnumerable<UserDTO>> GetUsers();
 
-        Task<IEnumerable<UserDTO>> GetUsersOfDepartment(int departmentId);
+        Task<IEnumerable<UserForCalendarDTO>> GetUsersOfDepartment(int departmentId);
     }
 }
