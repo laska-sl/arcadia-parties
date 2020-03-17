@@ -3,4 +3,6 @@
 <div class="departmentSelectorContainer">
     <router-outlet name="departmentSelector"></router-outlet>
 </div>
-<app-user-identity></app-user-identity>
+
+<app-user-identity *ngIf="loggedIn()"></app-user-identity>
+<button *ngIf="!loggedIn()" (click)="login()" mat-button>LOGIN</button>
