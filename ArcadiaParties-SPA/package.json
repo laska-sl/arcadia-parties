@@ -25,6 +25,7 @@
     "@ngrx/router-store": "^8.6.0",
     "@ngrx/store": "^8.6.0",
     "@ngrx/store-devtools": "^8.6.0",
+    "adal-angular": "^1.0.17",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
@@ -34,6 +35,7 @@
     "@angular/cli": "^9.0.3",
     "@angular/compiler-cli": "~9.0.1",
     "@angular/language-service": "~9.0.1",
+    "@types/adal-angular": "^1.0.1",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
