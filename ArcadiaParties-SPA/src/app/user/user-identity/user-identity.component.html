@@ -1,2 +1,8 @@
-<mat-icon class="user-icon" aria-hidden="false">account_circle</mat-icon>
-<a [routerLink]="['/user']">{{ userIdentity$ | async }}</a>
+<button mat-button [matMenuTriggerFor]="menu">
+  <mat-icon class="user-icon" aria-hidden="false">account_circle</mat-icon>
+  <span class="user-identity">{{ userIdentity$ | async }}</span>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item [routerLink]="['/user']">My account</button>
+  <button mat-menu-item (click)="logout()">Logout</button>
+</mat-menu>

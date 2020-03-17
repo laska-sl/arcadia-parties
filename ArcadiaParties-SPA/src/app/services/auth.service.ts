@@ -44,6 +44,6 @@ export class AuthService {
           this.login();
         }
       })
-    ).pipe(retry(3));
+    );
   }
 }
