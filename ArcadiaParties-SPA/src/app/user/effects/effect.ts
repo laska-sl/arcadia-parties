@@ -5,7 +5,6 @@ import { map, mergeMap } from 'rxjs/operators';
 import { UserService } from '../services/user.service';
 import { loadUserAction, loadUserSuccessAction } from '../actions/actions';
 
-
 @Injectable()
 export class UserEffect {
   loadUser = createEffect(() =>
