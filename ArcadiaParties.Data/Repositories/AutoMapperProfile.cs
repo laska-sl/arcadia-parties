@@ -21,12 +21,12 @@ namespace ArcadiaParties.Data.Helpers
                     {
                         new CelebratingDateDTO
                         {
-                            DateName = "Birth Date",
+                            Name = "Birth Date",
                             Date = user.BirthDate
                         },
                         new CelebratingDateDTO
                         {
-                            DateName = "Hire Date",
+                            Name = "Hire Date",
                             Date = user.HireDate
                         }
                     }
@@ -42,12 +42,12 @@ namespace ArcadiaParties.Data.Helpers
                     {
                         new CelebratingDateDTO
                         {
-                            DateName = "Birth Date",
+                            Name = "Birth Date",
                             Date = user.BirthDate
                         },
                         new CelebratingDateDTO
                         {
-                            DateName = "Hire Date",
+                            Name = "Hire Date",
                             Date = user.HireDate
                         }
                     },
@@ -57,7 +57,7 @@ namespace ArcadiaParties.Data.Helpers
                         Name = user.Department.Name
                     }
                 })
-                .ForMember(uDTO => uDTO.UserRoles, userDtoOpt => userDtoOpt.MapFrom(user => user.UserRoles.Select(y => y.Role.Name).ToList()));
+                .ForMember(uDTO => uDTO.Roles, userDtoOpt => userDtoOpt.MapFrom(user => user.UserRoles.Select(y => y.Role.Name).ToList()));
         }
     }
 }

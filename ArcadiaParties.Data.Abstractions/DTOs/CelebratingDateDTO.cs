@@ -4,7 +4,7 @@ namespace ArcadiaParties.Data.Abstractions.DTOs
 {
     public class CelebratingDateDTO
     {
-        public string DateName { get; set; }
+        public string Name { get; set; }
 
         public DateTime Date { get; set; }
     }

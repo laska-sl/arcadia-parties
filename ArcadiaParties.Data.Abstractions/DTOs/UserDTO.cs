@@ -12,7 +12,7 @@ namespace ArcadiaParties.Data.Abstractions.DTOs
 
         public ICollection<CelebratingDateDTO> Dates { get; set; }
 
-        public IEnumerable<string> UserRoles { get; set; }
+        public IEnumerable<string> Roles { get; set; }
 
         public DepartmentDTO Department { get; set; }
     }
