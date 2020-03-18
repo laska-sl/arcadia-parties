@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subscriber } from 'rxjs';
-import { retry } from 'rxjs/operators';
 import * as AuthenticationContext from 'adal-angular';
 
 @Injectable({

@@ -15,15 +15,12 @@ import { AuthService } from './auth.service';
 
 @Injectable()
 export class UnauthorizedInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       tap(
-        (event: HttpEvent<any>) => {
-          if (event instanceof HttpResponse) {
-          }
-        },
+        null,
         (err: any) => {
           if (err instanceof HttpErrorResponse) {
             if (err.status === 401) {
