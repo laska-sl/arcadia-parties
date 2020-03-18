@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ArcadiaParties.CQRS.Queries
 {
-    public class GetDatesOfDepartmentQuery : IRequest<IEnumerable<UsersOfDepartmentDTO>>
+    public class GetDatesOfDepartmentQuery : IRequest<IEnumerable<UsersForCalendarDTO>>
     {
         public int DepartmentId { get; }
         

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ArcadiaParties.Data.Abstractions.DTOs
 {
-    public class UsersOfDepartmentDTO
+    public class UsersForCalendarDTO
     {
         public string FirstName { get; set; }
 

@@ -45,10 +45,10 @@ namespace ArcadiaParties.Data.Repositories
             return usersToReturn;
         }
 
-        public async Task<IEnumerable<UsersOfDepartmentDTO>> GetUsersOfDepartment(int departmentId)
+        public async Task<IEnumerable<UserDTO>> GetUsersOfDepartment(int departmentId)
         {
             var users = await _context.Users.Where(u => u.DepartmentId == departmentId).ToListAsync();
-            var usersToReturn = _mapper.Map<List<UsersOfDepartmentDTO>>(users);
+            var usersToReturn = _mapper.Map<List<UserDTO>>(users);
 
             return usersToReturn;
         }
