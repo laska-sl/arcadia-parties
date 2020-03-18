@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subscriber } from 'rxjs';
 import * as AuthenticationContext from 'adal-angular';
+import { oauth } from 'src/adal-config/adal-config.json';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +10,10 @@ export class AuthService {
   context: AuthenticationContext;
 
   constructor() {
+    console.log(oauth.clientId);
     this.context = new AuthenticationContext({
-      clientId: '7550c576-a91a-4bd6-8f47-5af6dc701a40',
-      tenant: 'ea6365cd-cf52-4237-bafd-838a4864edd4',
+      clientId: oauth.clientId,
+      tenant: oauth.tenant,
       cacheLocation: 'localStorage',
       redirectUri: 'http://localhost:4200/token',
       popUp: true
