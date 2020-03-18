@@ -37,11 +37,7 @@ export class AuthService {
   acquireTokenResilient(): Observable<any> {
     return new Observable<any>((subscriber: Subscriber<any>) =>
       this.context.acquireToken('7550c576-a91a-4bd6-8f47-5af6dc701a40', (message: string, token: string) => {
-        if (token) {
-          subscriber.next(token);
-        } else {
-          this.login();
-        }
+        subscriber.next(token);
       })
     );
   }

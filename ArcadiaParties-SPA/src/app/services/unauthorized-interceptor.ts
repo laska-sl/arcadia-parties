@@ -22,10 +22,8 @@ export class UnauthorizedInterceptor implements HttpInterceptor {
       tap(
         null,
         (err: any) => {
-          if (err instanceof HttpErrorResponse) {
-            if (err.status === 401) {
-              this.authService.login();
-            }
+          if (err instanceof HttpErrorResponse && err.status === 401) {
+            this.authService.login();
           }
         }
       )
