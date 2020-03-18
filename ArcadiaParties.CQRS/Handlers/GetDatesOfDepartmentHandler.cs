@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ArcadiaParties.CQRS.Handlers
 {
-    internal class GetDatesOfDepartmentHandler : IRequestHandler<GetDatesOfDepartmentQuery, IEnumerable<UserForCalendarDTO>>
+    internal class GetDatesOfDepartmentHandler : IRequestHandler<GetDatesOfDepartmentQuery, IEnumerable<UsersOfDepartmentDTO>>
     {
         private readonly IUserRepository _repo;
         private readonly IMapper _mapper;
@@ -21,10 +21,10 @@ namespace ArcadiaParties.CQRS.Handlers
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<UserForCalendarDTO>> Handle(GetDatesOfDepartmentQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<UsersOfDepartmentDTO>> Handle(GetDatesOfDepartmentQuery request, CancellationToken cancellationToken)
         {
             var users = await _repo.GetUsersOfDepartment(request.DepartmentId);
-            var usersToReturn = _mapper.Map<List<UserForCalendarDTO>>(users);
+            var usersToReturn = _mapper.Map<List<UsersOfDepartmentDTO>>(users);
             return usersToReturn;
         }
     }

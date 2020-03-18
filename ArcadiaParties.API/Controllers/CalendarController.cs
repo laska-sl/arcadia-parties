@@ -21,7 +21,7 @@ namespace ArcadiaParties.API.Controllers
             _mediator = mediator;
         }
 
-        [ProducesResponseType(typeof(IEnumerable<UserForCalendarDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<UsersOfDepartmentDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [SwaggerOperation(

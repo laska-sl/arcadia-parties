@@ -12,8 +12,8 @@ namespace ArcadiaParties.Data.Helpers
         {
             CreateMap<Department, DepartmentDTO>();
 
-            CreateMap<User, UserForCalendarDTO>()
-                .ConstructUsing(user => new UserForCalendarDTO
+            CreateMap<User, UsersOfDepartmentDTO>()
+                .ConstructUsing(user => new UsersOfDepartmentDTO
                 {
                     FirstName = user.FirstName,
                     LastName = user.LastName,
