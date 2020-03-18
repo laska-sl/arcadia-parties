@@ -1,6 +1,6 @@
 import { createEffect, ofType, Actions } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
-import { map, mergeMap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 
 import { DepartmentService } from '../services/department.service';
 import { loadDepartmentsSuccessAction, loadDepartmentsAction } from '../actions/actions';
@@ -10,13 +10,11 @@ export class DepartmentEffect {
   loadDepartments = createEffect(() =>
     this.actions.pipe(
       ofType(loadDepartmentsAction),
-      mergeMap(() =>
+      switchMap(() =>
         this.departmentService
-          .getDepartments()
-          .pipe(map(departmentsFromService => loadDepartmentsSuccessAction({ departments: departmentsFromService })))
-      )
-    )
+          .getDepartments()),
+      map(departmentsFromService => loadDepartmentsSuccessAction({ departments: departmentsFromService })))
   );
 
-  constructor(private actions: Actions, private departmentService: DepartmentService) {}
+  constructor(private actions: Actions, private departmentService: DepartmentService) { }
 }
