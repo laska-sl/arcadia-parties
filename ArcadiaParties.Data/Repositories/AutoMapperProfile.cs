@@ -12,7 +12,7 @@ namespace ArcadiaParties.Data.Helpers
         {
             CreateMap<Department, DepartmentDTO>();
 
-            CreateMap<UserDTO, UsersForCalendarDTO>();
+            CreateMap<UserDTO, UserForCalendarDTO>();
 
             CreateMap<User, UserDTO>()
                 .ConstructUsing(user => new UserDTO

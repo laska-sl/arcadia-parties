@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace ArcadiaParties.Data.Abstractions.DTOs
 {
-    public class UsersForCalendarDTO
+    public class UserForCalendarDTO
     {
         public string FirstName { get; set; }
 
