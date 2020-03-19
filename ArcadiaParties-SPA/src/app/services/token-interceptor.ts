@@ -11,8 +11,9 @@ export class TokenInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (request.url.includes('/api/')) {
-      return this.injector
-        .get(AuthService)
+      const authService: AuthService = this.injector.get(AuthService);
+
+      return authService
         .acquireTokenResilient()
         .pipe(
           mergeMap(token => {
@@ -27,9 +28,7 @@ export class TokenInterceptor implements HttpInterceptor {
           }),
           catchError((err: HttpErrorResponse) => {
             if (err.status === 401) {
-              this.injector
-                .get(AuthService)
-                .login();
+              authService.login();
             }
             return throwError(err);
           })
