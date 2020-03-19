@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subscriber } from 'rxjs';
-import { retry } from 'rxjs/operators';
 import * as AuthenticationContext from 'adal-angular';
+
+import { AppSettingsService } from '../app-settings/app-settings.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,12 +10,12 @@ import * as AuthenticationContext from 'adal-angular';
 export class AuthService {
   context: AuthenticationContext;
 
-  constructor() {
+  constructor(private appSettingsService: AppSettingsService) {
     this.context = new AuthenticationContext({
-      clientId: '7550c576-a91a-4bd6-8f47-5af6dc701a40',
-      tenant: 'ea6365cd-cf52-4237-bafd-838a4864edd4',
+      clientId: appSettingsService.appSettings.oauth.clientId,
+      tenant: appSettingsService.appSettings.oauth.tenant,
       cacheLocation: 'localStorage',
-      redirectUri: 'http://localhost:4200/token',
+      redirectUri: appSettingsService.appSettings.oauth.redirectUri,
       popUp: true
     });
   }
@@ -28,21 +29,17 @@ export class AuthService {
   }
 
   loggedIn(): boolean {
-    return !!this.context.getCachedToken('7550c576-a91a-4bd6-8f47-5af6dc701a40');
+    return !!this.context.getCachedToken(this.appSettingsService.appSettings.oauth.clientId);
   }
 
   getAccessToken(): string {
-    return this.context.getCachedToken('7550c576-a91a-4bd6-8f47-5af6dc701a40');
+    return this.context.getCachedToken(this.appSettingsService.appSettings.oauth.clientId);
   }
 
   acquireTokenResilient(): Observable<any> {
     return new Observable<any>((subscriber: Subscriber<any>) =>
-      this.context.acquireToken('7550c576-a91a-4bd6-8f47-5af6dc701a40', (message: string, token: string) => {
-        if (token) {
-          subscriber.next(token);
-        } else {
-          this.login();
-        }
+      this.context.acquireToken(this.appSettingsService.appSettings.oauth.clientId, (_, token) => {
+        subscriber.next(token);
       })
     );
   }
