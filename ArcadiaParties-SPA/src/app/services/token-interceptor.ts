@@ -1,27 +1,41 @@
-import { HttpRequest, HttpInterceptor, HttpHandler, HttpEvent, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { HttpRequest, HttpInterceptor, HttpHandler, HttpEvent, HTTP_INTERCEPTORS, HttpErrorResponse } from '@angular/common/http';
+import { Injectable, Injector } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
+import { mergeMap, catchError } from 'rxjs/operators';
 
 import { AuthService } from './auth.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService) { }
+  constructor(private injector: Injector) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return this.authService.acquireTokenResilient().pipe(
-      mergeMap(token => {
-        if (token) {
-          request = request.clone({
-            setHeaders: {
-              Authorization: 'Bearer ' + token
+    if (request.url.includes('/api/')) {
+      return this.injector
+        .get(AuthService)
+        .acquireTokenResilient()
+        .pipe(
+          mergeMap(token => {
+            if (token) {
+              request = request.clone({
+                setHeaders: {
+                  Authorization: 'Bearer ' + token
+                }
+              });
             }
-          });
-        }
-        return next.handle(request);
-      })
-    );
+            return next.handle(request);
+          }),
+          catchError((err: HttpErrorResponse) => {
+            if (err.status === 401) {
+              this.injector
+                .get(AuthService)
+                .login();
+            }
+            return throwError(err);
+          })
+        );
+    }
+    return next.handle(request);
   }
 }
 
