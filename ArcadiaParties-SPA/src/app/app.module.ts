@@ -1,10 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MaterialModule } from './material/material.module';
 import { AppComponent } from './app.component';
@@ -16,6 +17,8 @@ import { appRoutes } from './routes';
 import { UserModule } from './user/user.module';
 import { TitleEffect } from './effects/effect';
 import { DepartmentModule } from './department/department.module';
+import { TokenInterceptorProvider } from './services/token-interceptor';
+import { AppSettingsService } from './app-settings/app-settings.service';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, ContentComponent],
@@ -36,9 +39,19 @@ import { DepartmentModule } from './department/department.module';
     }),
     MaterialModule,
     RouterModule.forRoot(appRoutes),
-    EffectsModule.forRoot([TitleEffect])
+    EffectsModule.forRoot([TitleEffect]),
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    TokenInterceptorProvider,
+    AppSettingsService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (appSettingsService: AppSettingsService) => () => appSettingsService.init(),
+      deps: [AppSettingsService],
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

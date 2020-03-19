@@ -94,6 +94,8 @@ namespace ArcadiaParties.API
             services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -117,6 +119,8 @@ namespace ArcadiaParties.API
             app.UseRouting();
 
             app.UseAuthentication();
+
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseDatabaseAuthorization();
 
