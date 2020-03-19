@@ -7,7 +7,8 @@ import { AuthService } from './auth.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  authService: AuthService;
+  private authService: AuthService;
+
   constructor(private injector: Injector) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -15,6 +16,7 @@ export class TokenInterceptor implements HttpInterceptor {
       if (!this.authService) {
         this.authService = this.injector.get(AuthService);
       }
+
       return this.authService
         .acquireTokenResilient()
         .pipe(
