@@ -20,10 +20,6 @@ import { DepartmentModule } from './department/department.module';
 import { TokenInterceptorProvider } from './services/token-interceptor';
 import { AppSettingsService } from './app-settings/app-settings.service';
 
-function initializeAppSettings(appSettingsService: AppSettingsService) {
-  return () => appSettingsService.init();
-}
-
 @NgModule({
   declarations: [AppComponent, HeaderComponent, ContentComponent],
   imports: [
