@@ -8,13 +8,13 @@ import { AuthService } from './auth.service';
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   authService: AuthService;
-
-  constructor(injector: Injector) {
-    this.authService = injector.get(AuthService);
-  }
+  constructor(private injector: Injector) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (request.url.includes('/api/')) {
+      if (!this.authService) {
+        this.authService = this.injector.get(AuthService);
+      }
       return this.authService
         .acquireTokenResilient()
         .pipe(
