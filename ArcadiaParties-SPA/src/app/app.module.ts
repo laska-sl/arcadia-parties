@@ -20,7 +20,7 @@ import { DepartmentModule } from './department/department.module';
 import { TokenInterceptorProvider } from './services/token-interceptor';
 import { AppSettingsService } from './app-settings/app-settings.service';
 
-export function initializeAppSettings(appSettingsService: AppSettingsService) {
+function initializeAppSettings(appSettingsService: AppSettingsService) {
   return () => appSettingsService.init();
 }
 
@@ -51,7 +51,7 @@ export function initializeAppSettings(appSettingsService: AppSettingsService) {
     AppSettingsService,
     {
       provide: APP_INITIALIZER,
-      useFactory: initializeAppSettings,
+      useFactory: (appSettingsService: AppSettingsService) => () => appSettingsService.init(),
       deps: [AppSettingsService],
       multi: true
     }
