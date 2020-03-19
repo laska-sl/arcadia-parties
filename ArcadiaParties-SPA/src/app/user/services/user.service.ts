@@ -2,22 +2,22 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/User';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { AppSettingsService } from 'src/app/app-settings/app-settings.service';
 
-import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  baseUrl = environment.apiUrl;
-
-  constructor(private http: HttpClient) {}
+  constructor(private appSettingsService: AppSettingsService, private http: HttpClient) {}
 
   getUser(): Observable<User> {
-    return this.http.get<User>(this.baseUrl + 'Users/GetCurrentUser');
+    const baseUrl = this.appSettingsService.appSettings.apiUrl;
+    return this.http.get<User>(baseUrl + 'Users/GetCurrentUser');
   }
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.baseUrl + 'Users/GetUsers');
+    const baseUrl = this.appSettingsService.appSettings.apiUrl;
+    return this.http.get<User[]>(baseUrl + 'Users/GetUsers');
   }
 }
