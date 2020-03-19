@@ -7,13 +7,15 @@ import { AuthService } from './auth.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  constructor(private injector: Injector) { }
+  authService: AuthService;
+
+  constructor(injector: Injector) {
+    this.authService = injector.get(AuthService);
+  }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (request.url.includes('/api/')) {
-      const authService: AuthService = this.injector.get(AuthService);
-
-      return authService
+      return this.authService
         .acquireTokenResilient()
         .pipe(
           mergeMap(token => {
@@ -28,7 +30,7 @@ export class TokenInterceptor implements HttpInterceptor {
           }),
           catchError((err: HttpErrorResponse) => {
             if (err.status === 401) {
-              authService.login();
+              this.authService.login();
             }
             return throwError(err);
           })
