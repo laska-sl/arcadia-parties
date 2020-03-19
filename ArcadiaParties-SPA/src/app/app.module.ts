@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,7 +18,11 @@ import { UserModule } from './user/user.module';
 import { TitleEffect } from './effects/effect';
 import { DepartmentModule } from './department/department.module';
 import { TokenInterceptorProvider } from './services/token-interceptor';
-import { UnauthorizedInterceptorProvider } from './services/unauthorized-interceptor';
+import { AppSettingsService } from './app-settings/app-settings.service';
+
+export function initializeAppSettings(appSettingsService: AppSettingsService) {
+  return () => appSettingsService.init();
+}
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, ContentComponent],
@@ -44,7 +48,13 @@ import { UnauthorizedInterceptorProvider } from './services/unauthorized-interce
   ],
   providers: [
     TokenInterceptorProvider,
-    UnauthorizedInterceptorProvider
+    AppSettingsService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeAppSettings,
+      deps: [AppSettingsService],
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
