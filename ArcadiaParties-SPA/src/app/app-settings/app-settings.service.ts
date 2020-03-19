@@ -12,7 +12,6 @@ export class AppSettingsService {
   constructor(private http: HttpClient) { }
 
   async init() {
-    console.log();
     const response = await this.http
       .get<AppSettings>('app-settings.json')
       .toPromise();
