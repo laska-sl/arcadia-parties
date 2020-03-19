@@ -10,31 +10,36 @@ namespace ArcadiaParties.Data.Helpers
     {
         public AutoMapperProfile()
         {
-            CreateMap<User, UserDTO>()
-                .ForMember(uDTO => uDTO.UserRoles, userDtoOpt => userDtoOpt.MapFrom(user => user.UserRoles.Select(y => y.Role.Name).ToList()))
-                .ForMember(uDTO => uDTO.Department, userDtoOpt => userDtoOpt.MapFrom(user => user.Department.Name));
-
             CreateMap<Department, DepartmentDTO>();
 
-            CreateMap<UserDTO, UserForCalendarDTO>()
-                .ConstructUsing(user => new UserForCalendarDTO
+            CreateMap<UserDTO, UserForCalendarDTO>();
+
+            CreateMap<User, UserDTO>()
+                .ConstructUsing(user => new UserDTO
                 {
+                    Identity = user.Identity,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
                     Dates = new List<CelebratingDateDTO>
                     {
                         new CelebratingDateDTO
                         {
-                            DateName = "Birth Date",
+                            Name = "Birth Date",
                             Date = user.BirthDate
                         },
                         new CelebratingDateDTO
                         {
-                            DateName = "Hire Date",
+                            Name = "Hire Date",
                             Date = user.HireDate
                         }
+                    },
+                    Department = new DepartmentDTO
+                    {
+                        Id = user.Department.Id,
+                        Name = user.Department.Name
                     }
-                });
+                })
+                .ForMember(uDTO => uDTO.Roles, userDtoOpt => userDtoOpt.MapFrom(user => user.UserRoles.Select(y => y.Role.Name).ToList()));
         }
     }
 }

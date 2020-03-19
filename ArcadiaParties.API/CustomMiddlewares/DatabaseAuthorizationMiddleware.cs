@@ -41,7 +41,7 @@ namespace ArcadiaParties.API.CustomMiddlewares
 
             newIdentity.AddClaim(new Claim(ClaimTypes.Name, user.Identity.Name));
             
-            foreach (var item in currentUserFromDB.UserRoles)
+            foreach (var item in currentUserFromDB.Roles)
             {
                 newIdentity.AddClaim(new Claim(ClaimTypes.Role, item));
             }
