@@ -7,6 +7,7 @@ import { AuthService } from './auth.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
+
   private authService: AuthService;
 
   constructor(private injector: Injector) { }

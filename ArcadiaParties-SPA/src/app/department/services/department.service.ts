@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
 import { Department } from '../models/department';
+import { AppSettingsService } from 'src/app/app-settings/app-settings.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DepartmentService {
-  private mockDepartments: Department[] = [
-    { id: 1, name: 'Department1' },
-    { id: 2, name: 'Department2' },
-    { id: 3, name: 'Department3' },
-    { id: 4, name: 'horoshiy' }
-  ];
+  constructor(private http: HttpClient, private appSettingsService: AppSettingsService) { }
 
-  getDepartments() {
-    return this.mockDepartments;
+  getDepartments(): Observable<Department[]> {
+    const apiUrl = this.appSettingsService.appSettings.apiUrl;
+    return this.http.get<Department[]>(apiUrl + 'departments');
   }
 }
