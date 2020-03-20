@@ -1,6 +1,6 @@
 ﻿namespace ArcadiaParties.Data.Abstractions.DTOs
 {
-    class UserFromAssistantDTO
+    public class UserFromAssistantDTO
     {
         public string UserName { get; set; }
 
