@@ -2,7 +2,7 @@
 
 namespace ArcadiaParties.Data.Abstractions.Repositories
 {
-    public interface ITokenForAssistantRepository
+    public interface IAssistantTokenRepository
     {
         Task<string> GetToken();
     }

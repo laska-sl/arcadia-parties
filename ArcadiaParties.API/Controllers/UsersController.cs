@@ -18,17 +18,17 @@ namespace ArcadiaParties.API.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly ITokenForAssistantRepository _repo;
+        private readonly IAssistantTokenRepository _repo;
         private readonly IHttpClientFactory _clientFactory;
 
-        public UsersController(IMediator mediator, ITokenForAssistantRepository repo, IHttpClientFactory clientFactory)
+        public UsersController(IMediator mediator, IAssistantTokenRepository repo, IHttpClientFactory clientFactory)
         {
             _mediator = mediator;
             _repo = repo;
             _clientFactory = clientFactory;
         }
 
-        [ProducesResponseType(typeof(IEnumerable<UserFromAssistantDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<UserAssistantDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [SwaggerOperation(
@@ -45,7 +45,7 @@ namespace ArcadiaParties.API.Controllers
             return Ok(users);
         }
 
-        [ProducesResponseType(typeof(UserFromAssistantDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(UserAssistantDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [SwaggerOperation(
@@ -62,7 +62,7 @@ namespace ArcadiaParties.API.Controllers
             return Ok(user);
         }
 
-        [ProducesResponseType(typeof(UserFromAssistantDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(UserAssistantDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [SwaggerOperation(
@@ -70,27 +70,27 @@ namespace ArcadiaParties.API.Controllers
         )]
         [Authorize]
         [HttpGet]
-        [Route("GetUserFromAssistant")]
+        [Route("GetUser")]
         public async Task<IActionResult> GetUserFromAssistant(CancellationToken cancellationToken)
         {
-            var query = new GetUserFromAssistantQuery();
+            var query = new GetAssistantUserQuery();
             var user = await _mediator.Send(query, cancellationToken);
 
             return Ok(user);
         }
 
-        [ProducesResponseType(typeof(DetailedUserFromAssistantDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [SwaggerOperation(
-             Summary = "Returns current authenticated user"
+             Summary = "Returns detailed authenticated user"
         )]
         [Authorize]
         [HttpGet]
-        [Route("GetDetailedUserFromAssistantDTO")]
+        [Route("GetDetailedUser")]
         public async Task<IActionResult> GetDetailedUserFromAssistant(CancellationToken cancellationToken)
         {
-            var query = new GetDetailedUserFromAssistantQuery();
+            var query = new GetAssistantEmployeeQuery();
             var user = await _mediator.Send(query, cancellationToken);
 
             return Ok(user);

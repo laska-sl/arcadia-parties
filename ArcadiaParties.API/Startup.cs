@@ -97,7 +97,7 @@ namespace ArcadiaParties.API
 
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 
-            services.AddScoped<ITokenForAssistantRepository, TokenForAssistantRepository>();
+            services.AddScoped<IAssistantTokenRepository, AssistantTokenRepository>();
 
             services.AddCors();
         }
