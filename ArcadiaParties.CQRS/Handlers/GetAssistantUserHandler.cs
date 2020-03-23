@@ -12,12 +12,12 @@ namespace ArcadiaParties.CQRS.Handlers
 {
     public class GetAssistantUserHandler : IRequestHandler<GetAssistantUserQuery, AssistantUserDTO>
     {
-        private readonly IAssistantTokenRepository _repo;
+        private readonly IAssistantTokenRepository _token;
         private readonly IHttpClientFactory _clientFactory;
 
-        public GetAssistantUserHandler(IAssistantTokenRepository repo, IHttpClientFactory clientFactory)
+        public GetAssistantUserHandler(IAssistantTokenRepository token, IHttpClientFactory clientFactory)
         {
-            _repo = repo;
+            _token = token;
             _clientFactory = clientFactory;
         }
 
@@ -27,7 +27,7 @@ namespace ArcadiaParties.CQRS.Handlers
                 HttpMethod.Get,
                 "https://assistant.arcadia.spb.ru/api/user");
 
-            var token = await _repo.GetToken();
+            var token = await _token.GetToken();
             httpRequest.Headers.Add("Authorization", "Bearer " + token);
             var client = _clientFactory.CreateClient();
             var response = await client.SendAsync(httpRequest);

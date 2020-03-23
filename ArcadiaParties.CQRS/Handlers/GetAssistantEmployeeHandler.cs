@@ -12,13 +12,13 @@ namespace ArcadiaParties.CQRS.Handlers
 {
     class GetAssistantEmployeeHandler : IRequestHandler<GetAssistantEmployeeQuery, AssistantEmployeeDTO>
     {
-        private readonly IAssistantTokenRepository _repo;
+        private readonly IAssistantTokenRepository _token;
         private readonly IHttpClientFactory _clientFactory;
         private readonly IMediator _mediator;
 
-        public GetAssistantEmployeeHandler(IAssistantTokenRepository repo, IMediator mediator, IHttpClientFactory clientFactory)
+        public GetAssistantEmployeeHandler(IAssistantTokenRepository token, IMediator mediator, IHttpClientFactory clientFactory)
         {
-            _repo = repo;
+            _token = token;
             _mediator = mediator;
             _clientFactory = clientFactory;
         }
@@ -33,7 +33,7 @@ namespace ArcadiaParties.CQRS.Handlers
                 HttpMethod.Get,
                 "https://assistant.arcadia.spb.ru/api/employees/" + employeeId);
 
-            var token = await _repo.GetToken();
+            var token = await _token.GetToken();
             httpRequest.Headers.Add("Authorization", "Bearer " + token);
             var client = _clientFactory.CreateClient();
             var response = await client.SendAsync(httpRequest);
