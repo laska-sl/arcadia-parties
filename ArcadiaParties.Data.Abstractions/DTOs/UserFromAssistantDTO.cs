@@ -2,8 +2,8 @@
 {
     public class UserFromAssistantDTO
     {
-        public string UserName { get; set; }
+        public string username { get; set; }
 
-        public string EmployeeId { get; set; }
+        public string employeeId { get; set; }
     }
 }
