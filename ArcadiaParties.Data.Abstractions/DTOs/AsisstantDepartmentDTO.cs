@@ -1,6 +1,6 @@
 ﻿namespace ArcadiaParties.Data.Abstractions.DTOs
 {
-    class DepartmentAsisstantDTO
+    class AsisstantDepartmentDTO
     {
         public string DepartmentId { get; set; }
 

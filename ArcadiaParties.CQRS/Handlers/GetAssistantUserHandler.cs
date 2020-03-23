@@ -10,7 +10,7 @@ using System.Text.Json;
 
 namespace ArcadiaParties.CQRS.Handlers
 {
-    public class GetAssistantUserHandler : IRequestHandler<GetAssistantUserQuery, UserAssistantDTO>
+    public class GetAssistantUserHandler : IRequestHandler<GetAssistantUserQuery, AssistantUserDTO>
     {
         private readonly IAssistantTokenRepository _repo;
         private readonly IHttpClientFactory _clientFactory;
@@ -21,9 +21,9 @@ namespace ArcadiaParties.CQRS.Handlers
             _clientFactory = clientFactory;
         }
 
-        public UserAssistantDTO UserFromAssistantDTO { get; set; }
+        public AssistantUserDTO UserFromAssistantDTO { get; set; }
 
-        public async Task<UserAssistantDTO> Handle(GetAssistantUserQuery request, CancellationToken cancellationToken)
+        public async Task<AssistantUserDTO> Handle(GetAssistantUserQuery request, CancellationToken cancellationToken)
         {
             var httpRequest = new HttpRequestMessage(
                 HttpMethod.Get,
@@ -35,7 +35,7 @@ namespace ArcadiaParties.CQRS.Handlers
             var response = await client.SendAsync(httpRequest);
 
             var responseBody = await response.Content.ReadAsStreamAsync();
-            UserFromAssistantDTO = await JsonSerializer.DeserializeAsync<UserAssistantDTO>(responseBody);
+            UserFromAssistantDTO = await JsonSerializer.DeserializeAsync<AssistantUserDTO>(responseBody);
             return UserFromAssistantDTO;
         }
     }

@@ -28,7 +28,7 @@ namespace ArcadiaParties.API.Controllers
             _clientFactory = clientFactory;
         }
 
-        [ProducesResponseType(typeof(IEnumerable<UserAssistantDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<AssistantUserDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [SwaggerOperation(
@@ -45,7 +45,7 @@ namespace ArcadiaParties.API.Controllers
             return Ok(users);
         }
 
-        [ProducesResponseType(typeof(UserAssistantDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(AssistantUserDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [SwaggerOperation(
@@ -62,7 +62,7 @@ namespace ArcadiaParties.API.Controllers
             return Ok(user);
         }
 
-        [ProducesResponseType(typeof(UserAssistantDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(AssistantUserDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [SwaggerOperation(
