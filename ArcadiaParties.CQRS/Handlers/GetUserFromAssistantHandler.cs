@@ -5,28 +5,26 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 using System.IO;
-using AutoMapper;
 using ArcadiaParties.Data.Abstractions.DTOs;
 using System.Text.Json;
+using System;
 
 namespace ArcadiaParties.CQRS.Handlers
 {
-    public class GetUserFromAssistantHandler : IRequestHandler<GetUserFromAssistantQuery, object>
+    public class GetUserFromAssistantHandler : IRequestHandler<GetUserFromAssistantQuery, UserFromAssistantDTO>
     {
         private readonly ITokenForAssistantRepository _repo;
-        private readonly IMapper _mapper;
         private readonly IHttpClientFactory _clientFactory;
 
-        public GetUserFromAssistantHandler(ITokenForAssistantRepository repo, IHttpClientFactory clientFactory, IMapper mapper)
+        public GetUserFromAssistantHandler(ITokenForAssistantRepository repo, IHttpClientFactory clientFactory)
         {
             _repo = repo;
             _clientFactory = clientFactory;
-            _mapper = mapper;
         }
 
-        public object UserFromAssistantDTO { get; set; }
+        public UserFromAssistantDTO UserFromAssistantDTO { get; set; }
 
-        public async Task<object> Handle(GetUserFromAssistantQuery request, CancellationToken cancellationToken)
+        public async Task<UserFromAssistantDTO> Handle(GetUserFromAssistantQuery request, CancellationToken cancellationToken)
         {
             var httpRequest = new HttpRequestMessage(
             HttpMethod.Get,
@@ -39,7 +37,9 @@ namespace ArcadiaParties.CQRS.Handlers
 
             Stream responseBody = await response.Content.ReadAsStreamAsync();
             UserFromAssistantDTO = await JsonSerializer.DeserializeAsync<UserFromAssistantDTO>(responseBody);
-            
+
+            Console.WriteLine(UserFromAssistantDTO.employeeId);
+
             return UserFromAssistantDTO;
            
         }

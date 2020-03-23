@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Collections.Generic;
-using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -75,6 +74,23 @@ namespace ArcadiaParties.API.Controllers
         public async Task<IActionResult> GetUserFromAssistant(CancellationToken cancellationToken)
         {
             var query = new GetUserFromAssistantQuery();
+            var user = await _mediator.Send(query, cancellationToken);
+
+            return Ok(user);
+        }
+
+        [ProducesResponseType(typeof(DetailedUserFromAssistantDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [SwaggerOperation(
+             Summary = "Returns current authenticated user"
+        )]
+        [Authorize]
+        [HttpGet]
+        [Route("GetDetailedUserFromAssistantDTO")]
+        public async Task<IActionResult> GetDetailedUserFromAssistant(CancellationToken cancellationToken)
+        {
+            var query = new GetDetailedUserFromAssistantQuery();
             var user = await _mediator.Send(query, cancellationToken);
 
             return Ok(user);

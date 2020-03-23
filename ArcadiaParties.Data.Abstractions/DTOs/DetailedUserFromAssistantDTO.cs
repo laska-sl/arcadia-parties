@@ -2,16 +2,16 @@
 
 namespace ArcadiaParties.Data.Abstractions.DTOs
 {
-    class DetailedUserFromAssistantDTO
+    public class DetailedUserFromAssistantDTO
     {
-        public string EmployeeId { get; set; }
+        public string employeeId { get; set; }
 
-        public string Name { get; set; }
+        public string name { get; set; }
 
-        public string DepartmentId { get; set; }
+        public string departmentId { get; set; }
 
-        public DateTime BirthDate { get; set; }
+        public DateTime birthDate { get; set; }
 
-        public DateTime HireDate { get; set; }
+        public DateTime hireDate { get; set; }
     }
 }
