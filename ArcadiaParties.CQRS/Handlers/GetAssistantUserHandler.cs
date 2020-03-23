@@ -33,9 +33,13 @@ namespace ArcadiaParties.CQRS.Handlers
             httpRequest.Headers.Add("Authorization", "Bearer " + token);
             var client = _clientFactory.CreateClient();
             var response = await client.SendAsync(httpRequest);
-
             var responseBody = await response.Content.ReadAsStreamAsync();
-            UserFromAssistantDTO = await JsonSerializer.DeserializeAsync<AssistantUserDTO>(responseBody);
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+            };
+            UserFromAssistantDTO = await JsonSerializer.DeserializeAsync<AssistantUserDTO>(responseBody, options);
             return UserFromAssistantDTO;
         }
     }
