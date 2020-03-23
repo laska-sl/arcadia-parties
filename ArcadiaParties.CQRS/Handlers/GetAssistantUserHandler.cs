@@ -21,8 +21,6 @@ namespace ArcadiaParties.CQRS.Handlers
             _clientFactory = clientFactory;
         }
 
-        public AssistantUserDTO UserFromAssistantDTO { get; set; }
-
         public async Task<AssistantUserDTO> Handle(GetAssistantUserQuery request, CancellationToken cancellationToken)
         {
             var httpRequest = new HttpRequestMessage(
@@ -39,8 +37,9 @@ namespace ArcadiaParties.CQRS.Handlers
             {
                 PropertyNameCaseInsensitive = true,
             };
-            UserFromAssistantDTO = await JsonSerializer.DeserializeAsync<AssistantUserDTO>(responseBody, options);
-            return UserFromAssistantDTO;
+            var userFromAssistantDTO = await JsonSerializer.DeserializeAsync<AssistantUserDTO>(responseBody, options);
+
+            return userFromAssistantDTO;
         }
     }
 }

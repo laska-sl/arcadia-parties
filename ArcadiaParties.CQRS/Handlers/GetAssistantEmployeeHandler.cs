@@ -23,8 +23,6 @@ namespace ArcadiaParties.CQRS.Handlers
             _clientFactory = clientFactory;
         }
 
-        public AssistantEmployeeDTO DetailedUserFromAssistantDTO { get; set; }
-
         public async Task<AssistantEmployeeDTO> Handle(GetAssistantEmployeeQuery request, CancellationToken cancellationToken)
         {
             var query = new GetAssistantUserQuery();
@@ -45,9 +43,9 @@ namespace ArcadiaParties.CQRS.Handlers
             {
                 PropertyNameCaseInsensitive = true,
             };
-            DetailedUserFromAssistantDTO = await JsonSerializer.DeserializeAsync<AssistantEmployeeDTO>(responseBody, options);
+            var detailedUserFromAssistantDTO = await JsonSerializer.DeserializeAsync<AssistantEmployeeDTO>(responseBody, options);
 
-            return DetailedUserFromAssistantDTO;
+            return detailedUserFromAssistantDTO;
 
         }
     }
