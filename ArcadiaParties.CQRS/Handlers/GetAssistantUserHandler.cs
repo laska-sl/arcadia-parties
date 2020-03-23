@@ -30,7 +30,7 @@ namespace ArcadiaParties.CQRS.Handlers
             var token = await _token.GetToken();
             httpRequest.Headers.Add("Authorization", "Bearer " + token);
             var client = _clientFactory.CreateClient();
-            var response = await client.SendAsync(httpRequest);
+            var response = await client.SendAsync(httpRequest, cancellationToken);
             var responseBody = await response.Content.ReadAsStreamAsync();
 
             var options = new JsonSerializerOptions
