@@ -29,7 +29,7 @@ namespace ArcadiaParties.CQRS.Handlers
         {
             var query = new GetAssistantUserQuery();
             var user = await _mediator.Send(query, cancellationToken);
-            var employeeId = user.employeeId;
+            var employeeId = user.EmployeeId;
 
             var httpRequest = new HttpRequestMessage(
                 HttpMethod.Get,

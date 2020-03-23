@@ -4,14 +4,14 @@ namespace ArcadiaParties.Data.Abstractions.DTOs
 {
     public class AssistantEmployeeDTO
     {
-        public string employeeId { get; set; }
+        public string EmployeeId { get; set; }
 
-        public string name { get; set; }
+        public string Name { get; set; }
 
-        public string departmentId { get; set; }
+        public string DepartmentId { get; set; }
 
-        public DateTime birthDate { get; set; }
+        public DateTime BirthDate { get; set; }
 
-        public DateTime hireDate { get; set; }
+        public DateTime HireDate { get; set; }
     }
 }
