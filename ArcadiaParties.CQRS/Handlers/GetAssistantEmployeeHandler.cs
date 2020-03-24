@@ -37,7 +37,6 @@ namespace ArcadiaParties.CQRS.Handlers
                 PropertyNameCaseInsensitive = true,
             };
             var assistantEmployee = await JsonSerializer.DeserializeAsync<AssistantEmployeeDTO>(responseBody, options);
-
             return assistantEmployee;
         }
     }

@@ -16,7 +16,7 @@ namespace ArcadiaParties.Data.Helpers
             CreateMap<UserDTO, UserForCalendarDTO>();
 
             CreateMap<AssistantEmployeeDTO, UserDTO>()
-            .ConstructUsing(user => new UserDTO
+                .ConstructUsing(user => new UserDTO
                 {
                     Identity = user.EmployeeId,
                     Name = user.Name,
@@ -56,7 +56,6 @@ namespace ArcadiaParties.Data.Helpers
                         }
                     },
                     DepartmentId = Convert.ToString(Convert.ToInt32(user.Department.Id)),
-                    
                 })
                 .ForMember(uDTO => uDTO.Roles, userDtoOpt => userDtoOpt.MapFrom(user => user.UserRoles.Select(y => y.Role.Name).ToList()));
         }

@@ -12,9 +12,9 @@ namespace ArcadiaParties.CQRS.Handlers
 {
     public class GetAssistantUserHandler : IRequestHandler<GetAssistantUserQuery, AssistantUserDTO>
     {
+        private const string requestUser = "https://assistant.arcadia.spb.ru/api/user";
         private readonly IAssistantTokenRepository _tokenRepository;
         private readonly IHttpClientFactory _clientFactory;
-        private const string requestUser = "https://assistant.arcadia.spb.ru/api/user";
 
         public GetAssistantUserHandler(IAssistantTokenRepository tokenRepository, IHttpClientFactory clientFactory)
         {
@@ -37,7 +37,6 @@ namespace ArcadiaParties.CQRS.Handlers
                 PropertyNameCaseInsensitive = true,
             };
             var assistantUser = await JsonSerializer.DeserializeAsync<AssistantUserDTO>(responseBody, options);
-
             return assistantUser;
         }
     }
