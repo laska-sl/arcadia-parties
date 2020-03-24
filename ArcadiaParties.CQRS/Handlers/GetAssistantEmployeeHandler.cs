@@ -13,12 +13,10 @@ namespace ArcadiaParties.CQRS.Handlers
     {
         private readonly IAssistantTokenRepository _tokenRepository;
         private readonly IHttpClientFactory _clientFactory;
-        private readonly IMediator _mediator;
 
-        public GetAssistantEmployeeHandler(IAssistantTokenRepository tokenRepository, IMediator mediator, IHttpClientFactory clientFactory)
+        public GetAssistantEmployeeHandler(IAssistantTokenRepository tokenRepository, IHttpClientFactory clientFactory)
         {
             _tokenRepository = tokenRepository;
-            _mediator = mediator;
             _clientFactory = clientFactory;
         }
 

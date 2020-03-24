@@ -1,5 +1,6 @@
 ﻿using ArcadiaParties.CQRS.Queries;
 using ArcadiaParties.Data.Abstractions.DTOs;
+using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -16,10 +17,12 @@ namespace ArcadiaParties.API.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
 
-        public UsersController(IMediator mediator)
+        public UsersController(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
+            _mapper = mapper;
         }
 
         [ProducesResponseType(typeof(IEnumerable<UserDTO>), StatusCodes.Status200OK)]
@@ -53,44 +56,16 @@ namespace ArcadiaParties.API.Controllers
             var query = new GetCurrentUserQuery(User);
             var user = await _mediator.Send(query, cancellationToken);
 
-            return Ok(user);
-        }
-
-        [ProducesResponseType(typeof(AssistantUserDTO), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        [SwaggerOperation(
-             Summary = "Returns current authenticated user"
-        )]
-        [Authorize]
-        [HttpGet]
-        [Route("GetUser")]
-        public async Task<IActionResult> GetAssistantUser(CancellationToken cancellationToken)
-        {
-            var query = new GetAssistantUserQuery();
-            var user = await _mediator.Send(query, cancellationToken);
-
-            return Ok(user);
-        }
-
-        [ProducesResponseType(typeof(AssistantEmployeeDTO), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        [SwaggerOperation(
-             Summary = "Returns detailed authenticated user"
-        )]
-        [Authorize]
-        [HttpGet]
-        [Route("GetDetailedUser")]
-        public async Task<IActionResult> GetAssistantEmployee(CancellationToken cancellationToken)
-        {
             var assistantUserQuery = new GetAssistantUserQuery();
             var assistantUser = await _mediator.Send(assistantUserQuery, cancellationToken);
 
-            var query = new GetAssistantEmployeeQuery(assistantUser.EmployeeId);
-            var user = await _mediator.Send(query, cancellationToken);
+            var query1 = new GetAssistantEmployeeQuery(assistantUser.EmployeeId);
+            var user1 = await _mediator.Send(query1, cancellationToken);
 
-            return Ok(user);
+            var userToReturn = _mapper.Map<UserDTO>(user1);
+            userToReturn.Roles = user.Roles;
+
+            return Ok(userToReturn);
         }
     }
 }
