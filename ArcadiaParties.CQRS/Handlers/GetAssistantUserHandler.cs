@@ -13,14 +13,13 @@ namespace ArcadiaParties.CQRS.Handlers
     {
         private readonly IAssistantTokenRepository _tokenRepository;
         private readonly IHttpClientFactory _clientFactory;
+        private const string requestUser = "https://assistant.arcadia.spb.ru/api/user";
 
         public GetAssistantUserHandler(IAssistantTokenRepository tokenRepository, IHttpClientFactory clientFactory)
         {
             _tokenRepository = tokenRepository;
             _clientFactory = clientFactory;
         }
-
-        const string requestUser = "https://assistant.arcadia.spb.ru/api/user";
 
         public async Task<AssistantUserDTO> Handle(GetAssistantUserQuery request, CancellationToken cancellationToken)
         {

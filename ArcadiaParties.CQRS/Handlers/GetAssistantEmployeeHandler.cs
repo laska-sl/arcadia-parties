@@ -11,6 +11,7 @@ namespace ArcadiaParties.CQRS.Handlers
 {
     class GetAssistantEmployeeHandler : IRequestHandler<GetAssistantEmployeeQuery, AssistantEmployeeDTO>
     {
+        private const string requestEmployee = "https://assistant.arcadia.spb.ru/api/employees/";
         private readonly IAssistantTokenRepository _tokenRepository;
         private readonly IHttpClientFactory _clientFactory;
 
@@ -19,8 +20,6 @@ namespace ArcadiaParties.CQRS.Handlers
             _tokenRepository = tokenRepository;
             _clientFactory = clientFactory;
         }
-
-        const string requestEmployee = "https://assistant.arcadia.spb.ru/api/employees/";
 
         public async Task<AssistantEmployeeDTO> Handle(GetAssistantEmployeeQuery request, CancellationToken cancellationToken)
         {
