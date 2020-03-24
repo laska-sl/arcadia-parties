@@ -3,6 +3,7 @@ using ArcadiaParties.Data.Abstractions.DTOs;
 using ArcadiaParties.Data.Abstractions.Repositories;
 using MediatR;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,7 +27,7 @@ namespace ArcadiaParties.CQRS.Handlers
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, requestEmployee + request.EmployeeId);
 
             var token = await _tokenRepository.GetToken();
-            httpRequest.Headers.Add("Authorization", "Bearer " + token);
+            httpRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var client = _clientFactory.CreateClient();
             var response = await client.SendAsync(httpRequest, cancellationToken);
             var responseBody = await response.Content.ReadAsStreamAsync();
