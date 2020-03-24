@@ -26,10 +26,7 @@ namespace ArcadiaParties.CQRS.Handlers
 
         public async Task<AssistantEmployeeDTO> Handle(GetAssistantEmployeeQuery request, CancellationToken cancellationToken)
         {
-            var query = new GetAssistantUserQuery();
-            var user = await _mediator.Send(query, cancellationToken);
-
-            var httpRequest = new HttpRequestMessage(HttpMethod.Get, requestEmployee + user.EmployeeId);
+            var httpRequest = new HttpRequestMessage(HttpMethod.Get, requestEmployee + request.EmployeeId);
 
             var token = await _tokenRepository.GetToken();
             httpRequest.Headers.Add("Authorization", "Bearer " + token);

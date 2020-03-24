@@ -84,7 +84,10 @@ namespace ArcadiaParties.API.Controllers
         [Route("GetDetailedUser")]
         public async Task<IActionResult> GetAssistantEmployee(CancellationToken cancellationToken)
         {
-            var query = new GetAssistantEmployeeQuery();
+            var assistantUserQuery = new GetAssistantUserQuery();
+            var assistantUser = await _mediator.Send(assistantUserQuery, cancellationToken);
+
+            var query = new GetAssistantEmployeeQuery(assistantUser.EmployeeId);
             var user = await _mediator.Send(query, cancellationToken);
 
             return Ok(user);
