@@ -1,13 +1,11 @@
 ﻿using ArcadiaParties.CQRS.Queries;
 using ArcadiaParties.Data.Abstractions.DTOs;
-using ArcadiaParties.Data.Abstractions.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -18,14 +16,10 @@ namespace ArcadiaParties.API.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly IAssistantTokenRepository _repo;
-        private readonly IHttpClientFactory _clientFactory;
 
-        public UsersController(IMediator mediator, IAssistantTokenRepository repo, IHttpClientFactory clientFactory)
+        public UsersController(IMediator mediator)
         {
             _mediator = mediator;
-            _repo = repo;
-            _clientFactory = clientFactory;
         }
 
         [ProducesResponseType(typeof(IEnumerable<UserDTO>), StatusCodes.Status200OK)]

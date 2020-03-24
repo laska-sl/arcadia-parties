@@ -2,7 +2,6 @@
 using ArcadiaParties.Data.Abstractions.DTOs;
 using ArcadiaParties.Data.Abstractions.Repositories;
 using MediatR;
-using System.IO;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
@@ -12,28 +11,27 @@ namespace ArcadiaParties.CQRS.Handlers
 {
     class GetAssistantEmployeeHandler : IRequestHandler<GetAssistantEmployeeQuery, AssistantEmployeeDTO>
     {
-        private readonly IAssistantTokenRepository _token;
+        private readonly IAssistantTokenRepository _tokenRepository;
         private readonly IHttpClientFactory _clientFactory;
         private readonly IMediator _mediator;
 
-        public GetAssistantEmployeeHandler(IAssistantTokenRepository token, IMediator mediator, IHttpClientFactory clientFactory)
+        public GetAssistantEmployeeHandler(IAssistantTokenRepository tokenRepository, IMediator mediator, IHttpClientFactory clientFactory)
         {
-            _token = token;
+            _tokenRepository = tokenRepository;
             _mediator = mediator;
             _clientFactory = clientFactory;
         }
+
+        const string requestEmployee = "https://assistant.arcadia.spb.ru/api/employees/";
 
         public async Task<AssistantEmployeeDTO> Handle(GetAssistantEmployeeQuery request, CancellationToken cancellationToken)
         {
             var query = new GetAssistantUserQuery();
             var user = await _mediator.Send(query, cancellationToken);
-            var employeeId = user.EmployeeId;
 
-            var httpRequest = new HttpRequestMessage(
-                HttpMethod.Get,
-                "https://assistant.arcadia.spb.ru/api/employees/" + employeeId);
+            var httpRequest = new HttpRequestMessage(HttpMethod.Get, requestEmployee + user.EmployeeId);
 
-            var token = await _token.GetToken();
+            var token = await _tokenRepository.GetToken();
             httpRequest.Headers.Add("Authorization", "Bearer " + token);
             var client = _clientFactory.CreateClient();
             var response = await client.SendAsync(httpRequest, cancellationToken);
@@ -43,10 +41,9 @@ namespace ArcadiaParties.CQRS.Handlers
             {
                 PropertyNameCaseInsensitive = true,
             };
-            var detailedUserFromAssistantDTO = await JsonSerializer.DeserializeAsync<AssistantEmployeeDTO>(responseBody, options);
+            var assistantEmployee = await JsonSerializer.DeserializeAsync<AssistantEmployeeDTO>(responseBody, options);
 
-            return detailedUserFromAssistantDTO;
-
+            return assistantEmployee;
         }
     }
 }
