@@ -53,16 +53,16 @@ namespace ArcadiaParties.API.Controllers
         [Route("GetCurrentUser")]
         public async Task<IActionResult> GetCurrentUser(CancellationToken cancellationToken)
         {
-            var query = new GetCurrentUserQuery(User);
-            var user = await _mediator.Send(query, cancellationToken);
+            var userQery = new GetCurrentUserQuery(User);
+            var user = await _mediator.Send(userQery, cancellationToken);
 
             var assistantUserQuery = new GetAssistantUserQuery();
             var assistantUser = await _mediator.Send(assistantUserQuery, cancellationToken);
 
-            var query1 = new GetAssistantEmployeeQuery(assistantUser.EmployeeId);
-            var user1 = await _mediator.Send(query1, cancellationToken);
+            var assistantEmployeeQuery = new GetAssistantEmployeeQuery(assistantUser.EmployeeId);
+            var assistantEmployee = await _mediator.Send(assistantEmployeeQuery, cancellationToken);
 
-            var userToReturn = _mapper.Map<UserDTO>(user1);
+            var userToReturn = _mapper.Map<UserDTO>(assistantEmployee);
             userToReturn.Roles = user.Roles;
 
             return Ok(userToReturn);
