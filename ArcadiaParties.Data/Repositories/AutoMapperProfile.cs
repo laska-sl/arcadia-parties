@@ -33,8 +33,7 @@ namespace ArcadiaParties.Data.Helpers
                             Name = "Hire Date",
                             Date = user.HireDate
                         }
-                    },
-                    DepartmentId = user.DepartmentId
+                    }
                 });
 
             CreateMap<User, UserDTO>()
@@ -55,7 +54,11 @@ namespace ArcadiaParties.Data.Helpers
                             Date = user.HireDate
                         }
                     },
-                    DepartmentId = Convert.ToString(Convert.ToInt32(user.Department.Id)),
+                    Department = new DepartmentDTO
+                    {
+                        DepartmentId = Convert.ToString(Convert.ToInt32(user.Department.Id)),
+                        Name = user.Department.Name
+                    }
                 })
                 .ForMember(uDTO => uDTO.Roles, userDtoOpt => userDtoOpt.MapFrom(user => user.UserRoles.Select(y => y.Role.Name).ToList()));
         }

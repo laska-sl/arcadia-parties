@@ -62,8 +62,12 @@ namespace ArcadiaParties.API.Controllers
             var assistantEmployeeQuery = new GetAssistantEmployeeQuery(assistantUser.EmployeeId);
             var assistantEmployee = await _mediator.Send(assistantEmployeeQuery, cancellationToken);
 
+            var assistantDepartmentQuery = new GetAssistantDepartmentQuery(assistantEmployee.DepartmentId);
+            var assistantDepartment = await _mediator.Send(assistantDepartmentQuery, cancellationToken);
+
             var userToReturn = _mapper.Map<UserDTO>(assistantEmployee);
             userToReturn.Roles = user.Roles;
+            userToReturn.Department = assistantDepartment;
 
             return Ok(userToReturn);
         }

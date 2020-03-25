@@ -12,6 +12,6 @@ namespace ArcadiaParties.Data.Abstractions.DTOs
 
         public IEnumerable<string> Roles { get; set; }
 
-        public string DepartmentId { get; set; }
+        public DepartmentDTO Department { get; set; }
     }
 }
