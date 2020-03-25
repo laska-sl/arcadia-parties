@@ -54,7 +54,7 @@ namespace ArcadiaParties.API.Controllers
         public async Task<IActionResult> GetCurrentUser(CancellationToken cancellationToken)
         {
             var userQery = new GetCurrentUserQuery(User);
-            var user = await _mediator.Send(userQery, cancellationToken);
+            var userRoles = await _mediator.Send(userQery, cancellationToken);
 
             var assistantUserQuery = new GetAssistantUserQuery();
             var assistantUser = await _mediator.Send(assistantUserQuery, cancellationToken);
@@ -66,7 +66,7 @@ namespace ArcadiaParties.API.Controllers
             var assistantDepartment = await _mediator.Send(assistantDepartmentQuery, cancellationToken);
 
             var userToReturn = _mapper.Map<UserDTO>(assistantEmployee);
-            userToReturn.Roles = user.Roles;
+            userToReturn.Roles = userRoles;
             userToReturn.Department = assistantDepartment;
 
             return Ok(userToReturn);

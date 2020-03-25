@@ -2,12 +2,13 @@
 using ArcadiaParties.Data.Abstractions.DTOs;
 using ArcadiaParties.Data.Abstractions.Repositories;
 using MediatR;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace ArcadiaParties.CQRS.Handlers
 {
-    internal class GetCurrentUserHandler : IRequestHandler<GetCurrentUserQuery, UserDTO>
+    internal class GetCurrentUserHandler : IRequestHandler<GetCurrentUserQuery, IEnumerable<string>>
     {
         private readonly IUserRepository _repo;
 
@@ -16,9 +17,10 @@ namespace ArcadiaParties.CQRS.Handlers
             _repo = repo;
         }
 
-        public async Task<UserDTO> Handle(GetCurrentUserQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<string>> Handle(GetCurrentUserQuery request, CancellationToken cancellationToken)
         {
-            return await _repo.GetUser(request.Principal.Identity.Name);
+            var user = await _repo.GetUser(request.Principal.Identity.Name);
+            return user.Roles;
         }
     }
 }
