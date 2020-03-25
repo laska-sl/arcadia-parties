@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace ArcadiaParties.CQRS.Handlers
 {
-    class GetAssistantDepartmentHandler : IRequestHandler<GetAssistantDepartmentQuery, DepartmentDTO>
+    internal class GetAssistantDepartmentHandler : IRequestHandler<GetAssistantDepartmentQuery, AssistantDepartmentDTO>
     {
-        private const string requestDepartment = "https://assistant.arcadia.spb.ru/api/departments/";
+        private const string requestLink = "https://assistant.arcadia.spb.ru/api/departments/";
         private readonly IAssistantTokenRepository _tokenRepository;
         private readonly IHttpClientFactory _clientFactory;
 
@@ -22,9 +22,9 @@ namespace ArcadiaParties.CQRS.Handlers
             _clientFactory = clientFactory;
         }
 
-        public async Task<DepartmentDTO> Handle(GetAssistantDepartmentQuery request, CancellationToken cancellationToken)
+        public async Task<AssistantDepartmentDTO> Handle(GetAssistantDepartmentQuery request, CancellationToken cancellationToken)
         {
-            var httpRequest = new HttpRequestMessage(HttpMethod.Get, requestDepartment + request.DepartmentId);
+            var httpRequest = new HttpRequestMessage(HttpMethod.Get, requestLink + request.DepartmentId);
 
             var token = await _tokenRepository.GetToken();
             httpRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -36,7 +36,7 @@ namespace ArcadiaParties.CQRS.Handlers
             {
                 PropertyNameCaseInsensitive = true,
             };
-            var assistantDepartment = await JsonSerializer.DeserializeAsync<DepartmentDTO>(responseBody, options);
+            var assistantDepartment = await JsonSerializer.DeserializeAsync<AssistantDepartmentDTO>(responseBody, options);
             return assistantDepartment;
         }
     }

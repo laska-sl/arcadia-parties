@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace ArcadiaParties.CQRS.Handlers
 {
-    class GetAssistantEmployeeHandler : IRequestHandler<GetAssistantEmployeeQuery, AssistantEmployeeDTO>
+    internal class GetAssistantEmployeeHandler : IRequestHandler<GetAssistantEmployeeQuery, AssistantEmployeeDTO>
     {
-        private const string requestEmployee = "https://assistant.arcadia.spb.ru/api/employees/";
+        private const string requestLink = "https://assistant.arcadia.spb.ru/api/employees/";
         private readonly IAssistantTokenRepository _tokenRepository;
         private readonly IHttpClientFactory _clientFactory;
 
@@ -24,7 +24,7 @@ namespace ArcadiaParties.CQRS.Handlers
 
         public async Task<AssistantEmployeeDTO> Handle(GetAssistantEmployeeQuery request, CancellationToken cancellationToken)
         {
-            var httpRequest = new HttpRequestMessage(HttpMethod.Get, requestEmployee + request.EmployeeId);
+            var httpRequest = new HttpRequestMessage(HttpMethod.Get, requestLink + request.EmployeeId);
 
             var token = await _tokenRepository.GetToken();
             httpRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);

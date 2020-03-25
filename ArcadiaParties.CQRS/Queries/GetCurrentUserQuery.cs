@@ -1,17 +1,16 @@
-﻿using ArcadiaParties.Data.Abstractions.DTOs;
+using System.Security.Claims;
+using ArcadiaParties.Data.Abstractions.DTOs;
 using MediatR;
-using System.Collections.Generic;
-using System.Security.Principal;
 
 namespace ArcadiaParties.CQRS.Queries
 {
-    public class GetCurrentUserQuery : IRequest<IEnumerable<string>>
+    public class GetCurrentUserQuery : IRequest<UserDTO>
     {
-        public GetCurrentUserQuery(IPrincipal principal)
+         public GetCurrentUserQuery(ClaimsPrincipal user)
         {
-            Principal = principal;
+            User = user;
         }
 
-        public IPrincipal Principal { get; }
+        public ClaimsPrincipal User { get; }
     }
 }

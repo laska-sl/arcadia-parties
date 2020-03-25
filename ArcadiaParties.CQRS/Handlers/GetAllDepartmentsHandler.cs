@@ -8,7 +8,7 @@ using MediatR;
 
 namespace ArcadiaParties.CQRS.Handlers
 {
-    public class GetAllDepartmentsHandler : IRequestHandler<GetAllDepartmentsQuery, IEnumerable<DepartmentDTO>>
+    internal class GetAllDepartmentsHandler : IRequestHandler<GetAllDepartmentsQuery, IEnumerable<DepartmentDTO>>
     {
         private readonly IDepartmentRepository _repo;
 

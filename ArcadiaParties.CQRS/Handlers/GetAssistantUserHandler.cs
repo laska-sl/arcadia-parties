@@ -10,9 +10,9 @@ using System.Net.Http.Headers;
 
 namespace ArcadiaParties.CQRS.Handlers
 {
-    public class GetAssistantUserHandler : IRequestHandler<GetAssistantUserQuery, AssistantUserDTO>
+    internal class GetAssistantUserHandler : IRequestHandler<GetAssistantUserQuery, AssistantUserDTO>
     {
-        private const string requestUser = "https://assistant.arcadia.spb.ru/api/user";
+        private const string requestLink = "https://assistant.arcadia.spb.ru/api/user";
         private readonly IAssistantTokenRepository _tokenRepository;
         private readonly IHttpClientFactory _clientFactory;
 
@@ -24,7 +24,7 @@ namespace ArcadiaParties.CQRS.Handlers
 
         public async Task<AssistantUserDTO> Handle(GetAssistantUserQuery request, CancellationToken cancellationToken)
         {
-            var httpRequest = new HttpRequestMessage(HttpMethod.Get, requestUser);
+            var httpRequest = new HttpRequestMessage(HttpMethod.Get, requestLink);
 
             var token = await _tokenRepository.GetToken();
             httpRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);

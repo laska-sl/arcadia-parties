@@ -1,6 +1,5 @@
 ﻿using ArcadiaParties.CQRS.Queries;
 using ArcadiaParties.Data.Abstractions.DTOs;
-using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -17,12 +16,10 @@ namespace ArcadiaParties.API.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly IMapper _mapper;
 
-        public UsersController(IMediator mediator, IMapper mapper)
+        public UsersController(IMediator mediator)
         {
             _mediator = mediator;
-            _mapper = mapper;
         }
 
         [ProducesResponseType(typeof(IEnumerable<UserDTO>), StatusCodes.Status200OK)]
@@ -54,22 +51,9 @@ namespace ArcadiaParties.API.Controllers
         public async Task<IActionResult> GetCurrentUser(CancellationToken cancellationToken)
         {
             var userQuery = new GetCurrentUserQuery(User);
-            var userRoles = await _mediator.Send(userQuery, cancellationToken);
+            var user = await _mediator.Send(userQuery, cancellationToken);
 
-            var assistantUserQuery = new GetAssistantUserQuery();
-            var assistantUser = await _mediator.Send(assistantUserQuery, cancellationToken);
-
-            var assistantEmployeeQuery = new GetAssistantEmployeeQuery(assistantUser.EmployeeId);
-            var assistantEmployee = await _mediator.Send(assistantEmployeeQuery, cancellationToken);
-
-            var assistantDepartmentQuery = new GetAssistantDepartmentQuery(assistantEmployee.DepartmentId);
-            var assistantDepartment = await _mediator.Send(assistantDepartmentQuery, cancellationToken);
-
-            var userToReturn = _mapper.Map<UserDTO>(assistantEmployee);
-            userToReturn.Roles = userRoles;
-            userToReturn.Department = assistantDepartment;
-
-            return Ok(userToReturn);
+            return Ok(user);
         }
     }
 }

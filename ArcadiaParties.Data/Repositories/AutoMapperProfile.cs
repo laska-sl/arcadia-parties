@@ -56,7 +56,7 @@ namespace ArcadiaParties.Data.Helpers
                     },
                     Department = new DepartmentDTO
                     {
-                        DepartmentId = Convert.ToString(Convert.ToInt32(user.Department.Id)),
+                        Id = user.Department.Id,
                         Name = user.Department.Name
                     }
                 })

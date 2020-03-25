@@ -1,26 +1,46 @@
-﻿using ArcadiaParties.CQRS.Queries;
-using ArcadiaParties.Data.Abstractions.DTOs;
-using ArcadiaParties.Data.Abstractions.Repositories;
-using MediatR;
-using System.Collections.Generic;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
+using ArcadiaParties.CQRS.Queries;
+using ArcadiaParties.Data.Abstractions.DTOs;
+using AutoMapper;
+using MediatR;
 
 namespace ArcadiaParties.CQRS.Handlers
 {
-    internal class GetCurrentUserHandler : IRequestHandler<GetCurrentUserQuery, IEnumerable<string>>
+    internal class GetCurrentUserHandler : IRequestHandler<GetCurrentUserQuery, UserDTO>
     {
-        private readonly IUserRepository _repo;
+        private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
 
-        public GetCurrentUserHandler(IUserRepository repo)
+        public GetCurrentUserHandler(IMediator mediator, IMapper mapper)
         {
-            _repo = repo;
+            _mediator = mediator;
+            _mapper = mapper;
+
         }
-
-        public async Task<IEnumerable<string>> Handle(GetCurrentUserQuery request, CancellationToken cancellationToken)
+        public async Task<UserDTO> Handle(GetCurrentUserQuery request, CancellationToken cancellationToken)
         {
-            var user = await _repo.GetUser(request.Principal.Identity.Name);
-            return user.Roles;
+            var userQuery = new GetUserRolesQuery(request.User);
+            var userRoles = await _mediator.Send(userQuery, cancellationToken);
+
+            var assistantUserQuery = new GetAssistantUserQuery();
+            var assistantUser = await _mediator.Send(assistantUserQuery, cancellationToken);
+
+            var assistantEmployeeQuery = new GetAssistantEmployeeQuery(assistantUser.EmployeeId);
+            var assistantEmployee = await _mediator.Send(assistantEmployeeQuery, cancellationToken);
+
+            var assistantDepartmentQuery = new GetAssistantDepartmentQuery(assistantEmployee.DepartmentId);
+            var assistantDepartment = await _mediator.Send(assistantDepartmentQuery, cancellationToken);
+
+            var userToReturn = _mapper.Map<UserDTO>(assistantEmployee);
+            userToReturn.Roles = userRoles;
+            userToReturn.Department = new DepartmentDTO
+            {
+                Id = Convert.ToInt32(Convert.ToString(assistantDepartment.DepartmentId)),
+                Name = assistantDepartment.Name
+            };
+            return userToReturn;
         }
     }
 }

@@ -3,7 +3,7 @@ using MediatR;
 
 namespace ArcadiaParties.CQRS.Queries
 {
-    public class GetAssistantDepartmentQuery : IRequest<DepartmentDTO>
+    public class GetAssistantDepartmentQuery : IRequest<AssistantDepartmentDTO>
     {
         public string DepartmentId { get; }
 
