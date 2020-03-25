@@ -53,8 +53,8 @@ namespace ArcadiaParties.API.Controllers
         [Route("GetCurrentUser")]
         public async Task<IActionResult> GetCurrentUser(CancellationToken cancellationToken)
         {
-            var userQery = new GetCurrentUserQuery(User);
-            var userRoles = await _mediator.Send(userQery, cancellationToken);
+            var userQuery = new GetCurrentUserQuery(User);
+            var userRoles = await _mediator.Send(userQuery, cancellationToken);
 
             var assistantUserQuery = new GetAssistantUserQuery();
             var assistantUser = await _mediator.Send(assistantUserQuery, cancellationToken);
