@@ -6,7 +6,7 @@ namespace ArcadiaParties.CQRS.Queries
 {
     public class GetCurrentUserQuery : IRequest<UserDTO>
     {
-         public GetCurrentUserQuery(IPrincipal principal)
+        public GetCurrentUserQuery(IPrincipal principal)
         {
             Principal = principal;
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using ArcadiaParties.CQRS.Queries;
@@ -17,7 +16,6 @@ namespace ArcadiaParties.CQRS.Handlers
         {
             _mediator = mediator;
             _mapper = mapper;
-
         }
         public async Task<UserDTO> Handle(GetCurrentUserQuery request, CancellationToken cancellationToken)
         {
