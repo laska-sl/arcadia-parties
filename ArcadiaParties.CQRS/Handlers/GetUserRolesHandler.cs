@@ -19,7 +19,7 @@ namespace ArcadiaParties.CQRS.Handlers
         public async Task<IEnumerable<string>> Handle(GetUserRolesQuery request, CancellationToken cancellationToken)
         {
             var user = await _repo.GetUser(request.Principal.Identity.Name);
-            return user.Roles;
+            return user?.Roles;
         }
     }
 }
