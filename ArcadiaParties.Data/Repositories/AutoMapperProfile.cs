@@ -1,6 +1,7 @@
 ﻿using ArcadiaParties.Data.Abstractions.DTOs;
 using ArcadiaParties.Data.Models;
 using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,14 +13,41 @@ namespace ArcadiaParties.Data.Helpers
         {
             CreateMap<Department, DepartmentDTO>();
 
+            CreateMap<AssistantDepartmentDTO, DepartmentDTO>()
+                .ConstructUsing(department => new DepartmentDTO
+                {
+                    Id = int.Parse(department.DepartmentId),
+                    Name = department.Name,
+                });
+
             CreateMap<UserDTO, UserForCalendarDTO>();
+
+            CreateMap<AssistantEmployeeDTO, UserDTO>()
+                .ConstructUsing(user => new UserDTO
+                {
+                    Identity = user.EmployeeId,
+                    Name = user.Name,
+                    
+                    Dates = new List<CelebratingDateDTO>
+                    {
+                        new CelebratingDateDTO
+                        {
+                            Name = "Birth Date",
+                            Date = user.BirthDate
+                        },
+                        new CelebratingDateDTO
+                        {
+                            Name = "Hire Date",
+                            Date = user.HireDate
+                        }
+                    }
+                });
 
             CreateMap<User, UserDTO>()
                 .ConstructUsing(user => new UserDTO
                 {
                     Identity = user.Identity,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
+                    Name = user.FirstName + user.LastName,
                     Dates = new List<CelebratingDateDTO>
                     {
                         new CelebratingDateDTO
