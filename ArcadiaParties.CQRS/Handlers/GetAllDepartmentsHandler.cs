@@ -41,8 +41,8 @@ namespace ArcadiaParties.CQRS.Handlers
                 PropertyNameCaseInsensitive = true,
             };
             var assistantDepartments = await JsonSerializer.DeserializeAsync<IEnumerable<AssistantDepartmentDTO>>(responseBody, options);
-            var departmentToReturn = _mapper.Map<IEnumerable<DepartmentDTO>>(assistantDepartments);
-            return departmentToReturn;
+            var departmentsToReturn = _mapper.Map<IEnumerable<DepartmentDTO>>(assistantDepartments);
+            return departmentsToReturn;
         }
     }
 }
