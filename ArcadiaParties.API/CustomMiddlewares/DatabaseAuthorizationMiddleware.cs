@@ -25,10 +25,10 @@ namespace ArcadiaParties.API.CustomMiddlewares
                 return;
             }
 
-            var getCurrentUserQuery = new GetUserRolesQuery(user);
-            var currentUserRolesFromDB = await mediator.Send(getCurrentUserQuery);
+            var getUserRolesQuery = new GetUserRolesQuery(user);
+            var userRolesFromDB = await mediator.Send(getUserRolesQuery);
 
-            if (currentUserRolesFromDB == null)
+            if (userRolesFromDB == null)
             {
                 context.Response.StatusCode = 403;
                 return;
@@ -41,7 +41,7 @@ namespace ArcadiaParties.API.CustomMiddlewares
 
             newIdentity.AddClaim(new Claim(ClaimTypes.Name, user.Identity.Name));
             
-            foreach (var item in currentUserRolesFromDB)
+            foreach (var item in userRolesFromDB)
             {
                 newIdentity.AddClaim(new Claim(ClaimTypes.Role, item));
             }

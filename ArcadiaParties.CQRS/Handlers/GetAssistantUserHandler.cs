@@ -12,7 +12,7 @@ namespace ArcadiaParties.CQRS.Handlers
 {
     internal class GetAssistantUserHandler : IRequestHandler<GetAssistantUserQuery, AssistantUserDTO>
     {
-        private const string requestLink = "https://assistant.arcadia.spb.ru/api/user";
+        private const string usersUrl = "https://assistant.arcadia.spb.ru/api/user";
         private readonly IAssistantTokenRepository _tokenRepository;
         private readonly IHttpClientFactory _clientFactory;
 
@@ -24,7 +24,7 @@ namespace ArcadiaParties.CQRS.Handlers
 
         public async Task<AssistantUserDTO> Handle(GetAssistantUserQuery request, CancellationToken cancellationToken)
         {
-            var httpRequest = new HttpRequestMessage(HttpMethod.Get, requestLink);
+            var httpRequest = new HttpRequestMessage(HttpMethod.Get, usersUrl);
 
             var token = await _tokenRepository.GetToken();
             httpRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);

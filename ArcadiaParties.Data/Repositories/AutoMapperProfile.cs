@@ -13,6 +13,13 @@ namespace ArcadiaParties.Data.Helpers
         {
             CreateMap<Department, DepartmentDTO>();
 
+            CreateMap<AssistantDepartmentDTO, DepartmentDTO>()
+                .ConstructUsing(department => new DepartmentDTO
+                {
+                    Id = int.Parse(department.DepartmentId),
+                    Name = department.Name,
+                });
+
             CreateMap<UserDTO, UserForCalendarDTO>();
 
             CreateMap<AssistantEmployeeDTO, UserDTO>()

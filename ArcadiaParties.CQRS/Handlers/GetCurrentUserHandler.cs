@@ -21,8 +21,8 @@ namespace ArcadiaParties.CQRS.Handlers
         }
         public async Task<UserDTO> Handle(GetCurrentUserQuery request, CancellationToken cancellationToken)
         {
-            var userQuery = new GetUserRolesQuery(request.User);
-            var userRoles = await _mediator.Send(userQuery, cancellationToken);
+            var userRolesQuery = new GetUserRolesQuery(request.Principal);
+            var userRoles = await _mediator.Send(userRolesQuery, cancellationToken);
 
             var assistantUserQuery = new GetAssistantUserQuery();
             var assistantUser = await _mediator.Send(assistantUserQuery, cancellationToken);
@@ -35,11 +35,8 @@ namespace ArcadiaParties.CQRS.Handlers
 
             var userToReturn = _mapper.Map<UserDTO>(assistantEmployee);
             userToReturn.Roles = userRoles;
-            userToReturn.Department = new DepartmentDTO
-            {
-                Id = Convert.ToInt32(Convert.ToString(assistantDepartment.DepartmentId)),
-                Name = assistantDepartment.Name
-            };
+            var departmentToReturn = _mapper.Map<DepartmentDTO>(assistantDepartment);
+            userToReturn.Department = departmentToReturn;
             return userToReturn;
         }
     }

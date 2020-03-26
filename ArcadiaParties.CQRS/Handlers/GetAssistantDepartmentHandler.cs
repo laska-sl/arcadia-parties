@@ -12,7 +12,7 @@ namespace ArcadiaParties.CQRS.Handlers
 {
     internal class GetAssistantDepartmentHandler : IRequestHandler<GetAssistantDepartmentQuery, AssistantDepartmentDTO>
     {
-        private const string requestLink = "https://assistant.arcadia.spb.ru/api/departments/";
+        private const string departmentsUrl = "https://assistant.arcadia.spb.ru/api/departments/";
         private readonly IAssistantTokenRepository _tokenRepository;
         private readonly IHttpClientFactory _clientFactory;
 
@@ -24,7 +24,7 @@ namespace ArcadiaParties.CQRS.Handlers
 
         public async Task<AssistantDepartmentDTO> Handle(GetAssistantDepartmentQuery request, CancellationToken cancellationToken)
         {
-            var httpRequest = new HttpRequestMessage(HttpMethod.Get, requestLink + request.DepartmentId);
+            var httpRequest = new HttpRequestMessage(HttpMethod.Get, departmentsUrl + request.DepartmentId);
 
             var token = await _tokenRepository.GetToken();
             httpRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
