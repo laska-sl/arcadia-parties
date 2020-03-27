@@ -94,9 +94,13 @@ namespace ArcadiaParties.API
 
             services.AddAutoMapper(typeof(AutoMapperProfile));
 
+            services.AddHttpClient();
+
             services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+
+            services.AddScoped<IAssistantTokenRepository, AssistantTokenRepository>();
 
             services.AddCors();
 
