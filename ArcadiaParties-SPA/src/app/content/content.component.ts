@@ -5,7 +5,7 @@ import { merge, Subscription } from 'rxjs';
 import { takeUntil, map, filter, debounceTime } from 'rxjs/operators';
 
 import { changeTitleAction } from '../actions/actions';
-import { selectUser } from '../user/selector/selector';
+import { selectUserDepartmentId } from '../user/selector/selector';
 import { changeDepartmentIdAction } from '../department/actions/actions';
 import { selectCurrentDepartmentId } from '../department/selector/selector';
 import { DepartmentState } from '../department/reducers/reducer';
@@ -31,9 +31,9 @@ export class ContentComponent implements OnDestroy {
 
     const currentUserDepartment$ = this.store
       .pipe(
-        select(selectUser),
+        select(selectUserDepartmentId),
         takeUntil(routeParams$),
-        map(user => user.department.id)
+        map(id => id),
       );
 
     const mergedObservable$ = merge(

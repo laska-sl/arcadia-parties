@@ -7,3 +7,5 @@ export const userFeatureSelector = createFeatureSelector<UserState>(userFeatureS
 export const selectUser = createSelector(userFeatureSelector, state => state.user);
 
 export const selectUserName = createSelector(selectUser, user => user && user.name);
+
+export const selectUserDepartmentId = createSelector(selectUser, user => user && user.department.id);
