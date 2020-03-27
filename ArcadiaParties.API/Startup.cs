@@ -17,6 +17,8 @@ using System.Collections.Generic;
 using System;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using ArcadiaParties.API.Token;
+using Microsoft.AspNetCore.Http;
 
 namespace ArcadiaParties.API
 {
@@ -48,6 +50,7 @@ namespace ArcadiaParties.API
                 {
                     options.Audience = OAuthSettings.ClientId;
                     options.MetadataAddress = OAuthSettings.OpenIdConfigurationUrl;
+                    options.SaveToken = true;
                 });
 
             services.AddSwaggerGen(c =>
@@ -66,7 +69,7 @@ namespace ArcadiaParties.API
                         Implicit = new OpenApiOAuthFlow
                         {
                             AuthorizationUrl = new Uri(OAuthSettings.AuthorizationUrl),
-                            TokenUrl = new Uri(OAuthSettings.TokenUrl),
+                            TokenUrl = new Uri(OAuthSettings.TokenUrl)
                         }
                     }
                 });
@@ -96,6 +99,10 @@ namespace ArcadiaParties.API
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 
             services.AddCors();
+
+            services.AddSingleton<ITokenGetterFactory, TokenGetterFactory>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
