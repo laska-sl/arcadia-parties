@@ -117,7 +117,7 @@ namespace ArcadiaParties.API
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Arcadian Parties API");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Arcadia Parties API");
                 c.OAuthClientId(OAuthSettings.ClientId);
                 c.OAuthAppName("Arcadia Parties - Swagger");
                 c.OAuthAdditionalQueryStringParams(new Dictionary<string, string>() { { "resource", OAuthSettings.ClientId } });
