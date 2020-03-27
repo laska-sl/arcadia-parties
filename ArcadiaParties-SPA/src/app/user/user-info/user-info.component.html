@@ -4,9 +4,8 @@
     <mat-tab-group mat-stretch-tabs>
       <mat-tab label="General">
         <div class="center font">
-          <p>Identity: {{ user.identity }}</p>
-          <p>FirstName: {{ user.firstName }}</p>
-          <p>LastName: {{ user.lastName }}</p>
+          <p>Id: {{ user.identity }}</p>
+          <p>Name: {{ user.name }}</p>
           <p>Department: {{ user.department.name }}</p>
           <p>
             Roles: <span *ngFor="let role of user.roles"> {{ role }} </span>

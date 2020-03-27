@@ -1,6 +1,6 @@
 <button mat-button [matMenuTriggerFor]="menu">
   <mat-icon class="user-icon" aria-hidden="false">account_circle</mat-icon>
-  <span class="user-identity">{{ userIdentity$ | async }}</span>
+  <span class="user-identity">{{ userName$ | async }}</span>
 </button>
 <mat-menu #menu="matMenu">
   <button mat-menu-item [routerLink]="['/user']">My account</button>

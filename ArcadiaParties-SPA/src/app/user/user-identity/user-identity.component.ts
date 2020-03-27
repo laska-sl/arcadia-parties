@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { loadUserAction } from '../actions/actions';
-import { selectUserIdentity } from '../selector/selector';
+import { selectUserName } from '../selector/selector';
 import { UserState } from '../reducers/reducer';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./user-identity.component.scss']
 })
 export class UserIdentityComponent {
-  userIdentity$: Observable<string> = this.store.pipe(select(selectUserIdentity));
+  userName$: Observable<string> = this.store.pipe(select(selectUserName));
 
   constructor(private store: Store<UserState>, private authService: AuthService) {
     store.dispatch(loadUserAction());
