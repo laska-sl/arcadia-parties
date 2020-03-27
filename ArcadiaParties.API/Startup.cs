@@ -17,8 +17,9 @@ using System.Collections.Generic;
 using System;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using ArcadiaParties.API.Token;
 using Microsoft.AspNetCore.Http;
+using ArcadiaParties.Configuration;
+using ArcadiaParties.Token;
 
 namespace ArcadiaParties.API
 {
@@ -100,13 +101,13 @@ namespace ArcadiaParties.API
 
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 
-            services.AddScoped<IAssistantTokenRepository, AssistantTokenRepository>();
-
             services.AddCors();
 
-            services.AddSingleton<ITokenGetterFactory, TokenGetterFactory>();
+            services.AddSingleton<ITokenServiceFactory, TokenServiceFactory>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddSingleton<OAuthSettings>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

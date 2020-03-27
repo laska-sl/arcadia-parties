@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 
-namespace ArcadiaParties.API.Token
+namespace ArcadiaParties.Token
 {
     public class TokenService : ITokenService
     {

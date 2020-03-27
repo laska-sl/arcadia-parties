@@ -1,4 +1,4 @@
-﻿namespace ArcadiaParties.API.Token
+﻿namespace ArcadiaParties.Token
 {
     public enum AzureApplication
     {

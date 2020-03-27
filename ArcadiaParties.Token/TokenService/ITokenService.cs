@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace ArcadiaParties.API.Token
+namespace ArcadiaParties.Token
 {
     public interface ITokenService
     {

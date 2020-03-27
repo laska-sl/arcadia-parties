@@ -17,8 +17,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ArcadiaParties.Configuration\ArcadiaParties.Configuration.csproj" />
     <ProjectReference Include="..\ArcadiaParties.CQRS\ArcadiaParties.CQRS.csproj" />
     <ProjectReference Include="..\ArcadiaParties.Data.Abstractions\ArcadiaParties.Data.Abstractions.csproj" />
     <ProjectReference Include="..\ArcadiaParties.Data\ArcadiaParties.Data.csproj" />
+    <ProjectReference Include="..\ArcadiaParties.Token\ArcadiaParties.Token.csproj" />
   </ItemGroup>
 </Project>
