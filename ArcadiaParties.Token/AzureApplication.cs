@@ -2,7 +2,6 @@
 {
     public enum AzureApplication
     {
-        ArcadiaAssistant,
-        ServiceDesk
+        ArcadiaAssistant
     }
 }
