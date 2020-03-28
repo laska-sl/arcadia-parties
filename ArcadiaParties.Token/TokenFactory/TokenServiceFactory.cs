@@ -14,11 +14,11 @@ namespace ArcadiaParties.Token
             HttpContextAccessor = httpContextAccessor;
         }
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
 
-        public OAuthSettings OAuthSettings { get; }
+        private OAuthSettings OAuthSettings { get; }
 
-        public IHttpContextAccessor HttpContextAccessor { get; }
+        private IHttpContextAccessor HttpContextAccessor { get; }
 
         public ITokenService CreateTokenService(AzureApplication azureApplication)
         {
@@ -30,9 +30,6 @@ namespace ArcadiaParties.Token
             {
                 case AzureApplication.ArcadiaAssistant:
                     targetAppSectionName = "ArcadiaAssistant";
-                    break;
-                case AzureApplication.ServiceDesk:
-                    targetAppSectionName = "ServiceDesk";
                     break;
                 default:
                     throw new Exception("Invalid azure application");

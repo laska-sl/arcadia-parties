@@ -14,11 +14,11 @@ namespace ArcadiaParties.Token
             HttpContextAccessor = httpContextAccessor;
         }
 
-        public string MainAppClientId { get; }
+        private string MainAppClientId { get; }
 
-        public AzureAdConfiguration TargetAppConfiguration { get; }
+        private AzureAdConfiguration TargetAppConfiguration { get; }
 
-        public IHttpContextAccessor HttpContextAccessor { get; }
+        private IHttpContextAccessor HttpContextAccessor { get; }
 
         public async Task<string> GetTokenAsync()
         {
