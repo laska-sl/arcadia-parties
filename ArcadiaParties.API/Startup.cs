@@ -107,7 +107,7 @@ namespace ArcadiaParties.API
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            services.AddSingleton<OAuthSettings>();
+            services.AddSingleton(OAuthSettings);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
