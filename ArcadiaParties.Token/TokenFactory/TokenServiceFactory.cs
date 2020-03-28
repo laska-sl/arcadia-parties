@@ -37,7 +37,7 @@ namespace ArcadiaParties.Token
 
             var targetAppConfiguration = Configuration.GetSection(targetAppSectionName).Get<AzureAdConfiguration>();
 
-            return new TokenService(mainAppClientId, targetAppConfiguration, HttpContextAccessor);
+            return new OnBehalfOfTokenService(mainAppClientId, targetAppConfiguration, HttpContextAccessor);
         }
     }
 }
